@@ -35,7 +35,12 @@ class ImmichApi:
         headers = {"Accept": f"application/{application}", "x-api-key": self.api_key}
         url = f"{self.base_url}/{end_point}"
 
-        LOGGER.debug("REQUEST url: %s params: %s headers: %s", url, params, headers)
+        LOGGER.debug(
+            "REQUEST url: %s params: %s headers: %s",
+            url,
+            params,
+            {**headers, "x-api-key": "**********"},
+        )
 
         try:
             async with self.session.request(
