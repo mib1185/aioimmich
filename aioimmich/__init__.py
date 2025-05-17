@@ -31,7 +31,7 @@ class Immich:
         params: dict | None = None,
         method: str = "get",
         application: str = "json",
-    ) -> dict | bytes | None:
+    ) -> list | dict | bytes | None:
         """Perform the request and handle errors."""
         headers = {"Accept": f"application/{application}", "x-api-key": self.api_key}
         url = f"{self.base_url}/{end_point}"
@@ -67,14 +67,14 @@ class Immich:
             )
             raise err
 
-    async def get_all_albums(self) -> list[ImmichAlbum]:
+    async def async_get_all_albums(self) -> list[ImmichAlbum]:
         """Get all albums.
 
         Returns:
             list of all albums as `list[ImmichAlbum]`
         """
         result = await self._async_do_request("albums")
-        assert isinstance(result, dict)
+        assert isinstance(result, list)
         return [
             ImmichAlbum(
                 album["id"],
@@ -87,7 +87,7 @@ class Immich:
             for album in result
         ]
 
-    async def get_album_info(
+    async def async_get_album_info(
         self, album_id: str, without_assests: bool = False
     ) -> ImmichAlbum:
         """Get album information and its assets.
@@ -103,7 +103,6 @@ class Immich:
             f"albums/{album_id}",
             {"withoutAssets": "true" if without_assests else "false"},
         )
-        print(result)
         assert isinstance(result, dict)
         return ImmichAlbum(
             result["id"],
@@ -119,7 +118,7 @@ class Immich:
             ],
         )
 
-    async def view_asset(self, asset_id: str, size: str = "thumbnail") -> bytes:
+    async def async_view_asset(self, asset_id: str, size: str = "thumbnail") -> bytes:
         """Get an assets thumbnail.
 
         Arguments:
