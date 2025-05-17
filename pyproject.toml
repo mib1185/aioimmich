@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aioimmich"
-version = "0.1.0"
+version = "0.2.0"
 description = "Asynchronous library to fetch albums and assests from immich."
 authors = [{ name = "mib1185" }]
 readme = "README.md"
@@ -29,7 +29,7 @@ homepage = 'https://github.com/mib1185/aioimmich'
 repository = 'https://github.com/mib1185/aioimmich'
 
 [tool.setuptools]
-package-data = { "aioimmich" = ["py.typed"] }
+package-data = { "aioimmich" = ["py.typed", "*.py", "**/*.py"] }
 platforms = ["any"]
 packages = ["aioimmich"]
 
