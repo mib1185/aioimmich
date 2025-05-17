@@ -203,6 +203,44 @@ MOCK_DATA: dict = {
         "status": 200,
         "body": b"abcdefabcdefabcdefabcdef",
     },
+    "server/about": {
+        "status": 200,
+        "body": json.dumps(
+            {
+                "version": "v1.132.3",
+                "versionUrl": "https://github.com/immich-app/immich/releases/tag/v1.132.3",
+                "licensed": False,
+                "build": "14709928600",
+                "buildUrl": "https://github.com/immich-app/immich/actions/runs/14709928600",
+                "buildImage": "v1.132.3",
+                "buildImageUrl": "https://github.com/immich-app/immich/pkgs/container/immich-server",
+                "repository": "immich-app/immich",
+                "repositoryUrl": "https://github.com/immich-app/immich",
+                "sourceRef": "v1.132.3",
+                "sourceCommit": "02994883fe3f3972323bb6759d0170a4062f5236",
+                "sourceUrl": "https://github.com/immich-app/immich/commit/02994883fe3f3972323bb6759d0170a4062f5236",
+                "nodejs": "v22.14.0",
+                "exiftool": "13.00",
+                "ffmpeg": "7.0.2-7",
+                "libvips": "8.16.1",
+                "imagemagick": "7.1.1-47",
+            }
+        ),
+    },
+    "server/storage": {
+        "status": 200,
+        "body": json.dumps(
+            {
+                "diskSize": "294.2 GiB",
+                "diskUse": "142.9 GiB",
+                "diskAvailable": "136.3 GiB",
+                "diskSizeRaw": 315926315008,
+                "diskUseRaw": 153400406016,
+                "diskAvailableRaw": 146403004416,
+                "diskUsagePercentage": 48.56,
+            }
+        ),
+    },
     "albums/INVALID_ALBUM_ID?withoutAssets=false": {
         "status": 400,
         "body": json.dumps(

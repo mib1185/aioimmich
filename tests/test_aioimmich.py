@@ -5,14 +5,16 @@ from __future__ import annotations
 import pytest
 from aiohttp import ClientError
 
+from aioimmich.albums.models import ImmichAlbum
+from aioimmich.assets.models import ImmichAsset
 from aioimmich.exceptions import ImmichError, ImmichUnauthorizedError
-from aioimmich.models import ImmichAlbum, ImmichAsset
+from aioimmich.server.models import ImmichServerAbout, ImmichServerStorage
 
 
 async def test_get_all_albums(mock_pegelonline_with_data):
     """Test async_get_all_albums."""
     api = await mock_pegelonline_with_data()
-    albums = await api.async_get_all_albums()
+    albums = await api.albums.async_get_all_albums()
     assert len(albums) == 2
 
     album = albums[0]
@@ -39,7 +41,9 @@ async def test_get_album_info(mock_pegelonline_with_data):
     api = await mock_pegelonline_with_data()
 
     # get album info without assets
-    album = await api.async_get_album_info("721e1a4b-aa12-441e-8d3b-5ac7ab283bb6", True)
+    album = await api.albums.async_get_album_info(
+        "721e1a4b-aa12-441e-8d3b-5ac7ab283bb6", True
+    )
 
     assert isinstance(album, ImmichAlbum)
     assert album.album_id == "721e1a4b-aa12-441e-8d3b-5ac7ab283bb6"
@@ -50,7 +54,7 @@ async def test_get_album_info(mock_pegelonline_with_data):
     assert album.thumbnail_asset_id == "0d03a7ad-ddc7-45a6-adee-68d322a6d2f5"
 
     # get album info with assets
-    album = await api.async_get_album_info(
+    album = await api.albums.async_get_album_info(
         "721e1a4b-aa12-441e-8d3b-5ac7ab283bb6", False
     )
 
@@ -70,23 +74,77 @@ async def test_view_asset(mock_pegelonline_with_data):
     api = await mock_pegelonline_with_data()
 
     # get asset with default size
-    asset_bytes = await api.async_view_asset("2e94c203-50aa-4ad2-8e29-56dd74e0eff4")
+    asset_bytes = await api.assets.async_view_asset(
+        "2e94c203-50aa-4ad2-8e29-56dd74e0eff4"
+    )
     assert isinstance(asset_bytes, bytes)
     assert asset_bytes == b"abcdef"
 
     # get asset with preview size
-    asset_bytes = await api.async_view_asset(
+    asset_bytes = await api.assets.async_view_asset(
         "2e94c203-50aa-4ad2-8e29-56dd74e0eff4", "preview"
     )
     assert isinstance(asset_bytes, bytes)
     assert asset_bytes == b"abcdefabcdef"
 
     # get asset with fullsize
-    asset_bytes = await api.async_view_asset(
+    asset_bytes = await api.assets.async_view_asset(
         "2e94c203-50aa-4ad2-8e29-56dd74e0eff4", "fullsize"
     )
     assert isinstance(asset_bytes, bytes)
     assert asset_bytes == b"abcdefabcdefabcdefabcdef"
+
+
+async def test_get_about_info(mock_pegelonline_with_data):
+    """Test async_get_about_info."""
+    api = await mock_pegelonline_with_data()
+    about_info = await api.server.async_get_about_info()
+
+    assert isinstance(about_info, ImmichServerAbout)
+    assert about_info.build == "14709928600"
+    assert about_info.build_image == "v1.132.3"
+    assert (
+        about_info.build_image_url
+        == "https://github.com/immich-app/immich/pkgs/container/immich-server"
+    )
+    assert (
+        about_info.build_url
+        == "https://github.com/immich-app/immich/actions/runs/14709928600"
+    )
+    assert about_info.exiftool == "13.00"
+    assert about_info.ffmpeg == "7.0.2-7"
+    assert about_info.imagemagick == "7.1.1-47"
+    assert about_info.libvips == "8.16.1"
+    assert about_info.licensed is False
+    assert about_info.nodejs == "v22.14.0"
+    assert about_info.repository == "immich-app/immich"
+    assert about_info.repository_url == "https://github.com/immich-app/immich"
+    assert about_info.source_commit == "02994883fe3f3972323bb6759d0170a4062f5236"
+    assert about_info.source_ref == "v1.132.3"
+    assert (
+        about_info.source_url
+        == "https://github.com/immich-app/immich/commit/02994883fe3f3972323bb6759d0170a4062f5236"
+    )
+    assert about_info.version == "v1.132.3"
+    assert (
+        about_info.version_url
+        == "https://github.com/immich-app/immich/releases/tag/v1.132.3"
+    )
+
+
+async def test_get_storage_info(mock_pegelonline_with_data):
+    """Test async_get_storage_info."""
+    api = await mock_pegelonline_with_data()
+    storage_info = await api.server.async_get_storage_info()
+
+    assert isinstance(storage_info, ImmichServerStorage)
+    assert storage_info.disk_available == "136.3 GiB"
+    assert storage_info.disk_available_raw == 146403004416
+    assert storage_info.disk_size == "294.2 GiB"
+    assert storage_info.disk_size_raw == 315926315008
+    assert storage_info.disk_usage_percentage == 48.56
+    assert storage_info.disk_use == "142.9 GiB"
+    assert storage_info.disk_use_raw == 153400406016
 
 
 async def test_errors(mock_pegelonline_with_data):
@@ -94,10 +152,10 @@ async def test_errors(mock_pegelonline_with_data):
     api = await mock_pegelonline_with_data()
 
     with pytest.raises(ImmichError, match="Not found or no album.read access"):
-        await api.async_get_album_info("INVALID_ALBUM_ID")
+        await api.albums.async_get_album_info("INVALID_ALBUM_ID")
 
     with pytest.raises(ImmichUnauthorizedError, match="Invalid API key"):
-        await api.async_get_album_info("INVALID_API_KEY")
+        await api.albums.async_get_album_info("INVALID_API_KEY")
 
     with pytest.raises(ClientError):
-        await api.async_get_album_info("CLIENT_ERROR")
+        await api.albums.async_get_album_info("CLIENT_ERROR")

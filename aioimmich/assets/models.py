@@ -12,15 +12,3 @@ class ImmichAsset:
     asset_id: str
     file_name: str
     mime_type: str
-
-
-@dataclass
-class ImmichAlbum:
-    """Representation of an immich album."""
-
-    album_id: str
-    name: str
-    description: str
-    thumbnail_asset_id: str
-    asset_count: int
-    assets: list[ImmichAsset]
