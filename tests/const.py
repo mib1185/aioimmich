@@ -241,6 +241,30 @@ MOCK_DATA: dict = {
             }
         ),
     },
+    "server/statistics": {
+        "status": 200,
+        "body": json.dumps(
+            {
+                "photos": 27038,
+                "videos": 1836,
+                "usage": 119525451912,
+                "usagePhotos": 54291170551,
+                "usageVideos": 65234281361,
+                "usageByUser": [
+                    {
+                        "userId": "e7ef5713-9dab-4bd4-b899-715b0ca4379e",
+                        "userName": "admin",
+                        "photos": 27038,
+                        "videos": 1836,
+                        "usage": 119525451912,
+                        "usagePhotos": 54291170551,
+                        "usageVideos": 65234281361,
+                        "quotaSizeInBytes": None,
+                    }
+                ],
+            }
+        ),
+    },
     "albums/INVALID_ALBUM_ID?withoutAssets=false": {
         "status": 400,
         "body": json.dumps(

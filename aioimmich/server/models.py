@@ -39,3 +39,14 @@ class ImmichServerStorage:
     disk_use_raw: int
     disk_available_raw: int
     disk_usage_percentage: float
+
+
+@dataclass
+class ImmichServerStatistics:
+    """Representation of the immich server usage statistics."""
+
+    photos: int
+    videos: int
+    usage: int
+    usage_photos: int
+    usage_videos: int

@@ -1,7 +1,7 @@
 """aioimmich server api."""
 
 from ..api import ImmichApi
-from .models import ImmichServerAbout, ImmichServerStorage
+from .models import ImmichServerAbout, ImmichServerStatistics, ImmichServerStorage
 
 
 class ImmichServer:
@@ -15,11 +15,10 @@ class ImmichServer:
         """Get server about info.
 
         Returns:
-            server storage info as `ImmichServerStorage`
+            server about info as `ImmichServerAbout`
         """
         result = await self.api.async_do_request("server/about")
         assert isinstance(result, dict)
-        print(result)
         return ImmichServerAbout(
             result["version"],
             result["versionUrl"],
@@ -48,7 +47,6 @@ class ImmichServer:
         """
         result = await self.api.async_do_request("server/storage")
         assert isinstance(result, dict)
-        print(result)
         return ImmichServerStorage(
             result["diskSize"],
             result["diskUse"],
@@ -57,4 +55,20 @@ class ImmichServer:
             result["diskUseRaw"],
             result["diskAvailableRaw"],
             result["diskUsagePercentage"],
+        )
+
+    async def async_get_server_statistics(self) -> ImmichServerStatistics:
+        """Get server usage statistics.
+
+        Returns:
+            server usage statistics as `ImmichServerStatistics`
+        """
+        result = await self.api.async_do_request("server/statistics")
+        assert isinstance(result, dict)
+        return ImmichServerStatistics(
+            result["photos"],
+            result["videos"],
+            result["usage"],
+            result["usagePhotos"],
+            result["usageVideos"],
         )
