@@ -37,7 +37,7 @@ async def main():
     async with aiohttp.ClientSession() as session:
         immich = Immich(session, "<API-KEY>", "<IMMICH-IP>")
 
-        for album in await immich.async_get_all_albums():
+        for album in await immich.albums.async_get_all_albums():
             print(f"Album: {album.name} contains {album.asset_count} assets")
 
 
@@ -57,9 +57,39 @@ async def main():
     async with aiohttp.ClientSession() as session:
         immich = Immich(session, "<API-KEY>", "<IMMICH-IP>")
 
-        asset_bytes = await immich.async_view_asset("<ASSET-ID>", size="fullsize")
+        asset_bytes = await immich.assets.async_view_asset("<ASSET-ID>", size="fullsize")
         with open(f"my_nice_picture.jpg", "wb") as fh:
             fh.write(asset_bytes)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+### Get server info
+
+```python
+import asyncio
+import aiohttp
+from aioimmich import Immich
+
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        immich = Immich(session, "<API-KEY>", "<IMMICH-IP>")
+
+        about_info = await api.server.async_get_about_info()
+        print(f"Version:       {about_info.version}")
+        print(f"Is licensed:   {about_info.licensed}")
+
+        storage_info = await api.server.async_get_storage_info()
+        print(f"Disk Available:       {storage_info.disk_available}")
+        print(f"Disk Available (raw): {storage_info.disk_available_raw} bytes")
+        print(f"Disk Size:            {storage_info.disk_size}")
+        print(f"Disk Size (raw):      {storage_info.disk_size_raw} bytes")
+        print(f"Disk Usage:           {storage_info.disk_usage_percentage}%")
+        print(f"Disk Use:             {storage_info.disk_use}")
+        print(f"Disk Use (raw):       {storage_info.disk_use_raw} bytes")
 
 
 if __name__ == "__main__":
