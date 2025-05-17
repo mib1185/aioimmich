@@ -8,7 +8,11 @@ from aiohttp import ClientError
 from aioimmich.albums.models import ImmichAlbum
 from aioimmich.assets.models import ImmichAsset
 from aioimmich.exceptions import ImmichError, ImmichUnauthorizedError
-from aioimmich.server.models import ImmichServerAbout, ImmichServerStorage
+from aioimmich.server.models import (
+    ImmichServerAbout,
+    ImmichServerStatistics,
+    ImmichServerStorage,
+)
 
 
 async def test_get_all_albums(mock_pegelonline_with_data):
@@ -145,6 +149,19 @@ async def test_get_storage_info(mock_pegelonline_with_data):
     assert storage_info.disk_usage_percentage == 48.56
     assert storage_info.disk_use == "142.9 GiB"
     assert storage_info.disk_use_raw == 153400406016
+
+
+async def test_get_server_statistics(mock_pegelonline_with_data):
+    """Test async_get_server_statistics."""
+    api = await mock_pegelonline_with_data()
+    usage_statistics = await api.server.async_get_server_statistics()
+
+    assert isinstance(usage_statistics, ImmichServerStatistics)
+    assert usage_statistics.usage == 119525451912
+    assert usage_statistics.photos == 27038
+    assert usage_statistics.usage_photos == 54291170551
+    assert usage_statistics.usage_videos == 65234281361
+    assert usage_statistics.videos == 1836
 
 
 async def test_errors(mock_pegelonline_with_data):
