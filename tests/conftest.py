@@ -39,7 +39,7 @@ def mock_pegelonline_with_data(mock_aioresponse, mock_immich):
             mock_aioresponse.get(
                 f"https://{MOCK_IMMICH_HOST}:2283/api/{path}",
                 status=data["status"],
-                body=json.dumps(data["body"]),
+                body=data["body"],
                 exception=data.get("exception"),
             )
         return mock_immich

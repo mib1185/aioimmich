@@ -1,5 +1,7 @@
 """Constants for aioimmich tests."""
 
+import json
+
 from aiohttp import ClientError
 
 MOCK_IMMICH_HOST = "localhost"
@@ -179,33 +181,49 @@ MOCK_DATA_ALBUM_2: dict = {
 MOCK_DATA: dict = {
     "albums": {
         "status": 200,
-        "body": [MOCK_DATA_ALBUM_1, MOCK_DATA_ALBUM_2],
+        "body": json.dumps([MOCK_DATA_ALBUM_1, MOCK_DATA_ALBUM_2]),
     },
     f"albums/{MOCK_DATA_ALBUM_1['id']}?withoutAssets=true": {
         "status": 200,
-        "body": MOCK_DATA_ALBUM_1,
+        "body": json.dumps(MOCK_DATA_ALBUM_1),
     },
     f"albums/{MOCK_DATA_ALBUM_1['id']}?withoutAssets=false": {
         "status": 200,
-        "body": {**MOCK_DATA_ALBUM_1, "assets": MOCK_DATA_ALBUM_1_ASSETS},
+        "body": json.dumps({**MOCK_DATA_ALBUM_1, "assets": MOCK_DATA_ALBUM_1_ASSETS}),
+    },
+    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=thumbnail": {
+        "status": 200,
+        "body": b"abcdef",
+    },
+    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=preview": {
+        "status": 200,
+        "body": b"abcdefabcdef",
+    },
+    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=fullsize": {
+        "status": 200,
+        "body": b"abcdefabcdefabcdefabcdef",
     },
     "albums/INVALID_ALBUM_ID?withoutAssets=false": {
         "status": 400,
-        "body": {
-            "message": "Not found or no album.read access",
-            "error": "Bad Request",
-            "statusCode": 400,
-            "correlationId": "e0hlizyl",
-        },
+        "body": json.dumps(
+            {
+                "message": "Not found or no album.read access",
+                "error": "Bad Request",
+                "statusCode": 400,
+                "correlationId": "e0hlizyl",
+            }
+        ),
     },
     "albums/INVALID_API_KEY?withoutAssets=false": {
         "status": 401,
-        "body": {
-            "message": "Invalid API key",
-            "error": "Unauthorized",
-            "statusCode": 401,
-            "correlationId": "qouswiyh",
-        },
+        "body": json.dumps(
+            {
+                "message": "Invalid API key",
+                "error": "Unauthorized",
+                "statusCode": 401,
+                "correlationId": "qouswiyh",
+            }
+        ),
     },
     "albums/CLIENT_ERROR?withoutAssets=false": {
         "status": None,

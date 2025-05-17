@@ -65,6 +65,30 @@ async def test_get_album_info(mock_pegelonline_with_data):
     assert album.thumbnail_asset_id == "0d03a7ad-ddc7-45a6-adee-68d322a6d2f5"
 
 
+async def test_view_asset(mock_pegelonline_with_data):
+    """Test async_view_asset."""
+    api = await mock_pegelonline_with_data()
+
+    # get asset with default size
+    asset_bytes = await api.async_view_asset("2e94c203-50aa-4ad2-8e29-56dd74e0eff4")
+    assert isinstance(asset_bytes, bytes)
+    assert asset_bytes == b"abcdef"
+
+    # get asset with preview size
+    asset_bytes = await api.async_view_asset(
+        "2e94c203-50aa-4ad2-8e29-56dd74e0eff4", "preview"
+    )
+    assert isinstance(asset_bytes, bytes)
+    assert asset_bytes == b"abcdefabcdef"
+
+    # get asset with fullsize
+    asset_bytes = await api.async_view_asset(
+        "2e94c203-50aa-4ad2-8e29-56dd74e0eff4", "fullsize"
+    )
+    assert isinstance(asset_bytes, bytes)
+    assert asset_bytes == b"abcdefabcdefabcdefabcdef"
+
+
 async def test_errors(mock_pegelonline_with_data):
     """Test api errors."""
     api = await mock_pegelonline_with_data()
