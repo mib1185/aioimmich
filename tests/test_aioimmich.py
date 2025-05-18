@@ -7,7 +7,11 @@ from aiohttp import ClientError
 
 from aioimmich.albums.models import ImmichAlbum
 from aioimmich.assets.models import ImmichAsset
-from aioimmich.exceptions import ImmichError, ImmichUnauthorizedError
+from aioimmich.exceptions import (
+    ImmichError,
+    ImmichForbiddenError,
+    ImmichUnauthorizedError,
+)
 from aioimmich.server.models import (
     ImmichServerAbout,
     ImmichServerStatistics,
@@ -173,6 +177,9 @@ async def test_errors(mock_pegelonline_with_data):
 
     with pytest.raises(ImmichUnauthorizedError, match="Invalid API key"):
         await api.albums.async_get_album_info("INVALID_API_KEY")
+
+    with pytest.raises(ImmichForbiddenError, match="Forbidden"):
+        await api.albums.async_get_album_info("FORBIDDEN")
 
     with pytest.raises(ClientError):
         await api.albums.async_get_album_info("CLIENT_ERROR")

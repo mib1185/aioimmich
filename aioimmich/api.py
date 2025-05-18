@@ -5,7 +5,7 @@ from __future__ import annotations
 from aiohttp.client import ClientSession
 
 from .const import CONNECT_ERRORS, LOGGER
-from .exceptions import ImmichError, ImmichUnauthorizedError
+from .exceptions import ImmichError, ImmichForbiddenError, ImmichUnauthorizedError
 
 
 class ImmichApi:
@@ -60,6 +60,8 @@ class ImmichApi:
                     raise ImmichError(err_result)
                 if resp.status == 401:
                     raise ImmichUnauthorizedError(err_result)
+                if resp.status == 403:
+                    raise ImmichForbiddenError(err_result)
                 return resp.raise_for_status()
 
         except CONNECT_ERRORS as err:
