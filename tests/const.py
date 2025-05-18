@@ -311,6 +311,17 @@ MOCK_DATA: dict = {
             }
         ),
     },
+    "albums/FORBIDDEN?withoutAssets=false": {
+        "status": 403,
+        "body": json.dumps(
+            {
+                "message": "Forbidden",
+                "error": "Forbidden",
+                "statusCode": 403,
+                "correlationId": "zxeujsqc",
+            }
+        ),
+    },
     "albums/CLIENT_ERROR?withoutAssets=false": {
         "status": None,
         "body": None,

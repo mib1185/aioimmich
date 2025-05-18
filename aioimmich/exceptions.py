@@ -19,3 +19,7 @@ class ImmichError(Exception):
 
 class ImmichUnauthorizedError(ImmichError):
     """Unauthorized error."""
+
+
+class ImmichForbiddenError(ImmichError):
+    """Forbidden error."""
