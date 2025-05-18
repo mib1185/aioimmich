@@ -203,6 +203,30 @@ MOCK_DATA: dict = {
         "status": 200,
         "body": b"abcdefabcdefabcdefabcdef",
     },
+    "users/me": {
+        "status": 200,
+        "body": json.dumps(
+            {
+                "id": "e7ef5713-9dab-4bd4-b899-715b0ca4379e",
+                "email": "admin@immich.local",
+                "name": "admin",
+                "profileImagePath": "",
+                "avatarColor": "primary",
+                "profileChangedAt": "2025-05-11T10:07:46.866Z",
+                "storageLabel": "admin",
+                "shouldChangePassword": True,
+                "isAdmin": True,
+                "createdAt": "2025-05-11T10:07:46.866Z",
+                "deletedAt": None,
+                "updatedAt": "2025-05-18T00:59:55.547Z",
+                "oauthId": "",
+                "quotaSizeInBytes": None,
+                "quotaUsageInBytes": 119526467534,
+                "status": "active",
+                "license": None,
+            }
+        ),
+    },
     "server/about": {
         "status": 200,
         "body": json.dumps(
