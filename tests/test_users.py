@@ -7,9 +7,9 @@ from dateutil import parser
 from aioimmich.users.models import AvatarColor, ImmichUser, UserStatus
 
 
-async def test_get_my_user(mock_pegelonline_with_data):
+async def test_get_my_user(mock_immich_with_data):
     """Test async_get_my_user."""
-    api = await mock_pegelonline_with_data()
+    api = await mock_immich_with_data()
     user = await api.users.async_get_my_user()
 
     assert isinstance(user, ImmichUser)
