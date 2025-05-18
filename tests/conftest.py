@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import json
-
 import aiohttp
 import pytest
 from aioresponses import aioresponses
@@ -30,11 +28,11 @@ async def mock_immich():
 
 
 @pytest.fixture
-def mock_pegelonline_with_data(mock_aioresponse, mock_immich):
+def mock_immich_with_data(mock_aioresponse, mock_immich):
     """Comfort fixture to initialize immich session."""
 
     async def data_to_immich() -> Immich:
-        """Initialize PegelOnline session."""
+        """Initialize immich session."""
         for path, data in MOCK_DATA.items():
             mock_aioresponse.get(
                 f"https://{MOCK_IMMICH_HOST}:2283/api/{path}",
