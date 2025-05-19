@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from aiohttp import StreamReader
 from aiohttp.client import ClientSession
 
 from .const import CONNECT_ERRORS, LOGGER
@@ -30,7 +31,8 @@ class ImmichApi:
         params: dict | None = None,
         method: str = "get",
         application: str = "json",
-    ) -> list | dict | bytes | None:
+        raw_response_content: bool = False,
+    ) -> list | dict | bytes | StreamReader | None:
         """Perform the request and handle errors."""
         headers = {"Accept": f"application/{application}", "x-api-key": self.api_key}
         url = f"{self.base_url}/{end_point}"
@@ -43,26 +45,30 @@ class ImmichApi:
         )
 
         try:
-            async with self.session.request(
+            resp = await self.session.request(
                 method, url, params=params, headers=headers
-            ) as resp:
-                if resp.status == 200:
-                    if application == "json":
-                        result = await resp.json()
-                        LOGGER.debug("RESPONSE %s", result)
-                        return result
-                    LOGGER.debug("RESPONSE bytes")
-                    return await resp.read()
+            )
+            LOGGER.debug("RESPONSE headers: %s", dict(resp.headers))
+            if resp.status == 200:
+                if raw_response_content:
+                    LOGGER.debug("RESPONSE as stream")
+                    return resp.content
+                if application == "json":
+                    result = await resp.json()
+                    LOGGER.debug("RESPONSE: %s", result)
+                    return result
+                LOGGER.debug("RESPONSE as bytes")
+                return await resp.read()
 
-                err_result = await resp.json()
-                LOGGER.debug("RESPONSE %s", err_result)
-                if resp.status == 400:
-                    raise ImmichError(err_result)
-                if resp.status == 401:
-                    raise ImmichUnauthorizedError(err_result)
-                if resp.status == 403:
-                    raise ImmichForbiddenError(err_result)
-                return resp.raise_for_status()
+            err_result = await resp.json()
+            LOGGER.debug("RESPONSE %s", err_result)
+            if resp.status == 400:
+                raise ImmichError(err_result)
+            if resp.status == 401:
+                raise ImmichUnauthorizedError(err_result)
+            if resp.status == 403:
+                raise ImmichForbiddenError(err_result)
+            return resp.raise_for_status()
 
         except CONNECT_ERRORS as err:
             LOGGER.debug("connection error", exc_info=True)
