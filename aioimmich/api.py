@@ -2,11 +2,21 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 from aiohttp import StreamReader
 from aiohttp.client import ClientSession
 
 from .const import CONNECT_ERRORS, LOGGER
 from .exceptions import ImmichError, ImmichForbiddenError, ImmichUnauthorizedError
+
+
+@dataclass
+class CacheEntry:
+    """Representation of response cache entry."""
+
+    etag: str | None
+    result: dict | list | None
 
 
 class ImmichApi:
@@ -24,6 +34,7 @@ class ImmichApi:
         self.session: ClientSession = aiohttp_session
         self.api_key = api_key
         self.base_url = f"{'https' if use_ssl else 'http'}://{host}:{port}/api"
+        self.cache: dict[str, CacheEntry] = {}
 
     async def async_do_request(
         self,
@@ -37,6 +48,14 @@ class ImmichApi:
         headers = {"Accept": f"application/{application}", "x-api-key": self.api_key}
         url = f"{self.base_url}/{end_point}"
 
+        cache_key = f"{method}_{end_point}_{params}"
+        if cache_key not in self.cache:
+            self.cache[cache_key] = CacheEntry(None, None)
+
+        cache_entry = self.cache[cache_key]
+        if (etag := cache_entry.etag) is not None:
+            headers.update({"If-None-Match": etag})
+
         LOGGER.debug(
             "REQUEST url: %s params: %s headers: %s",
             url,
@@ -49,12 +68,19 @@ class ImmichApi:
                 method, url, params=params, headers=headers
             )
             LOGGER.debug("RESPONSE headers: %s", dict(resp.headers))
+            if resp.status == 304:  # 304 = not modified
+                LOGGER.debug("RESPONSE from cache")
+                return cache_entry.result
+
             if resp.status == 200:
                 if raw_response_content:
                     LOGGER.debug("RESPONSE as stream")
                     return resp.content
                 if application == "json":
                     result = await resp.json()
+                    if cache_entry.etag is None:
+                        cache_entry.etag = resp.headers.get("Etag")
+                    cache_entry.result = result
                     LOGGER.debug("RESPONSE: %s", result)
                     return result
                 LOGGER.debug("RESPONSE as bytes")
