@@ -13,10 +13,10 @@ from mashumaro.mixins.json import DataClassJSONMixin
 class AssetType(StrEnum):
     """Asset type."""
 
-    AUDIO = "audio"
-    IMAGE = "image"
-    OTHER = "other"
-    VIDEO = "video"
+    AUDIO = "AUDIO"
+    IMAGE = "IMAGE"
+    OTHER = "OTHER"
+    VIDEO = "VIDEO"
 
 
 @dataclass
@@ -95,7 +95,6 @@ class ImmichAsset(DataClassJSONMixin):
     resized: bool
     thumbhash: str
     updated_at: datetime = field(metadata=field_options(alias="updatedAt"))
-    visibility: str
 
     # default parameters
     duplicate_id: str | None = field(
@@ -113,3 +112,4 @@ class ImmichAsset(DataClassJSONMixin):
     original_mime_type: str | None = field(
         metadata=field_options(alias="originalMimeType"), default=None
     )
+    visibility: str | None = field(default=None)

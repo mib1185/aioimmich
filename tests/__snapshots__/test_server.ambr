@@ -1,0 +1,10 @@
+# serializer version: 1
+# name: test_get_about_info
+  ImmichServerAbout(version='v1.132.3', version_url='https://github.com/immich-app/immich/releases/tag/v1.132.3', licensed=False, build='14709928600', build_url='https://github.com/immich-app/immich/actions/runs/14709928600', build_image='v1.132.3', build_image_url='https://github.com/immich-app/immich/pkgs/container/immich-server', repository='immich-app/immich', repository_url='https://github.com/immich-app/immich', source_ref='v1.132.3', source_commit='02994883fe3f3972323bb6759d0170a4062f5236', source_url='https://github.com/immich-app/immich/commit/02994883fe3f3972323bb6759d0170a4062f5236', nodejs='v22.14.0', exiftool='13.00', ffmpeg='7.0.2-7', libvips='8.16.1', imagemagick='7.1.1-47')
+# ---
+# name: test_get_server_statistics
+  ImmichServerStatistics(photos=27038, videos=1836, usage=119525451912, usage_photos=54291170551, usage_videos=65234281361)
+# ---
+# name: test_get_storage_info
+  ImmichServerStorage(disk_size='294.2 GiB', disk_use='142.9 GiB', disk_available='136.3 GiB', disk_size_raw=315926315008, disk_use_raw=153400406016, disk_available_raw=146403004416, disk_usage_percentage=48.56)
+# ---
