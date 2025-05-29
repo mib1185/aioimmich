@@ -19,25 +19,7 @@ class ImmichServer:
         """
         result = await self.api.async_do_request("server/about")
         assert isinstance(result, dict)
-        return ImmichServerAbout(
-            result["version"],
-            result["versionUrl"],
-            result["licensed"],
-            result.get("build"),
-            result.get("buildUrl"),
-            result.get("buildImage"),
-            result.get("buildImageUrl"),
-            result.get("repository"),
-            result.get("repositoryUrl"),
-            result.get("sourceRef"),
-            result.get("sourceCommit"),
-            result.get("sourceUrl"),
-            result.get("nodejs"),
-            result.get("exiftool"),
-            result.get("ffmpeg"),
-            result.get("libvips"),
-            result.get("imagemagick"),
-        )
+        return ImmichServerAbout.from_dict(result)
 
     async def async_get_storage_info(self) -> ImmichServerStorage:
         """Get server storage info.
@@ -47,15 +29,7 @@ class ImmichServer:
         """
         result = await self.api.async_do_request("server/storage")
         assert isinstance(result, dict)
-        return ImmichServerStorage(
-            result["diskSize"],
-            result["diskUse"],
-            result["diskAvailable"],
-            result["diskSizeRaw"],
-            result["diskUseRaw"],
-            result["diskAvailableRaw"],
-            result["diskUsagePercentage"],
-        )
+        return ImmichServerStorage.from_dict(result)
 
     async def async_get_server_statistics(self) -> ImmichServerStatistics:
         """Get server usage statistics.
@@ -65,10 +39,4 @@ class ImmichServer:
         """
         result = await self.api.async_do_request("server/statistics")
         assert isinstance(result, dict)
-        return ImmichServerStatistics(
-            result["photos"],
-            result["videos"],
-            result["usage"],
-            result["usagePhotos"],
-            result["usageVideos"],
-        )
+        return ImmichServerStatistics.from_dict(result)
