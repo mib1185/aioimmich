@@ -23,3 +23,7 @@ class ImmichUnauthorizedError(ImmichError):
 
 class ImmichForbiddenError(ImmichError):
     """Forbidden error."""
+
+
+class ImmichNotFoundError(ImmichError):
+    """Not found error."""

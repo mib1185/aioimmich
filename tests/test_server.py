@@ -8,6 +8,7 @@ from aioimmich.server.models import (
     ImmichServerAbout,
     ImmichServerStatistics,
     ImmichServerStorage,
+    ImmichServerVersionCheck,
 )
 
 
@@ -38,3 +39,14 @@ async def test_get_server_statistics(
 
     assert isinstance(usage_statistics, ImmichServerStatistics)
     assert usage_statistics == snapshot
+
+
+async def test_get_server_version_check(
+    mock_immich_with_data, snapshot: SnapshotAssertion
+):
+    """Test async_get_version_check."""
+    api = await mock_immich_with_data()
+    version_check_result = await api.server.async_get_version_check()
+
+    assert isinstance(version_check_result, ImmichServerVersionCheck)
+    assert version_check_result == snapshot

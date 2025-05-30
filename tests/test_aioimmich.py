@@ -8,6 +8,7 @@ from aiohttp import ClientError
 from aioimmich.exceptions import (
     ImmichError,
     ImmichForbiddenError,
+    ImmichNotFoundError,
     ImmichUnauthorizedError,
 )
 
@@ -24,6 +25,9 @@ async def test_errors(mock_immich_with_data):
 
     with pytest.raises(ImmichForbiddenError, match="Forbidden"):
         await api.albums.async_get_album_info("FORBIDDEN")
+
+    with pytest.raises(ImmichNotFoundError, match="Not Found"):
+        await api.albums.async_get_album_info("NOTFOUND")
 
     with pytest.raises(ClientError):
         await api.albums.async_get_album_info("CLIENT_ERROR")

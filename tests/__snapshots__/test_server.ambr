@@ -5,6 +5,9 @@
 # name: test_get_server_statistics
   ImmichServerStatistics(photos=27038, usage_by_user=[ByUserUsage(photos=27038, quota_size_in_bytes=None, usage=119525451912, usage_photos=54291170551, usage_videos=65234281361, user_id='e7ef5713-9dab-4bd4-b899-715b0ca4379e', user_name='admin', videos=1836)], usage_photos=54291170551, usage_videos=65234281361, usage=119525451912, videos=1836)
 # ---
+# name: test_get_server_version_check
+  ImmichServerVersionCheck(checked_at=datetime.datetime(2025, 5, 30, 20, 51, 0, 325000, tzinfo=datetime.timezone.utc), release_version='v1.134.0')
+# ---
 # name: test_get_storage_info
   ImmichServerStorage(disk_available_raw=146403004416, disk_available='136.3 GiB', disk_size_raw=315926315008, disk_size='294.2 GiB', disk_usage_percentage=48.56, disk_use_raw=153400406016, disk_use='142.9 GiB')
 # ---

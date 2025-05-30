@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime
 
 from mashumaro import field_options
 from mashumaro.mixins.json import DataClassJSONMixin
@@ -74,3 +75,11 @@ class ImmichServerStatistics(DataClassJSONMixin):
     usage_videos: int = field(metadata=field_options(alias="usageVideos"))
     usage: int
     videos: int
+
+
+@dataclass
+class ImmichServerVersionCheck(DataClassJSONMixin):
+    """Representation of the immich server version check result."""
+
+    checked_at: datetime = field(metadata=field_options(alias="checkedAt"))
+    release_version: str = field(metadata=field_options(alias="releaseVersion"))

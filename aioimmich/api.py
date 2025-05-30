@@ -8,7 +8,12 @@ from aiohttp import StreamReader
 from aiohttp.client import ClientSession
 
 from .const import CONNECT_ERRORS, LOGGER
-from .exceptions import ImmichError, ImmichForbiddenError, ImmichUnauthorizedError
+from .exceptions import (
+    ImmichError,
+    ImmichForbiddenError,
+    ImmichNotFoundError,
+    ImmichUnauthorizedError,
+)
 
 
 @dataclass
@@ -94,6 +99,8 @@ class ImmichApi:
                 raise ImmichUnauthorizedError(err_result)
             if resp.status == 403:
                 raise ImmichForbiddenError(err_result)
+            if resp.status == 404:
+                raise ImmichNotFoundError(err_result)
             return resp.raise_for_status()
 
         except CONNECT_ERRORS as err:
