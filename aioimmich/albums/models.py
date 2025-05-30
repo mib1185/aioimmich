@@ -2,18 +2,45 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from datetime import datetime
+
+from mashumaro import field_options
+from mashumaro.mixins.json import DataClassJSONMixin
 
 from ..assets.models import ImmichAsset
+from ..users.models import ImmichUser
 
 
 @dataclass
-class ImmichAlbum:
+class ImmichAlbum(DataClassJSONMixin):
     """Representation of an immich album."""
 
-    album_id: str
-    name: str
-    description: str
-    thumbnail_asset_id: str
-    asset_count: int
+    # non-default parameters
+    album_id: str = field(metadata=field_options(alias="id"))
+    album_name: str = field(metadata=field_options(alias="albumName"))
+    album_thumbnail_asset_id: str | None = field(
+        metadata=field_options(alias="albumThumbnailAssetId")
+    )
+    album_users: list = field(metadata=field_options(alias="albumUsers"))
+    asset_count: int = field(metadata=field_options(alias="assetCount"))
     assets: list[ImmichAsset]
+    created_at: datetime = field(metadata=field_options(alias="createdAt"))
+    has_shared_link: bool = field(metadata=field_options(alias="hasSharedLink"))
+    is_activity_enabled: bool = field(metadata=field_options(alias="isActivityEnabled"))
+    owner_id: str = field(metadata=field_options(alias="ownerId"))
+    owner: ImmichUser
+    shared: bool
+    updated_at: datetime = field(metadata=field_options(alias="updatedAt"))
+
+    # default parameters
+    end_date: datetime | None = field(
+        metadata=field_options(alias="endDate"), default=None
+    )
+    last_modified_asset_timestamp: datetime | None = field(
+        metadata=field_options(alias="lastModifiedAssetTimestamp"), default=None
+    )
+    order: str | None = field(default=None)
+    start_date: datetime | None = field(
+        metadata=field_options(alias="startDate"), default=None
+    )

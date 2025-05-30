@@ -1,0 +1,4 @@
+# serializer version: 1
+# name: test_get_my_user
+  ImmichUserObject(avatar_color=<AvatarColor.PRIMARY: 'primary'>, email='admin@immich.local', name='admin', profile_changed_at=datetime.datetime(2025, 5, 11, 10, 7, 46, 866000, tzinfo=datetime.timezone.utc), profile_image_path='', user_id='e7ef5713-9dab-4bd4-b899-715b0ca4379e', created_at=datetime.datetime(2025, 5, 11, 10, 7, 46, 866000, tzinfo=datetime.timezone.utc), is_admin=True, oauth_id='', should_change_password=True, status=<UserStatus.ACTIVE: 'active'>, storage_label='admin', deleted_at=None, quota_size_in_bytes=None, quota_usage_in_bytes=119526467534, updated_at=datetime.datetime(2025, 5, 18, 0, 59, 55, 547000, tzinfo=datetime.timezone.utc))
+# ---

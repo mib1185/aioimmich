@@ -20,17 +20,7 @@ class ImmichAlbums:
         """
         result = await self.api.async_do_request("albums")
         assert isinstance(result, list)
-        return [
-            ImmichAlbum(
-                album["id"],
-                album["albumName"],
-                album["description"],
-                album["albumThumbnailAssetId"],
-                album["assetCount"],
-                [],
-            )
-            for album in result
-        ]
+        return [ImmichAlbum.from_dict(album) for album in result]
 
     async def async_get_album_info(
         self, album_id: str, without_assests: bool = False
@@ -49,16 +39,5 @@ class ImmichAlbums:
             {"withoutAssets": "true" if without_assests else "false"},
         )
         assert isinstance(result, dict)
-        return ImmichAlbum(
-            result["id"],
-            result["albumName"],
-            result["description"],
-            result["albumThumbnailAssetId"],
-            result["assetCount"],
-            [
-                ImmichAsset(
-                    asset["id"], asset["originalFileName"], asset["originalMimeType"]
-                )
-                for asset in result["assets"]
-            ],
-        )
+        print(result)
+        return ImmichAlbum.from_dict(result)
