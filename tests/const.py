@@ -295,6 +295,34 @@ MOCK_DATA: dict = {
             {"checkedAt": "2025-05-30T20:51:00.325Z", "releaseVersion": "v1.134.0"}
         ),
     },
+    "tags": {
+        "status": 200,
+        "body": json.dumps(
+            [
+                {
+                    "id": "14ce3af3-67be-41c6-b77c-b25abddaf546",
+                    "name": "My 30th birthday",
+                    "value": "My 30th birthday",
+                    "createdAt": "2025-05-12T20:01:24.330Z",
+                    "updatedAt": "2025-05-12T20:01:24.412Z",
+                },
+                {
+                    "id": "67301cb8-cb73-4e8a-99e9-475cb3f7e7b5",
+                    "name": "Halloween",
+                    "value": "Halloween",
+                    "createdAt": "2025-05-12T20:00:45.220Z",
+                    "updatedAt": "2025-05-12T20:00:47.224Z",
+                },
+                {
+                    "id": "69bd487f-dc1e-4420-94c6-656f0515773d",
+                    "name": "Holidays",
+                    "value": "Holidays",
+                    "createdAt": "2025-05-12T20:00:49.967Z",
+                    "updatedAt": "2025-05-12T20:00:55.575Z",
+                },
+            ]
+        ),
+    },
     "albums/INVALID_ALBUM_ID?withoutAssets=false": {
         "status": 400,
         "body": json.dumps(
