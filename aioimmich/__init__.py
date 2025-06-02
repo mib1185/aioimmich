@@ -8,6 +8,7 @@ from .albums import ImmichAlbums
 from .api import ImmichApi
 from .assets import ImmichAssests
 from .server import ImmichServer
+from .tags import ImmichTags
 from .users import ImmichUsers
 
 
@@ -28,4 +29,5 @@ class Immich:
         self.albums = ImmichAlbums(self.api)
         self.assets = ImmichAssests(self.api)
         self.server = ImmichServer(self.api)
+        self.tags = ImmichTags(self.api)
         self.users = ImmichUsers(self.api)
