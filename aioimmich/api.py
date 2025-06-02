@@ -45,7 +45,8 @@ class ImmichApi:
         self,
         end_point: str,
         params: dict | None = None,
-        method: str = "get",
+        data: dict | None = None,
+        method: str = "GET",
         application: str = "json",
         raw_response_content: bool = False,
     ) -> list | dict | bytes | StreamReader | None:
@@ -62,15 +63,16 @@ class ImmichApi:
             headers.update({"If-None-Match": etag})
 
         LOGGER.debug(
-            "REQUEST url: %s params: %s headers: %s",
+            "REQUEST url: %s params: %s data: %s headers: %s",
             url,
             params,
+            data,
             {**headers, "x-api-key": "**********"},
         )
 
         try:
             resp = await self.session.request(
-                method, url, params=params, headers=headers
+                method, url, params=params, json=data, headers=headers
             )
             LOGGER.debug("RESPONSE headers: %s", dict(resp.headers))
             if resp.status == 304:  # 304 = not modified
