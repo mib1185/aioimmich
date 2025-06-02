@@ -1,15 +1,11 @@
 """aioimmich users api."""
 
-from ..api import ImmichApi
+from ..api import ImmichSubApi
 from .models import ImmichUserObject
 
 
-class ImmichUsers:
+class ImmichUsers(ImmichSubApi):
     """Immich users api."""
-
-    def __init__(self, api: ImmichApi) -> None:
-        """Immich users api init."""
-        self.api = api
 
     async def async_get_my_user(self) -> ImmichUserObject:
         """Get my own user info.

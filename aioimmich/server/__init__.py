@@ -1,6 +1,6 @@
 """aioimmich server api."""
 
-from ..api import ImmichApi
+from ..api import ImmichSubApi
 from .models import (
     ImmichServerAbout,
     ImmichServerStatistics,
@@ -9,12 +9,8 @@ from .models import (
 )
 
 
-class ImmichServer:
+class ImmichServer(ImmichSubApi):
     """Immich server api."""
-
-    def __init__(self, api: ImmichApi) -> None:
-        """Immich server api init."""
-        self.api = api
 
     async def async_get_about_info(self) -> ImmichServerAbout:
         """Get server about info.

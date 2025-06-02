@@ -1,16 +1,11 @@
 """aioimmich albums api."""
 
-from ..api import ImmichApi
-from ..assets.models import ImmichAsset
+from ..api import ImmichSubApi
 from .models import ImmichAlbum
 
 
-class ImmichAlbums:
+class ImmichAlbums(ImmichSubApi):
     """Immich albums api."""
-
-    def __init__(self, api: ImmichApi) -> None:
-        """Immich albums api init."""
-        self.api = api
 
     async def async_get_all_albums(self) -> list[ImmichAlbum]:
         """Get all albums.
