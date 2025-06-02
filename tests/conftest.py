@@ -2,13 +2,20 @@
 
 from __future__ import annotations
 
+import json
+
 import aiohttp
 import pytest
 from aioresponses import aioresponses
 
 from aioimmich import Immich
 
-from .const import MOCK_DATA, MOCK_IMMICH_API_KEY, MOCK_IMMICH_HOST
+from .const import (
+    MOCK_DATA,
+    MOCK_DATA_ALBUM_1_ASSETS,
+    MOCK_IMMICH_API_KEY,
+    MOCK_IMMICH_HOST,
+)
 
 
 @pytest.fixture
@@ -40,6 +47,12 @@ def mock_immich_with_data(mock_aioresponse, mock_immich):
                 body=data["body"],
                 exception=data.get("exception"),
             )
+        mock_aioresponse.post(
+            f"https://{MOCK_IMMICH_HOST}:2283/api/search/metadata",
+            body=json.dumps(
+                {"assets": {"items": MOCK_DATA_ALBUM_1_ASSETS, "nextPage": None}}
+            ),
+        )
         return mock_immich
 
     return data_to_immich
