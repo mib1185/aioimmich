@@ -1,7 +1,12 @@
 """aioimmich server api."""
 
 from ..api import ImmichApi
-from .models import ImmichServerAbout, ImmichServerStatistics, ImmichServerStorage
+from .models import (
+    ImmichServerAbout,
+    ImmichServerStatistics,
+    ImmichServerStorage,
+    ImmichServerVersionCheck,
+)
 
 
 class ImmichServer:
@@ -40,3 +45,15 @@ class ImmichServer:
         result = await self.api.async_do_request("server/statistics")
         assert isinstance(result, dict)
         return ImmichServerStatistics.from_dict(result)
+
+    async def async_get_version_check(self) -> ImmichServerVersionCheck:
+        """Get server version check result.
+
+        Requires immich server v1.134.0
+
+        Returns:
+            server version check result as `ImmichServerVersionCheck`
+        """
+        result = await self.api.async_do_request("server/version-check")
+        assert isinstance(result, dict)
+        return ImmichServerVersionCheck.from_dict(result)

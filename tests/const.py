@@ -289,6 +289,12 @@ MOCK_DATA: dict = {
             }
         ),
     },
+    "server/version-check": {
+        "status": 200,
+        "body": json.dumps(
+            {"checkedAt": "2025-05-30T20:51:00.325Z", "releaseVersion": "v1.134.0"}
+        ),
+    },
     "albums/INVALID_ALBUM_ID?withoutAssets=false": {
         "status": 400,
         "body": json.dumps(
@@ -319,6 +325,17 @@ MOCK_DATA: dict = {
                 "error": "Forbidden",
                 "statusCode": 403,
                 "correlationId": "zxeujsqc",
+            }
+        ),
+    },
+    "albums/NOTFOUND?withoutAssets=false": {
+        "status": 404,
+        "body": json.dumps(
+            {
+                "message": "Cannot GET /api/server/version-check",
+                "error": "Not Found",
+                "statusCode": 404,
+                "correlationId": "4l3qxp07",
             }
         ),
     },
