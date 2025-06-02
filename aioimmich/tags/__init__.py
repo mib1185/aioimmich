@@ -1,15 +1,11 @@
 """aioimmich tags api."""
 
-from ..api import ImmichApi
+from ..api import ImmichSubApi
 from .models import ImmichTag
 
 
-class ImmichTags:
+class ImmichTags(ImmichSubApi):
     """Immich tags api."""
-
-    def __init__(self, api: ImmichApi) -> None:
-        """Immich tags api init."""
-        self.api = api
 
     async def async_get_all_tags(self) -> list[ImmichTag]:
         """Get all tags.

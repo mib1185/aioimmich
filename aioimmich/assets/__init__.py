@@ -2,15 +2,11 @@
 
 from aiohttp import StreamReader
 
-from ..api import ImmichApi
+from ..api import ImmichSubApi
 
 
-class ImmichAssests:
+class ImmichAssests(ImmichSubApi):
     """Immich assets api."""
-
-    def __init__(self, api: ImmichApi) -> None:
-        """Immich assets api init."""
-        self.api = api
 
     async def async_view_asset(self, asset_id: str, size: str = "thumbnail") -> bytes:
         """Get an assets thumbnail.

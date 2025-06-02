@@ -111,3 +111,11 @@ class ImmichApi:
                 err.__class__.__cause__,
             )
             raise err
+
+
+class ImmichSubApi:
+    """immich sub api."""
+
+    def __init__(self, api: ImmichApi) -> None:
+        """Immich sub api init."""
+        self.api = api
