@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aioimmich"
-version = "0.8.1"
+version = "0.9.0"
 description = "Asynchronous library to fetch albums and assests from immich."
 authors = [{ name = "mib1185" }]
 readme = "README.md"
