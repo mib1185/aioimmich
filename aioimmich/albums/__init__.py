@@ -34,5 +34,4 @@ class ImmichAlbums(ImmichSubApi):
             {"withoutAssets": "true" if without_assests else "false"},
         )
         assert isinstance(result, dict)
-        print(result)
         return ImmichAlbum.from_dict(result)
