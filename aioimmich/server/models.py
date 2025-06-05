@@ -13,23 +13,40 @@ from mashumaro.mixins.json import DataClassJSONMixin
 class ImmichServerAbout(DataClassJSONMixin):
     """Representation of the immich server about information."""
 
-    build_image_url: str | None = field(metadata=field_options(alias="buildImageUrl"))
-    build_image: str | None = field(metadata=field_options(alias="buildImage"))
-    build_url: str | None = field(metadata=field_options(alias="buildUrl"))
-    build: str | None
-    exiftool: str | None
-    ffmpeg: str | None
-    imagemagick: str | None
-    libvips: str | None
+    # non-default parameters
     licensed: bool
-    nodejs: str | None
-    repository_url: str | None = field(metadata=field_options(alias="repositoryUrl"))
-    repository: str | None
-    source_commit: str | None = field(metadata=field_options(alias="sourceCommit"))
-    source_ref: str | None = field(metadata=field_options(alias="sourceRef"))
-    source_url: str | None = field(metadata=field_options(alias="sourceUrl"))
     version_url: str = field(metadata=field_options(alias="versionUrl"))
     version: str
+
+    # default parameters
+    build_image_url: str | None = field(
+        metadata=field_options(alias="buildImageUrl"), default=None
+    )
+    build_image: str | None = field(
+        metadata=field_options(alias="buildImage"), default=None
+    )
+    build_url: str | None = field(
+        metadata=field_options(alias="buildUrl"), default=None
+    )
+    build: str | None = field(default=None)
+    exiftool: str | None = field(default=None)
+    ffmpeg: str | None = field(default=None)
+    imagemagick: str | None = field(default=None)
+    libvips: str | None = field(default=None)
+    nodejs: str | None = field(default=None)
+    repository_url: str | None = field(
+        metadata=field_options(alias="repositoryUrl"), default=None
+    )
+    repository: str | None = field(default=None)
+    source_commit: str | None = field(
+        metadata=field_options(alias="sourceCommit"), default=None
+    )
+    source_ref: str | None = field(
+        metadata=field_options(alias="sourceRef"), default=None
+    )
+    source_url: str | None = field(
+        metadata=field_options(alias="sourceUrl"), default=None
+    )
 
 
 @dataclass
