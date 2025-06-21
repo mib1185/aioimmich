@@ -57,6 +57,18 @@ def mock_immich_with_data(mock_aioresponse, mock_immich):
             f"https://{MOCK_IMMICH_HOST}:2283/api/assets",
             body=json.dumps({"id": "abcdef-0123456789", "status": "created"}),
         )
+
+        mock_aioresponse.put(
+            f"https://{MOCK_IMMICH_HOST}:2283/api/albums/721e1a4b-aa12-441e-8d3b-5ac7ab283bb6/assets",
+            body=json.dumps([{"id": "abcdef-0123456789", "success": True}]),
+        )
+        mock_aioresponse.put(
+            f"https://{MOCK_IMMICH_HOST}:2283/api/albums/c4721c25-8669-451f-a6be-3d9d4dc38f5f/assets",
+            body=json.dumps(
+                [{"id": "abcdef-0123456789", "success": False, "error": "duplicate"}]
+            ),
+        )
+
         return mock_immich
 
     return data_to_immich

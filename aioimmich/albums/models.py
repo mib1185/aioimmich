@@ -4,12 +4,22 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime
+from enum import StrEnum
 
 from mashumaro import field_options
 from mashumaro.mixins.json import DataClassJSONMixin
 
 from ..assets.models import ImmichAsset
 from ..users.models import ImmichUser
+
+
+class AssetToAlbumError(StrEnum):
+    """Asset upload status."""
+
+    DUPLICATED = "duplicate"
+    NO_PERMISSION = "no_permission"
+    NOT_FOUND = "not_found"
+    UNKNOWN = "unknown"
 
 
 @dataclass
@@ -44,3 +54,12 @@ class ImmichAlbum(DataClassJSONMixin):
     start_date: datetime | None = field(
         metadata=field_options(alias="startDate"), default=None
     )
+
+
+@dataclass
+class ImmichAddAssetsToAlbumResponse(DataClassJSONMixin):
+    """Representation of an immich add assets to album response."""
+
+    asset_id: str = field(metadata=field_options(alias="id"))
+    success: bool
+    error: AssetToAlbumError | None = field(default=None)
