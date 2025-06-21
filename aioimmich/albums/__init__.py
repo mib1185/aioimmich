@@ -1,7 +1,7 @@
 """aioimmich albums api."""
 
 from ..api import ImmichSubApi
-from .models import ImmichAlbum
+from .models import ImmichAddAssetsToAlbumResponse, ImmichAlbum
 
 
 class ImmichAlbums(ImmichSubApi):
@@ -35,3 +35,21 @@ class ImmichAlbums(ImmichSubApi):
         )
         assert isinstance(result, dict)
         return ImmichAlbum.from_dict(result)
+
+    async def async_add_assets_to_album(
+        self, album_id: str, asset_ids: list[str]
+    ) -> list[ImmichAddAssetsToAlbumResponse]:
+        """Add given assets to the given album.
+
+        Arguments:
+            album_id (str)    id of the album to add the assets
+            asset_ids (list)  list of asset ids to add to the album
+
+        Returns:
+            result of adding as list of `ImmichAddAssetsToAlbumResponse`
+        """
+        result = await self.api.async_do_request(
+            f"albums/{album_id}/assets", data={"ids": asset_ids}, method="PUT"
+        )
+        assert isinstance(result, list)
+        return [ImmichAddAssetsToAlbumResponse.from_dict(item) for item in result]
