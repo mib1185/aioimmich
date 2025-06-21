@@ -19,6 +19,14 @@ class AssetType(StrEnum):
     VIDEO = "VIDEO"
 
 
+class UploadStatus(StrEnum):
+    """Asset upload status."""
+
+    CREATED = "created"
+    DUPLICATED = "duplicate"
+    REPLACED = "replaced"
+
+
 @dataclass
 class ExifInfo(DataClassJSONMixin):
     """Exif info."""
@@ -113,3 +121,11 @@ class ImmichAsset(DataClassJSONMixin):
         metadata=field_options(alias="originalMimeType"), default=None
     )
     visibility: str | None = field(default=None)
+
+
+@dataclass
+class ImmichAssetUploadResponse(DataClassJSONMixin):
+    """Representation of an immich asset upload response."""
+
+    asset_id: str = field(metadata=field_options(alias="id"))
+    status: UploadStatus

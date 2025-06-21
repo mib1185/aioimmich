@@ -53,6 +53,10 @@ def mock_immich_with_data(mock_aioresponse, mock_immich):
                 {"assets": {"items": MOCK_DATA_ALBUM_1_ASSETS, "nextPage": None}}
             ),
         )
+        mock_aioresponse.post(
+            f"https://{MOCK_IMMICH_HOST}:2283/api/assets",
+            body=json.dumps({"id": "abcdef-0123456789", "status": "created"}),
+        )
         return mock_immich
 
     return data_to_immich

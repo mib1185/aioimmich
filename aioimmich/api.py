@@ -31,6 +31,7 @@ class ImmichApi:
         self,
         aiohttp_session: ClientSession,
         api_key: str,
+        device_id: str,
         host: str,
         port: int = 2283,
         use_ssl: bool = True,
@@ -40,12 +41,14 @@ class ImmichApi:
         self.api_key = api_key
         self.base_url = f"{'https' if use_ssl else 'http'}://{host}:{port}/api"
         self.cache: dict[str, CacheEntry] = {}
+        self.device_id = device_id
 
     async def async_do_request(
         self,
         end_point: str,
         params: dict | None = None,
         data: dict | None = None,
+        raw_data: dict | None = None,
         method: str = "GET",
         application: str = "json",
         raw_response_content: bool = False,
@@ -72,7 +75,7 @@ class ImmichApi:
 
         try:
             resp = await self.session.request(
-                method, url, params=params, json=data, headers=headers
+                method, url, params=params, json=data, data=raw_data, headers=headers
             )
             LOGGER.debug("RESPONSE headers: %s", dict(resp.headers))
             if resp.status == 304:  # 304 = not modified
