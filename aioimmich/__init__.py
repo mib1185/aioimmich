@@ -23,9 +23,10 @@ class Immich:
         host: str,
         port: int = 2283,
         use_ssl: bool = True,
+        device_id: str = "python",
     ) -> None:
         """Immich instace init."""
-        self.api = ImmichApi(aiohttp_session, api_key, host, port, use_ssl)
+        self.api = ImmichApi(aiohttp_session, api_key, device_id, host, port, use_ssl)
 
         self.albums = ImmichAlbums(self.api)
         self.assets = ImmichAssests(self.api)

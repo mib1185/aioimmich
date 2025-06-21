@@ -1,8 +1,12 @@
 """aioimmich assets api."""
 
+import os
+from datetime import datetime
+
 from aiohttp import StreamReader
 
 from ..api import ImmichSubApi
+from .models import ImmichAssetUploadResponse
 
 
 class ImmichAssests(ImmichSubApi):
@@ -40,3 +44,31 @@ class ImmichAssests(ImmichSubApi):
         )
         assert isinstance(result, StreamReader)
         return result
+
+    async def async_upload_asset(self, file: str) -> ImmichAssetUploadResponse:
+        """Upload a file.
+
+        Arguments:
+            file (str)  path to the file to be uploaded
+
+        Returns:
+            result of upload as `ImmichAssetUploadResponse`
+        """
+        stats = os.stat(file)
+        with open(file, "rb") as fh:
+            result = await self.api.async_do_request(
+                "assets",
+                raw_data={
+                    "assetData": fh,
+                    "deviceAssetId": f"{self.api.device_id}-{file}-{stats.st_mtime}",
+                    "deviceId": self.api.device_id,
+                    "fileCreatedAt": datetime.fromtimestamp(stats.st_mtime).isoformat(),
+                    "fileModifiedAt": datetime.fromtimestamp(
+                        stats.st_mtime
+                    ).isoformat(),
+                    "isFavorite": "false",
+                },
+                method="POST",
+            )
+        assert isinstance(result, dict)
+        return ImmichAssetUploadResponse.from_dict(result)
