@@ -55,6 +55,7 @@ def mock_immich_with_data(mock_aioresponse, mock_immich):
         )
         mock_aioresponse.post(
             f"https://{MOCK_IMMICH_HOST}:2283/api/assets",
+            status=201,
             body=json.dumps({"id": "abcdef-0123456789", "status": "created"}),
         )
 

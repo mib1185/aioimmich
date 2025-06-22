@@ -1,12 +1,23 @@
 """aioimmich assets api."""
 
 import os
+from collections.abc import AsyncIterator
 from datetime import datetime
+from hashlib import md5
 
-from aiohttp import StreamReader
+import aiofiles
+from aiohttp import MultipartWriter, StreamReader, hdrs
 
 from ..api import ImmichSubApi
 from .models import ImmichAssetUploadResponse
+
+
+async def _file_sender(file: str) -> AsyncIterator[bytes]:
+    async with aiofiles.open(file, "rb") as f:
+        chunk = await f.read(64 * 1024)
+        while chunk:
+            yield chunk
+            chunk = await f.read(64 * 1024)
 
 
 class ImmichAssests(ImmichSubApi):
@@ -55,20 +66,31 @@ class ImmichAssests(ImmichSubApi):
             result of upload as `ImmichAssetUploadResponse`
         """
         stats = os.stat(file)
-        with open(file, "rb") as fh:
+        filename = os.path.basename(file)
+
+        boundary = md5(str(file).encode("utf-8"), usedforsecurity=False).hexdigest()
+        data = {
+            "deviceAssetId": f"{self.api.device_id}-{file}-{stats.st_mtime}",
+            "deviceId": self.api.device_id,
+            "fileCreatedAt": datetime.fromtimestamp(stats.st_mtime).isoformat(),
+            "fileModifiedAt": datetime.fromtimestamp(stats.st_mtime).isoformat(),
+            "isFavorite": "false",
+        }
+        with MultipartWriter("form-data", boundary=boundary) as mp:
+            for k, v in data.items():
+                part = mp.append(v)
+                part.headers.pop(hdrs.CONTENT_TYPE)
+                part.set_content_disposition("form-data", name=k)
+
+            part = mp.append(_file_sender(file))
+            part.headers.pop(hdrs.CONTENT_TYPE)
+            part.set_content_disposition(
+                "form-data", name="assetData", filename=filename
+            )
+            part.headers.add(hdrs.CONTENT_TYPE, "application/octet-stream")
+
             result = await self.api.async_do_request(
-                "assets",
-                raw_data={
-                    "assetData": fh,
-                    "deviceAssetId": f"{self.api.device_id}-{file}-{stats.st_mtime}",
-                    "deviceId": self.api.device_id,
-                    "fileCreatedAt": datetime.fromtimestamp(stats.st_mtime).isoformat(),
-                    "fileModifiedAt": datetime.fromtimestamp(
-                        stats.st_mtime
-                    ).isoformat(),
-                    "isFavorite": "false",
-                },
-                method="POST",
+                "assets", raw_data=mp, method="POST"
             )
         assert isinstance(result, dict)
         return ImmichAssetUploadResponse.from_dict(result)

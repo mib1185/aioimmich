@@ -10,7 +10,7 @@ authors = [{ name = "mib1185" }]
 readme = "README.md"
 license.text = "Apache-2.0"
 requires-python = '>=3.11'
-dependencies = ["aiohttp", "mashumaro"]
+dependencies = ["aiofiles", "aiohttp", "mashumaro"]
 classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
