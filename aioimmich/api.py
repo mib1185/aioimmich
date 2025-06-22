@@ -82,7 +82,7 @@ class ImmichApi:
                 LOGGER.debug("RESPONSE from cache")
                 return cache_entry.result
 
-            if resp.status == 200:
+            if 200 <= resp.status < 300:
                 if raw_response_content:
                     LOGGER.debug("RESPONSE as stream")
                     return resp.content
