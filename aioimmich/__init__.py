@@ -8,6 +8,7 @@ from .albums import ImmichAlbums
 from .api import ImmichApi
 from .assets import ImmichAssests
 from .people import ImmichPeople
+from .jobs import ImmichJobs
 from .search import ImmichSearch
 from .server import ImmichServer
 from .tags import ImmichTags
@@ -22,6 +23,7 @@ class Immich:
         "albums",
         "assets",
         "people",
+        "jobs",
         "search",
         "server",
         "tags",
@@ -32,6 +34,7 @@ class Immich:
     albums: ImmichAlbums
     assets: ImmichAssests
     people: ImmichPeople
+    jobs: ImmichJobs
     search: ImmichSearch
     server: ImmichServer
     tags: ImmichTags
@@ -52,6 +55,7 @@ class Immich:
         self.albums = ImmichAlbums(self.api)
         self.assets = ImmichAssests(self.api)
         self.people = ImmichPeople(self.api)
+        self.jobs = ImmichJobs(self.api)
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
