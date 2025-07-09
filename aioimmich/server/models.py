@@ -98,5 +98,5 @@ class ImmichServerStatistics(DataClassJSONMixin):
 class ImmichServerVersionCheck(DataClassJSONMixin):
     """Representation of the immich server version check result."""
 
-    checked_at: datetime = field(metadata=field_options(alias="checkedAt"))
-    release_version: str = field(metadata=field_options(alias="releaseVersion"))
+    checked_at: datetime | None = field(metadata=field_options(alias="checkedAt"))
+    release_version: str | None = field(metadata=field_options(alias="releaseVersion"))
