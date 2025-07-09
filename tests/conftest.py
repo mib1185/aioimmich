@@ -79,7 +79,7 @@ def mock_immich_with_data(mock_aioresponse, mock_immich):
                         "delayed": 0,
                         "failed": 0,
                         "paused": 0,
-                        "waiting": 0
+                        "waiting": 0,
                     },
                     "queueStatus": {"isActive": True, "isPaused": False},
                 }
