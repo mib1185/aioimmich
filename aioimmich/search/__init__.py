@@ -17,12 +17,12 @@ class ImmichSearch(ImmichSubApi):
     ) -> list[ImmichAsset]:
         """Search for assets.
 
-        Arguments:
-            asset_type (`AssetType | None`)  filter to `AssetType`
-            person_ids (`list[str] | None`)  filter to list of personIds
-            tag_ids (`list[str] | None`)     filter to list of tagIds
-            page_size (`int`)                assets per page
-            max_pages (`int`)                maximun number of pages to return
+        Args:
+            asset_type (AssetType | None): filter to `AssetType`
+            person_ids (list[str] | None): filter to list of personIds
+            tag_ids (list[str] | None): filter to list of tagIds
+            page_size (int): assets per page
+            max_pages (int): maximun number of pages to return
 
         Returns:
             a list of `ImmichAsset`
@@ -53,9 +53,9 @@ class ImmichSearch(ImmichSubApi):
     ) -> list[ImmichAsset]:
         """Get all assets.
 
-        Arguments:
-            page_size (`int`)  assets per page
-            max_pages (`int`)  maximun number of pages to return
+        Args:
+            page_size (int): assets per page
+            max_pages (int): maximun number of pages to return
 
         Returns:
             a list of `ImmichAsset`
@@ -67,10 +67,10 @@ class ImmichSearch(ImmichSubApi):
     ) -> list[ImmichAsset]:
         """Get all assets for given tag ids.
 
-        Arguments:
-            tag_ids (`list[str]`)  filter to list of tagIds
-            page_size (`int`)      assets per page
-            max_pages (`int`)      maximun number of pages to return
+        Args:
+            tag_ids (list[str]): filter to list of tagIds
+            page_size (int): assets per page
+            max_pages (int): maximun number of pages to return
 
         Returns:
             a list of `ImmichAsset`
@@ -84,10 +84,10 @@ class ImmichSearch(ImmichSubApi):
     ) -> list[ImmichAsset]:
         """Get all assets for given person ids.
 
-        Arguments:
-            person_ids (`list[str]`)  filter to list of tagIds
-            page_size (`int`)         assets per page
-            max_pages (`int`)         maximun number of pages to return
+        Args:
+            person_ids (list[str]): filter to list of tagIds
+            page_size (int): assets per page
+            max_pages (int): maximun number of pages to return
 
         Returns:
             a list of `ImmichAsset`

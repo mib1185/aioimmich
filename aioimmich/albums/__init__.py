@@ -22,9 +22,9 @@ class ImmichAlbums(ImmichSubApi):
     ) -> ImmichAlbum:
         """Get album information and its assets.
 
-        Arguments:
-            album_id (str)          id of the album to be fetched
-            without_assests (bool)  whether to fetch the asstes for the album
+        Args:
+            album_id (str): id of the album to be fetched
+            without_assests (bool): whether to fetch the asstes for the album
 
         Returns:
             album with assests (when `without_assests=False`) as `ImmichAlbum`
@@ -41,9 +41,9 @@ class ImmichAlbums(ImmichSubApi):
     ) -> list[ImmichAddAssetsToAlbumResponse]:
         """Add given assets to the given album.
 
-        Arguments:
-            album_id (str)    id of the album to add the assets
-            asset_ids (list)  list of asset ids to add to the album
+        Args:
+            album_id (str): id of the album to add the assets
+            asset_ids (list): list of asset ids to add to the album
 
         Returns:
             result of adding as list of `ImmichAddAssetsToAlbumResponse`
