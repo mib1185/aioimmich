@@ -323,6 +323,45 @@ MOCK_DATA: dict = {
             ]
         ),
     },
+    "people?page=1&size=3": {
+        "status": 200,
+        "body": json.dumps(
+            {
+                "people": [
+                    {
+                        "id": "6176838a-ac5a-4d1f-9a35-91c591d962d8",
+                        "name": "Me",
+                        "birthDate": None,
+                        "thumbnailPath": "upload/thumbs/e7ef5713-9dab-4bd4-b899-715b0ca4379e/61/76/6176838a-ac5a-4d1f-9a35-91c591d962d8.jpeg",
+                        "isHidden": False,
+                        "isFavorite": False,
+                        "updatedAt": "2025-05-11T11:07:41.651Z",
+                    },
+                    {
+                        "id": "3e66aa4a-a4a8-41a4-86fe-2ae5e490078f",
+                        "name": "I",
+                        "birthDate": None,
+                        "thumbnailPath": "upload/thumbs/e7ef5713-9dab-4bd4-b899-715b0ca4379e/3e/66/3e66aa4a-a4a8-41a4-86fe-2ae5e490078f.jpeg",
+                        "isHidden": False,
+                        "isFavorite": False,
+                        "updatedAt": "2025-05-19T22:10:21.953Z",
+                    },
+                    {
+                        "id": "a3c83297-684a-4576-82dc-b07432e8a18f",
+                        "name": "Myself",
+                        "birthDate": None,
+                        "thumbnailPath": "upload/thumbs/e7ef5713-9dab-4bd4-b899-715b0ca4379e/a3/c8/a3c83297-684a-4576-82dc-b07432e8a18f.jpeg",
+                        "isHidden": False,
+                        "isFavorite": False,
+                        "updatedAt": "2025-05-12T21:07:04.044Z",
+                    },
+                ],
+                "hasNextPage": False,
+                "total": 3,
+                "hidden": 0,
+            }
+        ),
+    },
     "albums/INVALID_ALBUM_ID?withoutAssets=false": {
         "status": 400,
         "body": json.dumps(
