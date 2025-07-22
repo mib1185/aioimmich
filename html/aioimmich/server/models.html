@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>aioimmich.server.models API documentation</title>
+<meta name="description" content="aioimmich server models.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>aioimmich.server.models</code></h1>
+</header>
+<section id="section-intro">
+<p>aioimmich server models.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="aioimmich.server.models.ByUserUsage"><code class="flex name class">
+<span>class <span class="ident">ByUserUsage</span></span>
+<span>(</span><span>photos: int,<br>quota_size_in_bytes: int | None,<br>usage: int,<br>usage_photos: int,<br>usage_videos: int,<br>user_id: str,<br>user_name: str,<br>videos: int)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ByUserUsage(DataClassJSONMixin):
+    &#34;&#34;&#34;Usage by user.&#34;&#34;&#34;
+
+    photos: int
+    quota_size_in_bytes: int | None = field(
+        metadata=field_options(alias=&#34;quotaSizeInBytes&#34;)
+    )
+    usage: int
+    usage_photos: int = field(metadata=field_options(alias=&#34;usagePhotos&#34;))
+    usage_videos: int = field(metadata=field_options(alias=&#34;usageVideos&#34;))
+    user_id: str = field(metadata=field_options(alias=&#34;userId&#34;))
+    user_name: str = field(metadata=field_options(alias=&#34;userName&#34;))
+    videos: int</code></pre>
+</details>
+<div class="desc"><p>Usage by user.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>mashumaro.mixins.json.DataClassJSONMixin</li>
+<li>mashumaro.mixins.dict.DataClassDictMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ByUserUsage.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>d, *, dialect=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="aioimmich.server.models.ByUserUsage.photos"><code class="name">var <span class="ident">photos</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ByUserUsage.quota_size_in_bytes"><code class="name">var <span class="ident">quota_size_in_bytes</span> : int | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ByUserUsage.usage"><code class="name">var <span class="ident">usage</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ByUserUsage.usage_photos"><code class="name">var <span class="ident">usage_photos</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ByUserUsage.usage_videos"><code class="name">var <span class="ident">usage_videos</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ByUserUsage.user_id"><code class="name">var <span class="ident">user_id</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ByUserUsage.user_name"><code class="name">var <span class="ident">user_name</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ByUserUsage.videos"><code class="name">var <span class="ident">videos</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ByUserUsage.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout"><code class="flex name class">
+<span>class <span class="ident">ImmichServerAbout</span></span>
+<span>(</span><span>licensed: bool,<br>version_url: str,<br>version: str,<br>build_image_url: str | None = None,<br>build_image: str | None = None,<br>build_url: str | None = None,<br>build: str | None = None,<br>exiftool: str | None = None,<br>ffmpeg: str | None = None,<br>imagemagick: str | None = None,<br>libvips: str | None = None,<br>nodejs: str | None = None,<br>repository_url: str | None = None,<br>repository: str | None = None,<br>source_commit: str | None = None,<br>source_ref: str | None = None,<br>source_url: str | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ImmichServerAbout(DataClassJSONMixin):
+    &#34;&#34;&#34;Representation of the immich server about information.&#34;&#34;&#34;
+
+    # non-default parameters
+    licensed: bool
+    version_url: str = field(metadata=field_options(alias=&#34;versionUrl&#34;))
+    version: str
+
+    # default parameters
+    build_image_url: str | None = field(
+        metadata=field_options(alias=&#34;buildImageUrl&#34;), default=None
+    )
+    build_image: str | None = field(
+        metadata=field_options(alias=&#34;buildImage&#34;), default=None
+    )
+    build_url: str | None = field(
+        metadata=field_options(alias=&#34;buildUrl&#34;), default=None
+    )
+    build: str | None = field(default=None)
+    exiftool: str | None = field(default=None)
+    ffmpeg: str | None = field(default=None)
+    imagemagick: str | None = field(default=None)
+    libvips: str | None = field(default=None)
+    nodejs: str | None = field(default=None)
+    repository_url: str | None = field(
+        metadata=field_options(alias=&#34;repositoryUrl&#34;), default=None
+    )
+    repository: str | None = field(default=None)
+    source_commit: str | None = field(
+        metadata=field_options(alias=&#34;sourceCommit&#34;), default=None
+    )
+    source_ref: str | None = field(
+        metadata=field_options(alias=&#34;sourceRef&#34;), default=None
+    )
+    source_url: str | None = field(
+        metadata=field_options(alias=&#34;sourceUrl&#34;), default=None
+    )</code></pre>
+</details>
+<div class="desc"><p>Representation of the immich server about information.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>mashumaro.mixins.json.DataClassJSONMixin</li>
+<li>mashumaro.mixins.dict.DataClassDictMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerAbout.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>d, *, dialect=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerAbout.build"><code class="name">var <span class="ident">build</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.build_image"><code class="name">var <span class="ident">build_image</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.build_image_url"><code class="name">var <span class="ident">build_image_url</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.build_url"><code class="name">var <span class="ident">build_url</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.exiftool"><code class="name">var <span class="ident">exiftool</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.ffmpeg"><code class="name">var <span class="ident">ffmpeg</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.imagemagick"><code class="name">var <span class="ident">imagemagick</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.libvips"><code class="name">var <span class="ident">libvips</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.licensed"><code class="name">var <span class="ident">licensed</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.nodejs"><code class="name">var <span class="ident">nodejs</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.repository"><code class="name">var <span class="ident">repository</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.repository_url"><code class="name">var <span class="ident">repository_url</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.source_commit"><code class="name">var <span class="ident">source_commit</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.source_ref"><code class="name">var <span class="ident">source_ref</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.source_url"><code class="name">var <span class="ident">source_url</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.version"><code class="name">var <span class="ident">version</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerAbout.version_url"><code class="name">var <span class="ident">version_url</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerAbout.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStatistics"><code class="flex name class">
+<span>class <span class="ident">ImmichServerStatistics</span></span>
+<span>(</span><span>photos: int,<br>usage_by_user: list[<a title="aioimmich.server.models.ByUserUsage" href="#aioimmich.server.models.ByUserUsage">ByUserUsage</a>],<br>usage_photos: int,<br>usage_videos: int,<br>usage: int,<br>videos: int)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ImmichServerStatistics(DataClassJSONMixin):
+    &#34;&#34;&#34;Representation of the immich server usage statistics.&#34;&#34;&#34;
+
+    photos: int
+    usage_by_user: list[ByUserUsage] = field(
+        metadata=field_options(alias=&#34;usageByUser&#34;)
+    )
+    usage_photos: int = field(metadata=field_options(alias=&#34;usagePhotos&#34;))
+    usage_videos: int = field(metadata=field_options(alias=&#34;usageVideos&#34;))
+    usage: int
+    videos: int</code></pre>
+</details>
+<div class="desc"><p>Representation of the immich server usage statistics.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>mashumaro.mixins.json.DataClassJSONMixin</li>
+<li>mashumaro.mixins.dict.DataClassDictMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerStatistics.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>d, *, dialect=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerStatistics.photos"><code class="name">var <span class="ident">photos</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStatistics.usage"><code class="name">var <span class="ident">usage</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStatistics.usage_by_user"><code class="name">var <span class="ident">usage_by_user</span> : list[<a title="aioimmich.server.models.ByUserUsage" href="#aioimmich.server.models.ByUserUsage">ByUserUsage</a>]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStatistics.usage_photos"><code class="name">var <span class="ident">usage_photos</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStatistics.usage_videos"><code class="name">var <span class="ident">usage_videos</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStatistics.videos"><code class="name">var <span class="ident">videos</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerStatistics.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStorage"><code class="flex name class">
+<span>class <span class="ident">ImmichServerStorage</span></span>
+<span>(</span><span>disk_available_raw: int,<br>disk_available: str,<br>disk_size_raw: int,<br>disk_size: str,<br>disk_usage_percentage: float,<br>disk_use_raw: int,<br>disk_use: str)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ImmichServerStorage(DataClassJSONMixin):
+    &#34;&#34;&#34;Representation of the immich server storage information.&#34;&#34;&#34;
+
+    disk_available_raw: int = field(metadata=field_options(alias=&#34;diskAvailableRaw&#34;))
+    disk_available: str = field(metadata=field_options(alias=&#34;diskAvailable&#34;))
+    disk_size_raw: int = field(metadata=field_options(alias=&#34;diskSizeRaw&#34;))
+    disk_size: str = field(metadata=field_options(alias=&#34;diskSize&#34;))
+    disk_usage_percentage: float = field(
+        metadata=field_options(alias=&#34;diskUsagePercentage&#34;)
+    )
+    disk_use_raw: int = field(metadata=field_options(alias=&#34;diskUseRaw&#34;))
+    disk_use: str = field(metadata=field_options(alias=&#34;diskUse&#34;))</code></pre>
+</details>
+<div class="desc"><p>Representation of the immich server storage information.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>mashumaro.mixins.json.DataClassJSONMixin</li>
+<li>mashumaro.mixins.dict.DataClassDictMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerStorage.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>d, *, dialect=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerStorage.disk_available"><code class="name">var <span class="ident">disk_available</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStorage.disk_available_raw"><code class="name">var <span class="ident">disk_available_raw</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStorage.disk_size"><code class="name">var <span class="ident">disk_size</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStorage.disk_size_raw"><code class="name">var <span class="ident">disk_size_raw</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStorage.disk_usage_percentage"><code class="name">var <span class="ident">disk_usage_percentage</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStorage.disk_use"><code class="name">var <span class="ident">disk_use</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerStorage.disk_use_raw"><code class="name">var <span class="ident">disk_use_raw</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerStorage.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerVersionCheck"><code class="flex name class">
+<span>class <span class="ident">ImmichServerVersionCheck</span></span>
+<span>(</span><span>checked_at: datetime | None, release_version: str | None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ImmichServerVersionCheck(DataClassJSONMixin):
+    &#34;&#34;&#34;Representation of the immich server version check result.&#34;&#34;&#34;
+
+    checked_at: datetime | None = field(metadata=field_options(alias=&#34;checkedAt&#34;))
+    release_version: str | None = field(metadata=field_options(alias=&#34;releaseVersion&#34;))</code></pre>
+</details>
+<div class="desc"><p>Representation of the immich server version check result.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>mashumaro.mixins.json.DataClassJSONMixin</li>
+<li>mashumaro.mixins.dict.DataClassDictMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerVersionCheck.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>d, *, dialect=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerVersionCheck.checked_at"><code class="name">var <span class="ident">checked_at</span> : datetime.datetime | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerVersionCheck.release_version"><code class="name">var <span class="ident">release_version</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerVersionCheck.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="aioimmich.server" href="index.html">aioimmich.server</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="aioimmich.server.models.ByUserUsage" href="#aioimmich.server.models.ByUserUsage">ByUserUsage</a></code></h4>
+<ul class="two-column">
+<li><code><a title="aioimmich.server.models.ByUserUsage.from_dict" href="#aioimmich.server.models.ByUserUsage.from_dict">from_dict</a></code></li>
+<li><code><a title="aioimmich.server.models.ByUserUsage.photos" href="#aioimmich.server.models.ByUserUsage.photos">photos</a></code></li>
+<li><code><a title="aioimmich.server.models.ByUserUsage.quota_size_in_bytes" href="#aioimmich.server.models.ByUserUsage.quota_size_in_bytes">quota_size_in_bytes</a></code></li>
+<li><code><a title="aioimmich.server.models.ByUserUsage.to_dict" href="#aioimmich.server.models.ByUserUsage.to_dict">to_dict</a></code></li>
+<li><code><a title="aioimmich.server.models.ByUserUsage.usage" href="#aioimmich.server.models.ByUserUsage.usage">usage</a></code></li>
+<li><code><a title="aioimmich.server.models.ByUserUsage.usage_photos" href="#aioimmich.server.models.ByUserUsage.usage_photos">usage_photos</a></code></li>
+<li><code><a title="aioimmich.server.models.ByUserUsage.usage_videos" href="#aioimmich.server.models.ByUserUsage.usage_videos">usage_videos</a></code></li>
+<li><code><a title="aioimmich.server.models.ByUserUsage.user_id" href="#aioimmich.server.models.ByUserUsage.user_id">user_id</a></code></li>
+<li><code><a title="aioimmich.server.models.ByUserUsage.user_name" href="#aioimmich.server.models.ByUserUsage.user_name">user_name</a></code></li>
+<li><code><a title="aioimmich.server.models.ByUserUsage.videos" href="#aioimmich.server.models.ByUserUsage.videos">videos</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="aioimmich.server.models.ImmichServerAbout" href="#aioimmich.server.models.ImmichServerAbout">ImmichServerAbout</a></code></h4>
+<ul class="two-column">
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.build" href="#aioimmich.server.models.ImmichServerAbout.build">build</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.build_image" href="#aioimmich.server.models.ImmichServerAbout.build_image">build_image</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.build_image_url" href="#aioimmich.server.models.ImmichServerAbout.build_image_url">build_image_url</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.build_url" href="#aioimmich.server.models.ImmichServerAbout.build_url">build_url</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.exiftool" href="#aioimmich.server.models.ImmichServerAbout.exiftool">exiftool</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.ffmpeg" href="#aioimmich.server.models.ImmichServerAbout.ffmpeg">ffmpeg</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.from_dict" href="#aioimmich.server.models.ImmichServerAbout.from_dict">from_dict</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.imagemagick" href="#aioimmich.server.models.ImmichServerAbout.imagemagick">imagemagick</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.libvips" href="#aioimmich.server.models.ImmichServerAbout.libvips">libvips</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.licensed" href="#aioimmich.server.models.ImmichServerAbout.licensed">licensed</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.nodejs" href="#aioimmich.server.models.ImmichServerAbout.nodejs">nodejs</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.repository" href="#aioimmich.server.models.ImmichServerAbout.repository">repository</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.repository_url" href="#aioimmich.server.models.ImmichServerAbout.repository_url">repository_url</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.source_commit" href="#aioimmich.server.models.ImmichServerAbout.source_commit">source_commit</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.source_ref" href="#aioimmich.server.models.ImmichServerAbout.source_ref">source_ref</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.source_url" href="#aioimmich.server.models.ImmichServerAbout.source_url">source_url</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.to_dict" href="#aioimmich.server.models.ImmichServerAbout.to_dict">to_dict</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.version" href="#aioimmich.server.models.ImmichServerAbout.version">version</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerAbout.version_url" href="#aioimmich.server.models.ImmichServerAbout.version_url">version_url</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="aioimmich.server.models.ImmichServerStatistics" href="#aioimmich.server.models.ImmichServerStatistics">ImmichServerStatistics</a></code></h4>
+<ul class="two-column">
+<li><code><a title="aioimmich.server.models.ImmichServerStatistics.from_dict" href="#aioimmich.server.models.ImmichServerStatistics.from_dict">from_dict</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStatistics.photos" href="#aioimmich.server.models.ImmichServerStatistics.photos">photos</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStatistics.to_dict" href="#aioimmich.server.models.ImmichServerStatistics.to_dict">to_dict</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStatistics.usage" href="#aioimmich.server.models.ImmichServerStatistics.usage">usage</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStatistics.usage_by_user" href="#aioimmich.server.models.ImmichServerStatistics.usage_by_user">usage_by_user</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStatistics.usage_photos" href="#aioimmich.server.models.ImmichServerStatistics.usage_photos">usage_photos</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStatistics.usage_videos" href="#aioimmich.server.models.ImmichServerStatistics.usage_videos">usage_videos</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStatistics.videos" href="#aioimmich.server.models.ImmichServerStatistics.videos">videos</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="aioimmich.server.models.ImmichServerStorage" href="#aioimmich.server.models.ImmichServerStorage">ImmichServerStorage</a></code></h4>
+<ul class="">
+<li><code><a title="aioimmich.server.models.ImmichServerStorage.disk_available" href="#aioimmich.server.models.ImmichServerStorage.disk_available">disk_available</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStorage.disk_available_raw" href="#aioimmich.server.models.ImmichServerStorage.disk_available_raw">disk_available_raw</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStorage.disk_size" href="#aioimmich.server.models.ImmichServerStorage.disk_size">disk_size</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStorage.disk_size_raw" href="#aioimmich.server.models.ImmichServerStorage.disk_size_raw">disk_size_raw</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStorage.disk_usage_percentage" href="#aioimmich.server.models.ImmichServerStorage.disk_usage_percentage">disk_usage_percentage</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStorage.disk_use" href="#aioimmich.server.models.ImmichServerStorage.disk_use">disk_use</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStorage.disk_use_raw" href="#aioimmich.server.models.ImmichServerStorage.disk_use_raw">disk_use_raw</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStorage.from_dict" href="#aioimmich.server.models.ImmichServerStorage.from_dict">from_dict</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerStorage.to_dict" href="#aioimmich.server.models.ImmichServerStorage.to_dict">to_dict</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="aioimmich.server.models.ImmichServerVersionCheck" href="#aioimmich.server.models.ImmichServerVersionCheck">ImmichServerVersionCheck</a></code></h4>
+<ul class="">
+<li><code><a title="aioimmich.server.models.ImmichServerVersionCheck.checked_at" href="#aioimmich.server.models.ImmichServerVersionCheck.checked_at">checked_at</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerVersionCheck.from_dict" href="#aioimmich.server.models.ImmichServerVersionCheck.from_dict">from_dict</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerVersionCheck.release_version" href="#aioimmich.server.models.ImmichServerVersionCheck.release_version">release_version</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerVersionCheck.to_dict" href="#aioimmich.server.models.ImmichServerVersionCheck.to_dict">to_dict</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

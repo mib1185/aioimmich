@@ -17,6 +17,26 @@ from .users import ImmichUsers
 class Immich:
     """Immich instance."""
 
+    __slots__ = (
+        "api",
+        "albums",
+        "assets",
+        "people",
+        "search",
+        "server",
+        "tags",
+        "users",
+    )
+
+    api: ImmichApi
+    albums: ImmichAlbums
+    assets: ImmichAssests
+    people: ImmichPeople
+    search: ImmichSearch
+    server: ImmichServer
+    tags: ImmichTags
+    users: ImmichUsers
+
     def __init__(
         self,
         aiohttp_session: ClientSession,

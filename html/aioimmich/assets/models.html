@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>aioimmich.assets.models API documentation</title>
+<meta name="description" content="aioimmich models.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>aioimmich.assets.models</code></h1>
+</header>
+<section id="section-intro">
+<p>aioimmich models.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="aioimmich.assets.models.AssetType"><code class="flex name class">
+<span>class <span class="ident">AssetType</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AssetType(StrEnum):
+    &#34;&#34;&#34;Asset type.&#34;&#34;&#34;
+
+    AUDIO = &#34;AUDIO&#34;
+    IMAGE = &#34;IMAGE&#34;
+    OTHER = &#34;OTHER&#34;
+    VIDEO = &#34;VIDEO&#34;</code></pre>
+</details>
+<div class="desc"><p>Asset type.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.StrEnum</li>
+<li>builtins.str</li>
+<li>enum.ReprEnum</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="aioimmich.assets.models.AssetType.AUDIO"><code class="name">var <span class="ident">AUDIO</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.AssetType.IMAGE"><code class="name">var <span class="ident">IMAGE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.AssetType.OTHER"><code class="name">var <span class="ident">OTHER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.AssetType.VIDEO"><code class="name">var <span class="ident">VIDEO</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo"><code class="flex name class">
+<span>class <span class="ident">ExifInfo</span></span>
+<span>(</span><span>city: str | None = None,<br>country: str | None = None,<br>date_time_original: datetime | None = None,<br>description: str | None = None,<br>exif_image_height: int | None = None,<br>exif_image_width: int | None = None,<br>exposure_time: str | None = None,<br>file_size_in_byte: int | None = None,<br>f_number: float | None = None,<br>focal_length: float | None = None,<br>iso: int | None = None,<br>latitude: float | None = None,<br>lens_model: str | None = None,<br>longitude: float | None = None,<br>make: str | None = None,<br>model: str | None = None,<br>modify_date: str | None = None,<br>orientation: str | None = None,<br>projection_type: str | None = None,<br>rating: str | None = None,<br>state: str | None = None,<br>time_zone: str | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ExifInfo(DataClassJSONMixin):
+    &#34;&#34;&#34;Exif info.&#34;&#34;&#34;
+
+    city: str | None = field(default=None)
+    country: str | None = field(default=None)
+    date_time_original: datetime | None = field(
+        metadata=field_options(alias=&#34;dateTimeOriginal&#34;), default=None
+    )
+    description: str | None = field(default=None)
+    exif_image_height: int | None = field(
+        metadata=field_options(alias=&#34;exifImageHeight&#34;), default=None
+    )
+    exif_image_width: int | None = field(
+        metadata=field_options(alias=&#34;exifImageWidth&#34;), default=None
+    )
+    exposure_time: str | None = field(
+        metadata=field_options(alias=&#34;exposureTime&#34;), default=None
+    )
+    file_size_in_byte: int | None = field(
+        metadata=field_options(alias=&#34;fileSizeInByte&#34;), default=None
+    )
+    f_number: float | None = field(
+        metadata=field_options(alias=&#34;fNumber&#34;), default=None
+    )
+    focal_length: float | None = field(
+        metadata=field_options(alias=&#34;focalLength&#34;), default=None
+    )
+    iso: int | None = field(default=None)
+    latitude: float | None = field(default=None)
+    lens_model: str | None = field(
+        metadata=field_options(alias=&#34;lensModel&#34;), default=None
+    )
+    longitude: float | None = field(default=None)
+    make: str | None = field(default=None)
+    model: str | None = field(default=None)
+    modify_date: str | None = field(
+        metadata=field_options(alias=&#34;modifyDate&#34;), default=None
+    )
+    orientation: str | None = field(default=None)
+    projection_type: str | None = field(
+        metadata=field_options(alias=&#34;projectionType&#34;), default=None
+    )
+    rating: str | None = field(default=None)
+    state: str | None = field(default=None)
+    time_zone: str | None = field(
+        metadata=field_options(alias=&#34;timeZone&#34;), default=None
+    )</code></pre>
+</details>
+<div class="desc"><p>Exif info.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>mashumaro.mixins.json.DataClassJSONMixin</li>
+<li>mashumaro.mixins.dict.DataClassDictMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="aioimmich.assets.models.ExifInfo.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>d, *, dialect=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="aioimmich.assets.models.ExifInfo.city"><code class="name">var <span class="ident">city</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.country"><code class="name">var <span class="ident">country</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.date_time_original"><code class="name">var <span class="ident">date_time_original</span> : datetime.datetime | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.description"><code class="name">var <span class="ident">description</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.exif_image_height"><code class="name">var <span class="ident">exif_image_height</span> : int | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.exif_image_width"><code class="name">var <span class="ident">exif_image_width</span> : int | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.exposure_time"><code class="name">var <span class="ident">exposure_time</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.f_number"><code class="name">var <span class="ident">f_number</span> : float | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.file_size_in_byte"><code class="name">var <span class="ident">file_size_in_byte</span> : int | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.focal_length"><code class="name">var <span class="ident">focal_length</span> : float | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.iso"><code class="name">var <span class="ident">iso</span> : int | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.latitude"><code class="name">var <span class="ident">latitude</span> : float | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.lens_model"><code class="name">var <span class="ident">lens_model</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.longitude"><code class="name">var <span class="ident">longitude</span> : float | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.make"><code class="name">var <span class="ident">make</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.model"><code class="name">var <span class="ident">model</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.modify_date"><code class="name">var <span class="ident">modify_date</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.orientation"><code class="name">var <span class="ident">orientation</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.projection_type"><code class="name">var <span class="ident">projection_type</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.rating"><code class="name">var <span class="ident">rating</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.state"><code class="name">var <span class="ident">state</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ExifInfo.time_zone"><code class="name">var <span class="ident">time_zone</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.assets.models.ExifInfo.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset"><code class="flex name class">
+<span>class <span class="ident">ImmichAsset</span></span>
+<span>(</span><span>asset_id: str,<br>asset_type: <a title="aioimmich.assets.models.AssetType" href="#aioimmich.assets.models.AssetType">AssetType</a>,<br>checksum: str,<br>device_asset_id: str,<br>device_id: str,<br>duration: str,<br>file_created_at: datetime,<br>file_modified_at: datetime,<br>has_metadata: bool,<br>is_archived: bool,<br>is_favorite: bool,<br>is_offline: bool,<br>is_trashed: bool,<br>local_datetime: datetime,<br>original_file_name: str,<br>original_path: str,<br>owner_id: str,<br>people: list,<br>resized: bool,<br>thumbhash: str,<br>updated_at: datetime,<br>duplicate_id: str | None = None,<br>exif_info: <a title="aioimmich.assets.models.ExifInfo" href="#aioimmich.assets.models.ExifInfo">ExifInfo</a> | None = None,<br>library_id: str | None = None,<br>live_photo_video_id: str | None = None,<br>original_mime_type: str | None = None,<br>visibility: str | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ImmichAsset(DataClassJSONMixin):
+    &#34;&#34;&#34;Representation of an immich asset.&#34;&#34;&#34;
+
+    # non-default parameters
+    asset_id: str = field(metadata=field_options(alias=&#34;id&#34;))
+    asset_type: AssetType = field(metadata=field_options(alias=&#34;type&#34;))
+    checksum: str
+    device_asset_id: str = field(metadata=field_options(alias=&#34;deviceAssetId&#34;))
+    device_id: str = field(metadata=field_options(alias=&#34;deviceId&#34;))
+    duration: str
+    file_created_at: datetime = field(metadata=field_options(alias=&#34;fileCreatedAt&#34;))
+    file_modified_at: datetime = field(metadata=field_options(alias=&#34;fileModifiedAt&#34;))
+    has_metadata: bool = field(metadata=field_options(alias=&#34;hasMetadata&#34;))
+    is_archived: bool = field(metadata=field_options(alias=&#34;isArchived&#34;))
+    is_favorite: bool = field(metadata=field_options(alias=&#34;isFavorite&#34;))
+    is_offline: bool = field(metadata=field_options(alias=&#34;isOffline&#34;))
+    is_trashed: bool = field(metadata=field_options(alias=&#34;isTrashed&#34;))
+    local_datetime: datetime = field(metadata=field_options(alias=&#34;localDateTime&#34;))
+    original_file_name: str = field(metadata=field_options(alias=&#34;originalFileName&#34;))
+    original_path: str = field(metadata=field_options(alias=&#34;originalPath&#34;))
+    owner_id: str = field(metadata=field_options(alias=&#34;ownerId&#34;))
+    people: list  # TODO: proper dataclass necessary
+    resized: bool
+    thumbhash: str
+    updated_at: datetime = field(metadata=field_options(alias=&#34;updatedAt&#34;))
+
+    # default parameters
+    duplicate_id: str | None = field(
+        metadata=field_options(alias=&#34;duplicateId&#34;), default=None
+    )
+    exif_info: ExifInfo | None = field(
+        metadata=field_options(alias=&#34;exifInfo&#34;), default=None
+    )
+    library_id: str | None = field(
+        metadata=field_options(alias=&#34;libraryId&#34;), default=None
+    )  # This property was deprecated in v1.106.0
+    live_photo_video_id: str | None = field(
+        metadata=field_options(alias=&#34;livePhotoVideoId&#34;), default=None
+    )
+    original_mime_type: str | None = field(
+        metadata=field_options(alias=&#34;originalMimeType&#34;), default=None
+    )
+    visibility: str | None = field(default=None)</code></pre>
+</details>
+<div class="desc"><p>Representation of an immich asset.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>mashumaro.mixins.json.DataClassJSONMixin</li>
+<li>mashumaro.mixins.dict.DataClassDictMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="aioimmich.assets.models.ImmichAsset.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>d, *, dialect=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="aioimmich.assets.models.ImmichAsset.asset_id"><code class="name">var <span class="ident">asset_id</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.asset_type"><code class="name">var <span class="ident">asset_type</span> : <a title="aioimmich.assets.models.AssetType" href="#aioimmich.assets.models.AssetType">AssetType</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.checksum"><code class="name">var <span class="ident">checksum</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.device_asset_id"><code class="name">var <span class="ident">device_asset_id</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.device_id"><code class="name">var <span class="ident">device_id</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.duplicate_id"><code class="name">var <span class="ident">duplicate_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.duration"><code class="name">var <span class="ident">duration</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.exif_info"><code class="name">var <span class="ident">exif_info</span> : <a title="aioimmich.assets.models.ExifInfo" href="#aioimmich.assets.models.ExifInfo">ExifInfo</a> | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.file_created_at"><code class="name">var <span class="ident">file_created_at</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.file_modified_at"><code class="name">var <span class="ident">file_modified_at</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.has_metadata"><code class="name">var <span class="ident">has_metadata</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.is_archived"><code class="name">var <span class="ident">is_archived</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.is_favorite"><code class="name">var <span class="ident">is_favorite</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.is_offline"><code class="name">var <span class="ident">is_offline</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.is_trashed"><code class="name">var <span class="ident">is_trashed</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.library_id"><code class="name">var <span class="ident">library_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.live_photo_video_id"><code class="name">var <span class="ident">live_photo_video_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.local_datetime"><code class="name">var <span class="ident">local_datetime</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.original_file_name"><code class="name">var <span class="ident">original_file_name</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.original_mime_type"><code class="name">var <span class="ident">original_mime_type</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.original_path"><code class="name">var <span class="ident">original_path</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.owner_id"><code class="name">var <span class="ident">owner_id</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.people"><code class="name">var <span class="ident">people</span> : list</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.resized"><code class="name">var <span class="ident">resized</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.thumbhash"><code class="name">var <span class="ident">thumbhash</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.updated_at"><code class="name">var <span class="ident">updated_at</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAsset.visibility"><code class="name">var <span class="ident">visibility</span> : str | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.assets.models.ImmichAsset.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAssetUploadResponse"><code class="flex name class">
+<span>class <span class="ident">ImmichAssetUploadResponse</span></span>
+<span>(</span><span>asset_id: str,<br>status: <a title="aioimmich.assets.models.UploadStatus" href="#aioimmich.assets.models.UploadStatus">UploadStatus</a>)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ImmichAssetUploadResponse(DataClassJSONMixin):
+    &#34;&#34;&#34;Representation of an immich asset upload response.&#34;&#34;&#34;
+
+    asset_id: str = field(metadata=field_options(alias=&#34;id&#34;))
+    status: UploadStatus</code></pre>
+</details>
+<div class="desc"><p>Representation of an immich asset upload response.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>mashumaro.mixins.json.DataClassJSONMixin</li>
+<li>mashumaro.mixins.dict.DataClassDictMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="aioimmich.assets.models.ImmichAssetUploadResponse.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>d, *, dialect=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="aioimmich.assets.models.ImmichAssetUploadResponse.asset_id"><code class="name">var <span class="ident">asset_id</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.ImmichAssetUploadResponse.status"><code class="name">var <span class="ident">status</span> : <a title="aioimmich.assets.models.UploadStatus" href="#aioimmich.assets.models.UploadStatus">UploadStatus</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.assets.models.ImmichAssetUploadResponse.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="aioimmich.assets.models.UploadStatus"><code class="flex name class">
+<span>class <span class="ident">UploadStatus</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class UploadStatus(StrEnum):
+    &#34;&#34;&#34;Asset upload status.&#34;&#34;&#34;
+
+    CREATED = &#34;created&#34;
+    DUPLICATED = &#34;duplicate&#34;
+    REPLACED = &#34;replaced&#34;</code></pre>
+</details>
+<div class="desc"><p>Asset upload status.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.StrEnum</li>
+<li>builtins.str</li>
+<li>enum.ReprEnum</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="aioimmich.assets.models.UploadStatus.CREATED"><code class="name">var <span class="ident">CREATED</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.UploadStatus.DUPLICATED"><code class="name">var <span class="ident">DUPLICATED</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.assets.models.UploadStatus.REPLACED"><code class="name">var <span class="ident">REPLACED</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="aioimmich.assets" href="index.html">aioimmich.assets</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="aioimmich.assets.models.AssetType" href="#aioimmich.assets.models.AssetType">AssetType</a></code></h4>
+<ul class="">
+<li><code><a title="aioimmich.assets.models.AssetType.AUDIO" href="#aioimmich.assets.models.AssetType.AUDIO">AUDIO</a></code></li>
+<li><code><a title="aioimmich.assets.models.AssetType.IMAGE" href="#aioimmich.assets.models.AssetType.IMAGE">IMAGE</a></code></li>
+<li><code><a title="aioimmich.assets.models.AssetType.OTHER" href="#aioimmich.assets.models.AssetType.OTHER">OTHER</a></code></li>
+<li><code><a title="aioimmich.assets.models.AssetType.VIDEO" href="#aioimmich.assets.models.AssetType.VIDEO">VIDEO</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="aioimmich.assets.models.ExifInfo" href="#aioimmich.assets.models.ExifInfo">ExifInfo</a></code></h4>
+<ul class="two-column">
+<li><code><a title="aioimmich.assets.models.ExifInfo.city" href="#aioimmich.assets.models.ExifInfo.city">city</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.country" href="#aioimmich.assets.models.ExifInfo.country">country</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.date_time_original" href="#aioimmich.assets.models.ExifInfo.date_time_original">date_time_original</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.description" href="#aioimmich.assets.models.ExifInfo.description">description</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.exif_image_height" href="#aioimmich.assets.models.ExifInfo.exif_image_height">exif_image_height</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.exif_image_width" href="#aioimmich.assets.models.ExifInfo.exif_image_width">exif_image_width</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.exposure_time" href="#aioimmich.assets.models.ExifInfo.exposure_time">exposure_time</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.f_number" href="#aioimmich.assets.models.ExifInfo.f_number">f_number</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.file_size_in_byte" href="#aioimmich.assets.models.ExifInfo.file_size_in_byte">file_size_in_byte</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.focal_length" href="#aioimmich.assets.models.ExifInfo.focal_length">focal_length</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.from_dict" href="#aioimmich.assets.models.ExifInfo.from_dict">from_dict</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.iso" href="#aioimmich.assets.models.ExifInfo.iso">iso</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.latitude" href="#aioimmich.assets.models.ExifInfo.latitude">latitude</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.lens_model" href="#aioimmich.assets.models.ExifInfo.lens_model">lens_model</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.longitude" href="#aioimmich.assets.models.ExifInfo.longitude">longitude</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.make" href="#aioimmich.assets.models.ExifInfo.make">make</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.model" href="#aioimmich.assets.models.ExifInfo.model">model</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.modify_date" href="#aioimmich.assets.models.ExifInfo.modify_date">modify_date</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.orientation" href="#aioimmich.assets.models.ExifInfo.orientation">orientation</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.projection_type" href="#aioimmich.assets.models.ExifInfo.projection_type">projection_type</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.rating" href="#aioimmich.assets.models.ExifInfo.rating">rating</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.state" href="#aioimmich.assets.models.ExifInfo.state">state</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.time_zone" href="#aioimmich.assets.models.ExifInfo.time_zone">time_zone</a></code></li>
+<li><code><a title="aioimmich.assets.models.ExifInfo.to_dict" href="#aioimmich.assets.models.ExifInfo.to_dict">to_dict</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="aioimmich.assets.models.ImmichAsset" href="#aioimmich.assets.models.ImmichAsset">ImmichAsset</a></code></h4>
+<ul class="two-column">
+<li><code><a title="aioimmich.assets.models.ImmichAsset.asset_id" href="#aioimmich.assets.models.ImmichAsset.asset_id">asset_id</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.asset_type" href="#aioimmich.assets.models.ImmichAsset.asset_type">asset_type</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.checksum" href="#aioimmich.assets.models.ImmichAsset.checksum">checksum</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.device_asset_id" href="#aioimmich.assets.models.ImmichAsset.device_asset_id">device_asset_id</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.device_id" href="#aioimmich.assets.models.ImmichAsset.device_id">device_id</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.duplicate_id" href="#aioimmich.assets.models.ImmichAsset.duplicate_id">duplicate_id</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.duration" href="#aioimmich.assets.models.ImmichAsset.duration">duration</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.exif_info" href="#aioimmich.assets.models.ImmichAsset.exif_info">exif_info</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.file_created_at" href="#aioimmich.assets.models.ImmichAsset.file_created_at">file_created_at</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.file_modified_at" href="#aioimmich.assets.models.ImmichAsset.file_modified_at">file_modified_at</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.from_dict" href="#aioimmich.assets.models.ImmichAsset.from_dict">from_dict</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.has_metadata" href="#aioimmich.assets.models.ImmichAsset.has_metadata">has_metadata</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.is_archived" href="#aioimmich.assets.models.ImmichAsset.is_archived">is_archived</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.is_favorite" href="#aioimmich.assets.models.ImmichAsset.is_favorite">is_favorite</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.is_offline" href="#aioimmich.assets.models.ImmichAsset.is_offline">is_offline</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.is_trashed" href="#aioimmich.assets.models.ImmichAsset.is_trashed">is_trashed</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.library_id" href="#aioimmich.assets.models.ImmichAsset.library_id">library_id</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.live_photo_video_id" href="#aioimmich.assets.models.ImmichAsset.live_photo_video_id">live_photo_video_id</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.local_datetime" href="#aioimmich.assets.models.ImmichAsset.local_datetime">local_datetime</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.original_file_name" href="#aioimmich.assets.models.ImmichAsset.original_file_name">original_file_name</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.original_mime_type" href="#aioimmich.assets.models.ImmichAsset.original_mime_type">original_mime_type</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.original_path" href="#aioimmich.assets.models.ImmichAsset.original_path">original_path</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.owner_id" href="#aioimmich.assets.models.ImmichAsset.owner_id">owner_id</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.people" href="#aioimmich.assets.models.ImmichAsset.people">people</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.resized" href="#aioimmich.assets.models.ImmichAsset.resized">resized</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.thumbhash" href="#aioimmich.assets.models.ImmichAsset.thumbhash">thumbhash</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.to_dict" href="#aioimmich.assets.models.ImmichAsset.to_dict">to_dict</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.updated_at" href="#aioimmich.assets.models.ImmichAsset.updated_at">updated_at</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAsset.visibility" href="#aioimmich.assets.models.ImmichAsset.visibility">visibility</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="aioimmich.assets.models.ImmichAssetUploadResponse" href="#aioimmich.assets.models.ImmichAssetUploadResponse">ImmichAssetUploadResponse</a></code></h4>
+<ul class="">
+<li><code><a title="aioimmich.assets.models.ImmichAssetUploadResponse.asset_id" href="#aioimmich.assets.models.ImmichAssetUploadResponse.asset_id">asset_id</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAssetUploadResponse.from_dict" href="#aioimmich.assets.models.ImmichAssetUploadResponse.from_dict">from_dict</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAssetUploadResponse.status" href="#aioimmich.assets.models.ImmichAssetUploadResponse.status">status</a></code></li>
+<li><code><a title="aioimmich.assets.models.ImmichAssetUploadResponse.to_dict" href="#aioimmich.assets.models.ImmichAssetUploadResponse.to_dict">to_dict</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="aioimmich.assets.models.UploadStatus" href="#aioimmich.assets.models.UploadStatus">UploadStatus</a></code></h4>
+<ul class="">
+<li><code><a title="aioimmich.assets.models.UploadStatus.CREATED" href="#aioimmich.assets.models.UploadStatus.CREATED">CREATED</a></code></li>
+<li><code><a title="aioimmich.assets.models.UploadStatus.DUPLICATED" href="#aioimmich.assets.models.UploadStatus.DUPLICATED">DUPLICATED</a></code></li>
+<li><code><a title="aioimmich.assets.models.UploadStatus.REPLACED" href="#aioimmich.assets.models.UploadStatus.REPLACED">REPLACED</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
