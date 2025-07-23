@@ -67,7 +67,7 @@ el.replaceWith(d);
     &#34;&#34;&#34;Immich tags api.&#34;&#34;&#34;
 
     async def async_get_all_people(
-        self, with_unnamed: bool = False, page_size: int = 3, max_pages: int = 1
+        self, with_unnamed: bool = False, page_size: int = 200, max_pages: int = 10
     ) -&gt; list[ImmichPerson]:
         &#34;&#34;&#34;Get all people.
 
@@ -119,7 +119,7 @@ el.replaceWith(d);
 <h3>Methods</h3>
 <dl>
 <dt id="aioimmich.people.ImmichPeople.async_get_all_people"><code class="name flex">
-<span>async def <span class="ident">async_get_all_people</span></span>(<span>self, with_unnamed: bool = False, page_size: int = 3, max_pages: int = 1) ‑> list[<a title="aioimmich.people.models.ImmichPerson" href="models.html#aioimmich.people.models.ImmichPerson">ImmichPerson</a>]</span>
+<span>async def <span class="ident">async_get_all_people</span></span>(<span>self, with_unnamed: bool = False, page_size: int = 200, max_pages: int = 10) ‑> list[<a title="aioimmich.people.models.ImmichPerson" href="models.html#aioimmich.people.models.ImmichPerson">ImmichPerson</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -127,7 +127,7 @@ el.replaceWith(d);
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">async def async_get_all_people(
-    self, with_unnamed: bool = False, page_size: int = 3, max_pages: int = 1
+    self, with_unnamed: bool = False, page_size: int = 200, max_pages: int = 10
 ) -&gt; list[ImmichPerson]:
     &#34;&#34;&#34;Get all people.
 
