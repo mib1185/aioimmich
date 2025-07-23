@@ -8,7 +8,7 @@ class ImmichPeople(ImmichSubApi):
     """Immich tags api."""
 
     async def async_get_all_people(
-        self, with_unnamed: bool = False, page_size: int = 3, max_pages: int = 1
+        self, with_unnamed: bool = False, page_size: int = 200, max_pages: int = 10
     ) -> list[ImmichPerson]:
         """Get all people.
 
