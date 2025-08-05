@@ -7,7 +7,6 @@
     "-e",
     "GIT_EDITOR=code --wait"
   ],
-  "postCreateCommand": "pre-commit install",
   "customizations": {
     "vscode": {
       "extensions": [
