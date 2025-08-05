@@ -1,7 +1,5 @@
 {
   "name": "aioimmich Dev",
-  "context": "..",
-  "dockerFile": "Dockerfile",
   "containerEnv": {
     "DEVCONTAINER": "1"
   },
@@ -9,7 +7,6 @@
     "-e",
     "GIT_EDITOR=code --wait"
   ],
-  "postCreateCommand": "pre-commit install",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -18,7 +15,7 @@
         "ms-python.pylint"
       ],
       "settings": {
-        "python.pythonPath": "/usr/local/bin/python",
+        "python.pythonPath": "/usr/local/python/current/bin/python",
         "python.formatting.blackPath": "/usr/local/bin/black",
         "python.formatting.provider": "black",
         "python.testing.pytestArgs": [
@@ -39,5 +36,13 @@
         "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
-  }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "installTools": false,
+      "version": "3.11"
+    }
+  },
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "updateContentCommand": "pip3 --disable-pip-version-check --no-cache-dir install -r requirements_dev.txt && pre-commit install"
 }
