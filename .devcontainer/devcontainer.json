@@ -1,7 +1,5 @@
 {
   "name": "aioimmich Dev",
-  "context": "..",
-  "dockerFile": "Dockerfile",
   "containerEnv": {
     "DEVCONTAINER": "1"
   },
@@ -39,5 +37,13 @@
         "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
-  }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "installTools": false,
+      "version": "3.11"
+    }
+  },
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "updateContentCommand": "pip3 --disable-pip-version-check --no-cache-dir install -r requirements_dev.txt && pre-commit install"
 }
