@@ -71,12 +71,18 @@ class ImmichJobStatus(DataClassJSONMixin):
 class ImmichAllJobsStatus(DataClassJSONMixin):
     """Representation of all jobs status."""
 
-    background_task: ImmichJobStatus = field(metadata=field_options(alias="backgroundTask"))
-    backup_database: ImmichJobStatus = field(metadata=field_options(alias="backupDatabase"))
+    background_task: ImmichJobStatus = field(
+        metadata=field_options(alias="backgroundTask")
+    )
+    backup_database: ImmichJobStatus = field(
+        metadata=field_options(alias="backupDatabase")
+    )
     duplicate_detection: ImmichJobStatus = field(
         metadata=field_options(alias="duplicateDetection")
     )
-    face_detection: ImmichJobStatus = field(metadata=field_options(alias="faceDetection"))
+    face_detection: ImmichJobStatus = field(
+        metadata=field_options(alias="faceDetection")
+    )
     facial_recognition: ImmichJobStatus = field(
         metadata=field_options(alias="facialRecognition")
     )
@@ -95,4 +101,6 @@ class ImmichAllJobsStatus(DataClassJSONMixin):
     thumbnail_generation: ImmichJobStatus = field(
         metadata=field_options(alias="thumbnailGeneration")
     )
-    video_conversion: ImmichJobStatus = field(metadata=field_options(alias="videoConversion"))
+    video_conversion: ImmichJobStatus = field(
+        metadata=field_options(alias="videoConversion")
+    )

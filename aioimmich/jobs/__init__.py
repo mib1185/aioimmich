@@ -1,7 +1,7 @@
 """aioimmich jobs api."""
 
 from ..api import ImmichSubApi
-from .models import ImmichAllJobsStatus, JobCommand, JobId, ImmichJobStatus
+from .models import ImmichAllJobsStatus, ImmichJobStatus, JobCommand, JobId
 
 
 class ImmichJobs(ImmichSubApi):
