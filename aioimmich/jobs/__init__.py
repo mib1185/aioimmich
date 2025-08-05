@@ -11,7 +11,7 @@ class ImmichJobs(ImmichSubApi):
         """Get all jobs status.
 
         Returns:
-            all jobs status as `ImmichJobsStatus`
+            all jobs status as `ImmichAllJobsStatus`
         """
         result = await self.api.async_do_request("jobs")
         assert isinstance(result, dict)
@@ -28,7 +28,7 @@ class ImmichJobs(ImmichSubApi):
             force: Whether to force the command
 
         Returns:
-            job status as `JobStatus`
+            job status as `ImmichJobStatus`
         """
         result = await self.api.async_do_request(
             f"jobs/{job_id}", data={"command": command, "force": force}, method="PUT"
