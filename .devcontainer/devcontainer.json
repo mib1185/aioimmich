@@ -16,7 +16,7 @@
         "ms-python.pylint"
       ],
       "settings": {
-        "python.pythonPath": "/usr/local/bin/python",
+        "python.pythonPath": "/usr/local/python/current/bin/python",
         "python.formatting.blackPath": "/usr/local/bin/black",
         "python.formatting.provider": "black",
         "python.testing.pytestArgs": [
