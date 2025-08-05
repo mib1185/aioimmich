@@ -4,10 +4,7 @@ from __future__ import annotations
 
 from syrupy.assertion import SnapshotAssertion
 
-from aioimmich.jobs.models import (
-    ImmichJobsStatus,
-    JobStatus,
-)
+from aioimmich.jobs.models import ImmichAllJobsStatus, ImmichJobStatus
 
 
 async def test_get_all_jobs_status(mock_immich_with_data, snapshot: SnapshotAssertion):
@@ -15,7 +12,7 @@ async def test_get_all_jobs_status(mock_immich_with_data, snapshot: SnapshotAsse
     api = await mock_immich_with_data()
     jobs_status = await api.jobs.async_get_all_jobs_status()
 
-    assert isinstance(jobs_status, ImmichJobsStatus)
+    assert isinstance(jobs_status, ImmichAllJobsStatus)
     assert jobs_status == snapshot
 
 
@@ -26,5 +23,5 @@ async def test_send_job_command(mock_immich_with_data, snapshot: SnapshotAsserti
         "thumbnailGeneration", "pause", force=True
     )
 
-    assert isinstance(job_status, JobStatus)
+    assert isinstance(job_status, ImmichJobStatus)
     assert job_status == snapshot

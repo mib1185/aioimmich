@@ -1,42 +1,37 @@
 """aioimmich jobs api."""
 
 from ..api import ImmichSubApi
-from .models import (
-    ImmichJobsStatus,
-    JobCommand,
-    JobStatus,
-)
+from .models import ImmichAllJobsStatus, JobCommand, JobId, ImmichJobStatus
 
 
 class ImmichJobs(ImmichSubApi):
     """Immich jobs api."""
 
-    async def async_get_all_jobs_status(self) -> ImmichJobsStatus:
+    async def async_get_all_jobs_status(self) -> ImmichAllJobsStatus:
         """Get all jobs status.
 
         Returns:
             all jobs status as `ImmichJobsStatus`
         """
-        result = await self.api.async_do_request("jobs/status")
+        result = await self.api.async_do_request("jobs")
         assert isinstance(result, dict)
-        return ImmichJobsStatus.from_dict(result)
+        return ImmichAllJobsStatus.from_dict(result)
 
     async def async_send_job_command(
-        self, job_id: str, command: str, force: bool = False
-    ) -> JobStatus:
+        self, job_id: JobId, command: JobCommand, force: bool = False
+    ) -> ImmichJobStatus:
         """Send job command.
 
         Args:
-            job_id: The job type ID (e.g., "thumbnailGeneration", "metadataExtraction")
-            command: The command to send ("start", "pause", "resume", "empty", "clear-failed")
+            job_id: The job type ID
+            command: The command to send
             force: Whether to force the command
 
         Returns:
             job status as `JobStatus`
         """
-        job_command = JobCommand(command=command, force=force)
         result = await self.api.async_do_request(
-            f"jobs/{job_id}", data=job_command.to_dict(), method="PUT"
+            f"jobs/{job_id}", data={"command": command, "force": force}, method="PUT"
         )
         assert isinstance(result, dict)
-        return JobStatus.from_dict(result)
+        return ImmichJobStatus.from_dict(result)

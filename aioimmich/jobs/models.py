@@ -3,9 +3,40 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from enum import StrEnum
 
 from mashumaro import field_options
 from mashumaro.mixins.json import DataClassJSONMixin
+
+
+class JobId(StrEnum):
+    """Job IDs."""
+
+    THUMBNAIL_GENERATION = "thumbnailGeneration"
+    METADATA_EXTRACTION = "metadataExtraction"
+    VIDEO_CONVERSION = "videoConversion"
+    FACE_DETECTION = "faceDetection"
+    FACIAL_RECOGNITION = "facialRecognition"
+    SMART_SEARCH = "smartSearch"
+    DUPLICATE_DETECTION = "duplicateDetection"
+    BACKGROUND_TASK = "backgroundTask"
+    STORAGE_TEMPLATE_MIGRATION = "storageTemplateMigration"
+    MIGRATION = "migration"
+    SEARCH = "search"
+    SIDECAR = "sidecar"
+    LIBRARY = "library"
+    NOTIFICATIONS = "notifications"
+    BACKUP_DATABASE = "backupDatabase"
+
+
+class JobCommand(StrEnum):
+    """Job commands."""
+
+    START = "start"
+    PAUSE = "pause"
+    RESUME = "resume"
+    EMPTY = "empty"
+    CLEAR_FAILED = "clear-failed"
 
 
 @dataclass
@@ -29,7 +60,7 @@ class QueueStatus(DataClassJSONMixin):
 
 
 @dataclass
-class JobStatus(DataClassJSONMixin):
+class ImmichJobStatus(DataClassJSONMixin):
     """Representation of status for a specific job type."""
 
     job_counts: JobCounts = field(metadata=field_options(alias="jobCounts"))
@@ -37,39 +68,31 @@ class JobStatus(DataClassJSONMixin):
 
 
 @dataclass
-class ImmichJobsStatus(DataClassJSONMixin):
+class ImmichAllJobsStatus(DataClassJSONMixin):
     """Representation of all jobs status."""
 
-    background_task: JobStatus = field(metadata=field_options(alias="backgroundTask"))
-    backup_database: JobStatus = field(metadata=field_options(alias="backupDatabase"))
-    duplicate_detection: JobStatus = field(
+    background_task: ImmichJobStatus = field(metadata=field_options(alias="backgroundTask"))
+    backup_database: ImmichJobStatus = field(metadata=field_options(alias="backupDatabase"))
+    duplicate_detection: ImmichJobStatus = field(
         metadata=field_options(alias="duplicateDetection")
     )
-    face_detection: JobStatus = field(metadata=field_options(alias="faceDetection"))
-    facial_recognition: JobStatus = field(
+    face_detection: ImmichJobStatus = field(metadata=field_options(alias="faceDetection"))
+    facial_recognition: ImmichJobStatus = field(
         metadata=field_options(alias="facialRecognition")
     )
-    library: JobStatus
-    metadata_extraction: JobStatus = field(
+    library: ImmichJobStatus
+    metadata_extraction: ImmichJobStatus = field(
         metadata=field_options(alias="metadataExtraction")
     )
-    migration: JobStatus
-    notifications: JobStatus
-    search: JobStatus
-    sidecar: JobStatus
-    smart_search: JobStatus = field(metadata=field_options(alias="smartSearch"))
-    storage_template_migration: JobStatus = field(
+    migration: ImmichJobStatus
+    notifications: ImmichJobStatus
+    search: ImmichJobStatus
+    sidecar: ImmichJobStatus
+    smart_search: ImmichJobStatus = field(metadata=field_options(alias="smartSearch"))
+    storage_template_migration: ImmichJobStatus = field(
         metadata=field_options(alias="storageTemplateMigration")
     )
-    thumbnail_generation: JobStatus = field(
+    thumbnail_generation: ImmichJobStatus = field(
         metadata=field_options(alias="thumbnailGeneration")
     )
-    video_conversion: JobStatus = field(metadata=field_options(alias="videoConversion"))
-
-
-@dataclass
-class JobCommand(DataClassJSONMixin):
-    """Representation of a job command request."""
-
-    command: str
-    force: bool = False
+    video_conversion: ImmichJobStatus = field(metadata=field_options(alias="videoConversion"))

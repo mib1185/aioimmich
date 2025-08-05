@@ -411,7 +411,7 @@ MOCK_DATA: dict = {
         "body": None,
         "exception": ClientError,
     },
-    "jobs/status": {
+    "jobs": {
         "status": 200,
         "body": json.dumps(
             {
