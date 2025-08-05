@@ -68,7 +68,7 @@ class ImmichJobStatus(DataClassJSONMixin):
 
 
 @dataclass
-class ImmichAllJobsStatus(DataClassJSONMixin):
+class ImmichAllJobStatus(DataClassJSONMixin):
     """Representation of all jobs status."""
 
     background_task: ImmichJobStatus = field(

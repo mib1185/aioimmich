@@ -1,13 +1,13 @@
 """aioimmich jobs api."""
 
 from ..api import ImmichSubApi
-from .models import ImmichAllJobsStatus, ImmichJobStatus, JobCommand, JobId
+from .models import ImmichAllJobStatus, ImmichJobStatus, JobCommand, JobId
 
 
 class ImmichJobs(ImmichSubApi):
     """Immich jobs api."""
 
-    async def async_get_all_jobs_status(self) -> ImmichAllJobsStatus:
+    async def async_get_all_jobs_status(self) -> ImmichAllJobStatus:
         """Get all jobs status.
 
         Returns:
@@ -15,7 +15,7 @@ class ImmichJobs(ImmichSubApi):
         """
         result = await self.api.async_do_request("jobs")
         assert isinstance(result, dict)
-        return ImmichAllJobsStatus.from_dict(result)
+        return ImmichAllJobStatus.from_dict(result)
 
     async def async_send_job_command(
         self, job_id: JobId, command: JobCommand, force: bool = False
