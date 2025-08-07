@@ -12,31 +12,31 @@ from mashumaro.mixins.json import DataClassJSONMixin
 class JobId(StrEnum):
     """Job IDs."""
 
-    THUMBNAIL_GENERATION = "thumbnailGeneration"
-    METADATA_EXTRACTION = "metadataExtraction"
-    VIDEO_CONVERSION = "videoConversion"
+    BACKGROUND_TASK = "backgroundTask"
+    BACKUP_DATABASE = "backupDatabase"
+    DUPLICATE_DETECTION = "duplicateDetection"
     FACE_DETECTION = "faceDetection"
     FACIAL_RECOGNITION = "facialRecognition"
-    SMART_SEARCH = "smartSearch"
-    DUPLICATE_DETECTION = "duplicateDetection"
-    BACKGROUND_TASK = "backgroundTask"
-    STORAGE_TEMPLATE_MIGRATION = "storageTemplateMigration"
+    LIBRARY = "library"
+    METADATA_EXTRACTION = "metadataExtraction"
     MIGRATION = "migration"
+    NOTIFICATIONS = "notifications"
     SEARCH = "search"
     SIDECAR = "sidecar"
-    LIBRARY = "library"
-    NOTIFICATIONS = "notifications"
-    BACKUP_DATABASE = "backupDatabase"
+    SMART_SEARCH = "smartSearch"
+    STORAGE_TEMPLATE_MIGRATION = "storageTemplateMigration"
+    THUMBNAIL_GENERATION = "thumbnailGeneration"
+    VIDEO_CONVERSION = "videoConversion"
 
 
 class JobCommand(StrEnum):
     """Job commands."""
 
-    START = "start"
+    CLEAR_FAILED = "clear-failed"
+    EMPTY = "empty"
     PAUSE = "pause"
     RESUME = "resume"
-    EMPTY = "empty"
-    CLEAR_FAILED = "clear-failed"
+    START = "start"
 
 
 @dataclass
