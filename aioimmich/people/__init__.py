@@ -36,6 +36,21 @@ class ImmichPeople(ImmichSubApi):
 
         return results
 
+    async def async_get_people_count(self) -> int:
+        """Get the count of all people.
+
+        Returns:
+            total count of recognized people as `int`
+        """
+        result = await self.api.async_do_request(
+            "people",
+            params={
+                "size": 1,
+            },
+        )
+        assert isinstance(result, dict)
+        return int(result["total"])
+
     async def async_get_person_thumbnail(self, person_id: str) -> bytes:
         """Download thumbnail for a person.
 
