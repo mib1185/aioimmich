@@ -37,10 +37,10 @@ class ImmichPeople(ImmichSubApi):
         return results
 
     async def async_get_people_count(self) -> int:
-        """Get the count of all people.
+        """Get the total count of all people.
 
         Returns:
-            total count of recognized people as `int`
+            total count of all people as `int`
         """
         result = await self.api.async_do_request(
             "people",
