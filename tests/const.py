@@ -362,6 +362,27 @@ MOCK_DATA: dict = {
             }
         ),
     },
+    "people?size=1": {
+        "status": 200,
+        "body": json.dumps(
+            {
+                "people": [
+                    {
+                        "id": "6176838a-ac5a-4d1f-9a35-91c591d962d8",
+                        "name": "Me",
+                        "birthDate": None,
+                        "thumbnailPath": "upload/thumbs/e7ef5713-9dab-4bd4-b899-715b0ca4379e/61/76/6176838a-ac5a-4d1f-9a35-91c591d962d8.jpeg",
+                        "isHidden": False,
+                        "isFavorite": False,
+                        "updatedAt": "2025-05-11T11:07:41.651Z",
+                    },
+                ],
+                "hasNextPage": False,
+                "total": 3,
+                "hidden": 0,
+            }
+        ),
+    },
     "albums/INVALID_ALBUM_ID?withoutAssets=false": {
         "status": 400,
         "body": json.dumps(
