@@ -15,6 +15,9 @@ class ImmichAlbums(ImmichSubApi):
         """
         result = await self.api.async_do_request("albums")
         assert isinstance(result, list)
+        result_shared = await self.api.async_do_request("albums", {"shared": "true"})
+        assert isinstance(result_shared, list)
+        result.extend(result_shared)
         return [ImmichAlbum.from_dict(album) for album in result]
 
     async def async_get_album_info(
