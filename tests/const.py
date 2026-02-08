@@ -178,10 +178,54 @@ MOCK_DATA_ALBUM_2: dict = {
     "lastModifiedAssetTimestamp": "2025-05-17T11:34:54.077Z",
 }
 
+MOCK_DATA_SHAED_ALBUM: dict = {
+    "albumName": "Shared Album",
+    "description": "",
+    "albumThumbnailAssetId": "1c148516-3a5d-442d-b74d-9714b257b120",
+    "createdAt": "2025-05-11T10:54:49.395Z",
+    "updatedAt": "2026-02-08T17:34:53.762Z",
+    "id": "8cb7ad53-acb0-4844-be8b-9e4323f0d32d",
+    "ownerId": "e7ef5713-9dab-4bd4-b899-715b0ca4379e",
+    "owner": {
+        "id": "e7ef5713-9dab-4bd4-b899-715b0ca4379e",
+        "email": "admin@immich.local",
+        "name": "admin",
+        "profileImagePath": "",
+        "avatarColor": "primary",
+        "profileChangedAt": "2025-05-11T10:07:46.866Z",
+    },
+    "albumUsers": [
+        {
+            "user": {
+                "id": "568fb168-5022-4cf3-ae16-d4b5c50f5894",
+                "email": "test@immich.local",
+                "name": "TestUser",
+                "profileImagePath": "",
+                "avatarColor": "purple",
+                "profileChangedAt": "2025-05-18T15:40:50.162463+00:00",
+            },
+            "role": "viewer",
+        }
+    ],
+    "shared": True,
+    "hasSharedLink": False,
+    "startDate": "2017-06-08T00:00:00.000Z",
+    "endDate": "2025-03-21T00:00:00.000Z",
+    "assets": [],
+    "assetCount": 69,
+    "isActivityEnabled": True,
+    "order": "desc",
+    "lastModifiedAssetTimestamp": "2026-01-28T22:42:19.894Z",
+}
+
 MOCK_DATA: dict = {
     "albums": {
         "status": 200,
         "body": json.dumps([MOCK_DATA_ALBUM_1, MOCK_DATA_ALBUM_2]),
+    },
+    "albums?shared=true": {
+        "status": 200,
+        "body": json.dumps([MOCK_DATA_SHAED_ALBUM]),
     },
     f"albums/{MOCK_DATA_ALBUM_1['id']}?withoutAssets=true": {
         "status": 200,

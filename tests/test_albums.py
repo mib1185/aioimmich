@@ -11,7 +11,7 @@ async def test_get_all_albums(mock_immich_with_data, snapshot: SnapshotAssertion
     """Test async_get_all_albums."""
     api = await mock_immich_with_data()
     albums = await api.albums.async_get_all_albums()
-    assert len(albums) == 2
+    assert len(albums) == 3
     assert albums == snapshot
 
 
