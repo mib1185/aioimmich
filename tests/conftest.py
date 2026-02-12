@@ -69,6 +69,22 @@ def mock_immich_with_data(mock_aioresponse, mock_immich):
                 [{"id": "abcdef-0123456789", "success": False, "error": "duplicate"}]
             ),
         )
+        mock_aioresponse.put(
+            f"https://{MOCK_IMMICH_HOST}:2283/api/jobs/thumbnailGeneration",
+            body=json.dumps(
+                {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 30924,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                }
+            ),
+        )
 
         return mock_immich
 

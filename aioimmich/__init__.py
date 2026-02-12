@@ -7,6 +7,7 @@ from aiohttp.client import ClientSession
 from .albums import ImmichAlbums
 from .api import ImmichApi
 from .assets import ImmichAssests
+from .jobs import ImmichJobs
 from .people import ImmichPeople
 from .search import ImmichSearch
 from .server import ImmichServer
@@ -21,6 +22,7 @@ class Immich:
         "api",
         "albums",
         "assets",
+        "jobs",
         "people",
         "search",
         "server",
@@ -31,6 +33,7 @@ class Immich:
     api: ImmichApi
     albums: ImmichAlbums
     assets: ImmichAssests
+    jobs: ImmichJobs
     people: ImmichPeople
     search: ImmichSearch
     server: ImmichServer
@@ -51,6 +54,7 @@ class Immich:
 
         self.albums = ImmichAlbums(self.api)
         self.assets = ImmichAssests(self.api)
+        self.jobs = ImmichJobs(self.api)
         self.people = ImmichPeople(self.api)
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
