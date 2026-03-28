@@ -13,7 +13,7 @@ class ImmichAlbums(ImmichSubApi):
         Returns:
             list of all albums as `list[ImmichAlbum]`
         """
-        result = await self.api.async_do_request("albums")
+        result = await self.api.async_do_request("albums", {"shared": "false"})
         assert isinstance(result, list)
         result_shared = await self.api.async_do_request("albums", {"shared": "true"})
         assert isinstance(result_shared, list)
