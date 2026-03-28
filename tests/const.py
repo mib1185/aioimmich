@@ -219,7 +219,7 @@ MOCK_DATA_SHAED_ALBUM: dict = {
 }
 
 MOCK_DATA: dict = {
-    "albums": {
+    "albums?shared=false": {
         "status": 200,
         "body": json.dumps([MOCK_DATA_ALBUM_1, MOCK_DATA_ALBUM_2]),
     },
