@@ -95,3 +95,12 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+## References
+
+- [immich api reference](https://api.immich.app)
+
+---
+You like my work?
+
+<a href="https://www.buymeacoffee.com/mib1185" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
