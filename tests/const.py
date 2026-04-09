@@ -476,4 +476,176 @@ MOCK_DATA: dict = {
         "body": None,
         "exception": ClientError,
     },
+    "jobs": {
+        "status": 200,
+        "body": json.dumps(
+            {
+                "backgroundTask": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 1532,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "backupDatabase": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 45,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "duplicateDetection": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 0,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "faceDetection": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 27038,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "facialRecognition": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 0,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "library": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 0,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "metadataExtraction": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 28874,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "migration": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 0,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "notifications": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 0,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "search": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 28874,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "sidecar": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 0,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "smartSearch": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 0,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "storageTemplateMigration": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 0,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "thumbnailGeneration": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 30924,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+                "videoConversion": {
+                    "jobCounts": {
+                        "active": 0,
+                        "completed": 1836,
+                        "delayed": 0,
+                        "failed": 0,
+                        "paused": 0,
+                        "waiting": 0,
+                    },
+                    "queueStatus": {"isActive": True, "isPaused": False},
+                },
+            }
+        ),
+    },
 }
