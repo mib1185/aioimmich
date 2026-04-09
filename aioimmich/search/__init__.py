@@ -14,6 +14,7 @@ class ImmichSearch(ImmichSubApi):
         tag_ids: list[str] | None = None,
         page_size: int = 100,
         max_pages: int = 20,
+        is_favorite: bool | None = None,
     ) -> list[ImmichAsset]:
         """Search for assets.
 
@@ -34,6 +35,8 @@ class ImmichSearch(ImmichSubApi):
             data["personIds"] = person_ids
         if tag_ids:
             data["tagIds"] = tag_ids
+        if is_favorite is not None:
+            data["isFavorite"] = is_favorite
 
         results: list[ImmichAsset] = []
         for page in range(max_pages):
@@ -61,6 +64,22 @@ class ImmichSearch(ImmichSubApi):
             a list of `ImmichAsset`
         """
         return await self._async_search_assets(page_size=page_size, max_pages=max_pages)
+
+    async def async_get_all_favorites(
+        self, page_size: int = 100, max_pages: int = 20
+    ) -> list[ImmichAsset]:
+        """Get all favorite assets.
+
+        Args:
+            page_size (int): assets per page
+            max_pages (int): maximun number of pages to return
+
+        Returns:
+            a list of `ImmichAsset`
+        """
+        return await self._async_search_assets(
+            page_size=page_size, max_pages=max_pages, is_favorite=True
+        )
 
     async def async_get_all_by_tag_ids(
         self, tag_ids: list[str], page_size: int = 100, max_pages: int = 20
