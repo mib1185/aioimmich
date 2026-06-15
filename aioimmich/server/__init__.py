@@ -43,11 +43,11 @@ class ImmichServer(ImmichSubApi):
         assert isinstance(result, dict)
         return ImmichServerStatistics.from_dict(result)
 
-    async def async_get_version(self) -> ImmichServerVersionCheck:
+    async def async_get_version(self) -> ImmichServerVersion:
         """Get server version result.
 
         Returns:
-            server version check result as `ImmichServerVersion`
+            server version result as `ImmichServerVersion`
         """
         result = await self.api.async_do_request("server/version")
         assert isinstance(result, dict)
