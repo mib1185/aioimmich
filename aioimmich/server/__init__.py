@@ -5,6 +5,7 @@ from .models import (
     ImmichServerAbout,
     ImmichServerStatistics,
     ImmichServerStorage,
+    ImmichServerVersion,
     ImmichServerVersionCheck,
 )
 
@@ -41,6 +42,16 @@ class ImmichServer(ImmichSubApi):
         result = await self.api.async_do_request("server/statistics")
         assert isinstance(result, dict)
         return ImmichServerStatistics.from_dict(result)
+
+    async def async_get_version(self) -> ImmichServerVersionCheck:
+        """Get server version result.
+
+        Returns:
+            server version check result as `ImmichServerVersion`
+        """
+        result = await self.api.async_do_request("server/version")
+        assert isinstance(result, dict)
+        return ImmichServerVersion.from_dict(result)
 
     async def async_get_version_check(self) -> ImmichServerVersionCheck:
         """Get server version check result.

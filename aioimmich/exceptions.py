@@ -3,6 +3,16 @@
 from __future__ import annotations
 
 
+class ImmichMissingSetup(Exception):
+    """The Immich class had not yet been set up."""
+
+    def __init__(self):
+        """Initialize missing setup error."""
+        super().__init__(
+            "The Immich class had not yet been set up; please run async_setup first"
+        )
+
+
 class ImmichError(Exception):
     """Base class for immich errors."""
 

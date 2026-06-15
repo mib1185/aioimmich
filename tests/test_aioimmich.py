@@ -2,15 +2,26 @@
 
 from __future__ import annotations
 
+from unittest.mock import AsyncMock
+
 import pytest
 from aiohttp import ClientError
 
 from aioimmich.exceptions import (
     ImmichError,
     ImmichForbiddenError,
+    ImmichMissingSetup,
     ImmichNotFoundError,
     ImmichUnauthorizedError,
 )
+
+
+async def test_missing_setup(mock_immich_with_data, mock_immich):
+    """Test missing setup errors."""
+    mock_immich.async_setup = AsyncMock()
+    api = await mock_immich_with_data()
+    with pytest.raises(ImmichMissingSetup):
+        await api.server.async_get_about_info()
 
 
 async def test_errors(mock_immich_with_data):

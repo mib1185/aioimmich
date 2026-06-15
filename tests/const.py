@@ -333,6 +333,11 @@ MOCK_DATA: dict = {
             }
         ),
     },
+    "server/version": {
+        "status": 200,
+        "body": json.dumps({"major": 2, "minor": 7, "patch": 0}),
+        "repeat": 2,
+    },
     "server/version-check": {
         "status": 200,
         "body": json.dumps(

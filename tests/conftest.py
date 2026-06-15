@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from typing import Any, AsyncGenerator, Generator
 
 import aiohttp
 import pytest
@@ -18,19 +19,23 @@ from .const import (
 )
 
 
-@pytest.fixture
-def mock_aioresponse():
+class MockImmich(Immich):
+    """Immich test double that allows per-instance overrides."""
+
+
+@pytest.fixture(name="mock_aioresponse")
+def m_aioresponse() -> Generator[aioresponses, Any, None]:
     """Mock a web request and provide a response."""
     with aioresponses() as m:
         yield m
 
 
-@pytest.fixture
-async def mock_immich():
+@pytest.fixture(name="mock_immich")
+async def m_immich() -> AsyncGenerator[MockImmich, Any]:
     """Return Immich session."""
     session = aiohttp.ClientSession()
-    api = Immich(session, MOCK_IMMICH_API_KEY, MOCK_IMMICH_HOST)
-    yield api
+    immich = MockImmich(session, MOCK_IMMICH_API_KEY, MOCK_IMMICH_HOST)
+    yield immich
     await session.close()
 
 
@@ -46,6 +51,7 @@ def mock_immich_with_data(mock_aioresponse, mock_immich):
                 status=data["status"],
                 body=data["body"],
                 exception=data.get("exception"),
+                repeat=data.get("repeat", 1),
             )
         mock_aioresponse.post(
             f"https://{MOCK_IMMICH_HOST}:2283/api/search/metadata",
@@ -70,6 +76,7 @@ def mock_immich_with_data(mock_aioresponse, mock_immich):
             ),
         )
 
+        await mock_immich.async_setup()
         return mock_immich
 
     return data_to_immich
