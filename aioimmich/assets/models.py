@@ -85,8 +85,6 @@ class ImmichAsset(DataClassJSONMixin):
     asset_id: str = field(metadata=field_options(alias="id"))
     asset_type: AssetType = field(metadata=field_options(alias="type"))
     checksum: str
-    device_asset_id: str = field(metadata=field_options(alias="deviceAssetId"))
-    device_id: str = field(metadata=field_options(alias="deviceId"))
     duration: str
     file_created_at: datetime = field(metadata=field_options(alias="fileCreatedAt"))
     file_modified_at: datetime = field(metadata=field_options(alias="fileModifiedAt"))
@@ -105,6 +103,12 @@ class ImmichAsset(DataClassJSONMixin):
     updated_at: datetime = field(metadata=field_options(alias="updatedAt"))
 
     # default parameters
+    device_asset_id: str | None = field(
+        metadata=field_options(alias="deviceAssetId"), default=None
+    )
+    device_id: str | None = field(
+        metadata=field_options(alias="deviceId"), default=None
+    )
     duplicate_id: str | None = field(
         metadata=field_options(alias="duplicateId"), default=None
     )
