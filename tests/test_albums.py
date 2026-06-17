@@ -2,9 +2,29 @@
 
 from __future__ import annotations
 
+import json
+
 from syrupy.assertion import SnapshotAssertion
 
 from aioimmich.albums.models import ImmichAddAssetsToAlbumResponse, ImmichAlbum
+
+from .const import MOCK_IMMICH_HOST
+
+
+async def test_get_all_albums_v2(
+    mock_immich_with_data, mock_aiointercept, snapshot: SnapshotAssertion
+):
+    """Test async_get_all_albums with api v2."""
+    mock_aiointercept.get(
+        f"https://{MOCK_IMMICH_HOST}:2283/api/server/version",
+        status=200,
+        body=json.dumps({"major": 2, "minor": 7, "patch": 0}),
+        repeat=2,
+    )
+    api = await mock_immich_with_data()
+    albums = await api.albums.async_get_all_albums()
+    assert len(albums) == 3
+    assert albums == snapshot
 
 
 async def test_get_all_albums(mock_immich_with_data, snapshot: SnapshotAssertion):
@@ -21,14 +41,7 @@ async def test_get_album_info(mock_immich_with_data, snapshot: SnapshotAssertion
 
     # get album info without assets
     album = await api.albums.async_get_album_info(
-        "721e1a4b-aa12-441e-8d3b-5ac7ab283bb6", True
-    )
-    assert isinstance(album, ImmichAlbum)
-    assert album == snapshot
-
-    # get album info with assets
-    album = await api.albums.async_get_album_info(
-        "721e1a4b-aa12-441e-8d3b-5ac7ab283bb6", False
+        "721e1a4b-aa12-441e-8d3b-5ac7ab283bb6"
     )
     assert isinstance(album, ImmichAlbum)
     assert album == snapshot

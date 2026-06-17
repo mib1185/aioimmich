@@ -47,7 +47,14 @@ class ImmichApi:
         self.base_url = f"{'https' if use_ssl else 'http'}://{host}:{port}/api"
         self.cache: dict[str, CacheEntry] = {}
         self.device_id = device_id
-        self.version: ImmichServerVersion | None = None
+        self._version: ImmichServerVersion | None = None
+
+    @property
+    def version(self) -> ImmichServerVersion:
+        """Get server version."""
+        if self._version is None:
+            raise ImmichMissingSetup
+        return self._version
 
     async def async_do_request(
         self,
@@ -60,7 +67,7 @@ class ImmichApi:
         raw_response_content: bool = False,
     ) -> list | dict | bytes | StreamReader | None:
         """Perform the request and handle errors."""
-        if self.version is None and end_point != "server/version":
+        if self._version is None and end_point != "server/version":
             raise ImmichMissingSetup
 
         headers = {"Accept": f"application/{application}", "x-api-key": self.api_key}

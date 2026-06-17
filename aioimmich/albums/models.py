@@ -9,7 +9,6 @@ from enum import StrEnum
 from mashumaro import field_options
 from mashumaro.mixins.json import DataClassJSONMixin
 
-from ..assets.models import ImmichAsset
 from ..users.models import ImmichUser
 
 
@@ -34,16 +33,15 @@ class ImmichAlbum(DataClassJSONMixin):
     )
     album_users: list = field(metadata=field_options(alias="albumUsers"))
     asset_count: int = field(metadata=field_options(alias="assetCount"))
-    assets: list[ImmichAsset]
     created_at: datetime = field(metadata=field_options(alias="createdAt"))
     has_shared_link: bool = field(metadata=field_options(alias="hasSharedLink"))
     is_activity_enabled: bool = field(metadata=field_options(alias="isActivityEnabled"))
-    owner_id: str = field(metadata=field_options(alias="ownerId"))
-    owner: ImmichUser
     shared: bool
     updated_at: datetime = field(metadata=field_options(alias="updatedAt"))
 
     # default parameters
+    owner_id: str | None = field(metadata=field_options(alias="ownerId"), default=None)
+    owner: ImmichUser | None = field(default=None)
     end_date: datetime | None = field(
         metadata=field_options(alias="endDate"), default=None
     )

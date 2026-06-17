@@ -62,4 +62,4 @@ class Immich:
         """Set up the API."""
         version = await self.api.async_do_request("server/version")
         assert isinstance(version, dict)
-        self.api.version = ImmichServerVersion.from_dict(version)
+        self.api._version = ImmichServerVersion.from_dict(version)
