@@ -6,12 +6,12 @@ from syrupy.assertion import SnapshotAssertion
 
 
 async def test_get_all_assets(
-    mock_immich_with_data, mock_aioresponse, snapshot: SnapshotAssertion
+    mock_immich_with_data, mock_aiointercept, snapshot: SnapshotAssertion
 ):
     """Test async_get_all."""
     api = await mock_immich_with_data()
     assets = await api.search.async_get_all()
-    mock_aioresponse.assert_called_with(
+    mock_aiointercept.assert_called_with(
         "https://localhost:2283/api/search/metadata",
         "post",
         headers={"Accept": "application/json", "x-api-key": "abcdef1234567890"},
@@ -23,12 +23,12 @@ async def test_get_all_assets(
 
 
 async def test_get_all_favorite_assets(
-    mock_immich_with_data, mock_aioresponse, snapshot: SnapshotAssertion
+    mock_immich_with_data, mock_aiointercept, snapshot: SnapshotAssertion
 ):
     """Test async_get_all_favorites."""
     api = await mock_immich_with_data()
     assets = await api.search.async_get_all_favorites()
-    mock_aioresponse.assert_called_with(
+    mock_aiointercept.assert_called_with(
         "https://localhost:2283/api/search/metadata",
         "post",
         headers={"Accept": "application/json", "x-api-key": "abcdef1234567890"},
@@ -40,14 +40,14 @@ async def test_get_all_favorite_assets(
 
 
 async def test_get_all_by_tag_ids(
-    mock_immich_with_data, mock_aioresponse, snapshot: SnapshotAssertion
+    mock_immich_with_data, mock_aiointercept, snapshot: SnapshotAssertion
 ):
     """Test async_get_all_by_tag_ids."""
     api = await mock_immich_with_data()
     assets = await api.search.async_get_all_by_tag_ids(
         ["14ce3af3-67be-41c6-b77c-b25abddaf546"]
     )
-    mock_aioresponse.assert_called_with(
+    mock_aiointercept.assert_called_with(
         "https://localhost:2283/api/search/metadata",
         "post",
         headers={"Accept": "application/json", "x-api-key": "abcdef1234567890"},
@@ -63,14 +63,14 @@ async def test_get_all_by_tag_ids(
 
 
 async def test_get_all_by_person_ids(
-    mock_immich_with_data, mock_aioresponse, snapshot: SnapshotAssertion
+    mock_immich_with_data, mock_aiointercept, snapshot: SnapshotAssertion
 ):
     """Test async_get_all_by_person_ids."""
     api = await mock_immich_with_data()
     assets = await api.search.async_get_all_by_person_ids(
         ["14ce3af3-67be-41c6-b77c-b25abddaf546"]
     )
-    mock_aioresponse.assert_called_with(
+    mock_aiointercept.assert_called_with(
         "https://localhost:2283/api/search/metadata",
         "post",
         headers={"Accept": "application/json", "x-api-key": "abcdef1234567890"},
