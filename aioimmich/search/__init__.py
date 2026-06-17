@@ -10,6 +10,7 @@ class ImmichSearch(ImmichSubApi):
     async def _async_search_assets(
         self,
         asset_type: AssetType | None = None,
+        album_ids: list[str] | None = None,
         person_ids: list[str] | None = None,
         tag_ids: list[str] | None = None,
         page_size: int = 100,
@@ -20,6 +21,7 @@ class ImmichSearch(ImmichSubApi):
 
         Args:
             asset_type (AssetType | None): filter to `AssetType`
+            album_ids (list[str] | None): filter to list of albumIds
             person_ids (list[str] | None): filter to list of personIds
             tag_ids (list[str] | None): filter to list of tagIds
             page_size (int): assets per page
@@ -31,6 +33,8 @@ class ImmichSearch(ImmichSubApi):
         data: dict[str, str | int | bool | list[str]] = {"size": page_size}
         if asset_type:
             data["type"] = asset_type.value
+        if album_ids:
+            data["albumIds"] = album_ids
         if person_ids:
             data["personIds"] = person_ids
         if tag_ids:
@@ -104,7 +108,7 @@ class ImmichSearch(ImmichSubApi):
         """Get all assets for given person ids.
 
         Args:
-            person_ids (list[str]): filter to list of tagIds
+            person_ids (list[str]): filter to list of personIds
             page_size (int): assets per page
             max_pages (int): maximun number of pages to return
 
@@ -113,4 +117,21 @@ class ImmichSearch(ImmichSubApi):
         """
         return await self._async_search_assets(
             person_ids=person_ids, page_size=page_size, max_pages=max_pages
+        )
+
+    async def async_get_all_by_album_ids(
+        self, album_ids: list[str], page_size: int = 100, max_pages: int = 20
+    ) -> list[ImmichAsset]:
+        """Get all assets for given album ids.
+
+        Args:
+            album_ids (list[str]): filter to list of albumIds
+            page_size (int): assets per page
+            max_pages (int): maximun number of pages to return
+
+        Returns:
+            a list of `ImmichAsset`
+        """
+        return await self._async_search_assets(
+            album_ids=album_ids, page_size=page_size, max_pages=max_pages
         )
