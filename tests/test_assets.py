@@ -31,7 +31,7 @@ async def test_view_asset(mock_immich_with_data):
     assert asset_bytes == b"abcdefabcdefabcdefabcdef"
 
 
-async def test_upload_asset(mock_immich_with_data, mock_aioresponse, tmp_path):
+async def test_upload_asset(mock_immich_with_data, mock_aiointercept, tmp_path):
     """Test async_upload_asset."""
     test_file = tmp_path / "image.png"
     test_file.write_bytes(b"abcdef")

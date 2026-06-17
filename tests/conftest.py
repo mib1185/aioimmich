@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import json
+from collections.abc import AsyncGenerator, Callable, Coroutine
+from typing import Any
 
 import aiohttp
 import pytest
-from aioresponses import aioresponses
+from aiointercept import aiointercept
 
 from aioimmich import Immich
 
@@ -18,15 +20,15 @@ from .const import (
 )
 
 
-@pytest.fixture
-def mock_aioresponse():
+@pytest.fixture(name="mock_aiointercept")
+async def aiointercept_fixture() -> AsyncGenerator[aiointercept, None]:
     """Mock a web request and provide a response."""
-    with aioresponses() as m:
+    async with aiointercept(mock_external_urls=True) as m:
         yield m
 
 
-@pytest.fixture
-async def mock_immich():
+@pytest.fixture(name="mock_immich")
+async def immich_fixture() -> AsyncGenerator[Immich, Any]:
     """Return Immich session."""
     session = aiohttp.ClientSession()
     api = Immich(session, MOCK_IMMICH_API_KEY, MOCK_IMMICH_HOST)
@@ -35,35 +37,37 @@ async def mock_immich():
 
 
 @pytest.fixture
-def mock_immich_with_data(mock_aioresponse, mock_immich):
+def mock_immich_with_data(
+    mock_aiointercept: aiointercept, mock_immich: Immich
+) -> Callable[[], Coroutine[Any, Any, Immich]]:
     """Comfort fixture to initialize immich session."""
 
     async def data_to_immich() -> Immich:
         """Initialize immich session."""
         for path, data in MOCK_DATA.items():
-            mock_aioresponse.get(
+            mock_aiointercept.get(
                 f"https://{MOCK_IMMICH_HOST}:2283/api/{path}",
                 status=data["status"],
                 body=data["body"],
                 exception=data.get("exception"),
             )
-        mock_aioresponse.post(
+        mock_aiointercept.post(
             f"https://{MOCK_IMMICH_HOST}:2283/api/search/metadata",
             body=json.dumps(
                 {"assets": {"items": MOCK_DATA_ALBUM_1_ASSETS, "nextPage": None}}
             ),
         )
-        mock_aioresponse.post(
+        mock_aiointercept.post(
             f"https://{MOCK_IMMICH_HOST}:2283/api/assets",
             status=201,
             body=json.dumps({"id": "abcdef-0123456789", "status": "created"}),
         )
 
-        mock_aioresponse.put(
+        mock_aiointercept.put(
             f"https://{MOCK_IMMICH_HOST}:2283/api/albums/721e1a4b-aa12-441e-8d3b-5ac7ab283bb6/assets",
             body=json.dumps([{"id": "abcdef-0123456789", "success": True}]),
         )
-        mock_aioresponse.put(
+        mock_aiointercept.put(
             f"https://{MOCK_IMMICH_HOST}:2283/api/albums/c4721c25-8669-451f-a6be-3d9d4dc38f5f/assets",
             body=json.dumps(
                 [{"id": "abcdef-0123456789", "success": False, "error": "duplicate"}]
