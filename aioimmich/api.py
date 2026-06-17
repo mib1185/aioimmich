@@ -106,6 +106,9 @@ class ImmichApi:
                 return await resp.read()
 
             err_result = await resp.json()
+            if correlation_id := resp.headers.get("X-Correlation-ID"):
+                err_result["correlationId"] = correlation_id
+
             LOGGER.debug("RESPONSE %s", err_result)
             if resp.status == 400:
                 raise ImmichError(err_result)

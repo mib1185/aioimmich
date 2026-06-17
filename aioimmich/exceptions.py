@@ -17,14 +17,25 @@ class ImmichError(Exception):
     """Base class for immich errors."""
 
     def __init__(self, result: dict):
-        """Initialize JSON RPC errors."""
+        """Initialize an immich error."""
         message = result["message"]
-        error = result["error"]
-        code = result["statusCode"]
         correlation_id = result["correlationId"]
-        super().__init__(
-            f"{message} (error: '{error}' code: '{code}' correlation_id: '{correlation_id}')"
-        )
+        if "error" in result:
+            # immich v2 path
+            error = result["error"]
+            code = result["statusCode"]
+            super().__init__(
+                f"{message} (error: '{error}' code: '{code}' correlation_id: '{correlation_id}')"
+            )
+        elif "errors" in result:
+            # immich v3 validation error path
+            msg = f"{message} (correlation_id: '{correlation_id}') -"
+            for err in result["errors"]:
+                msg += f" {err['message']} in path {err['path']}"
+            super().__init__(msg)
+        else:
+            # immich v3 common error path
+            super().__init__(f"{message} (correlation_id: '{correlation_id}')")
 
 
 class ImmichUnauthorizedError(ImmichError):
