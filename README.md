@@ -39,7 +39,7 @@ async def main():
         await immich.async_setup()
 
         for album in await immich.albums.async_get_all_albums():
-            print(f"Album: {album.name} contains {album.asset_count} assets")
+            print(f"Album: {album.album_name} contains {album.asset_count} assets")
 
 
 if __name__ == "__main__":
