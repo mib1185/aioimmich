@@ -83,3 +83,26 @@ async def test_get_all_by_person_ids(
     )
     assert len(assets) == 4
     assert assets == snapshot
+
+
+async def test_get_all_by_album_ids(
+    mock_immich_with_data, mock_aiointercept, snapshot: SnapshotAssertion
+):
+    """Test async_get_all_by_album_ids."""
+    api = await mock_immich_with_data()
+    assets = await api.search.async_get_all_by_album_ids(
+        ["14ce3af3-67be-41c6-b77c-b25abddaf546"]
+    )
+    mock_aiointercept.assert_called_with(
+        "https://localhost:2283/api/search/metadata",
+        "post",
+        headers={"Accept": "application/json", "x-api-key": "abcdef1234567890"},
+        params=None,
+        json={
+            "size": 100,
+            "albumIds": ["14ce3af3-67be-41c6-b77c-b25abddaf546"],
+            "page": 1,
+        },
+    )
+    assert len(assets) == 4
+    assert assets == snapshot
