@@ -14,7 +14,7 @@ class ImmichPeople(ImmichSubApi):
 
         Args:
             page_size (int):  assets per page
-            max_pages (int):  maximun number of pages to return
+            max_pages (int):  maximum number of pages to return
 
         Returns:
             all people as list of `ImmichPerson`

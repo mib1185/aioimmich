@@ -25,7 +25,7 @@ class ImmichSearch(ImmichSubApi):
             person_ids (list[str] | None): filter to list of personIds
             tag_ids (list[str] | None): filter to list of tagIds
             page_size (int): assets per page
-            max_pages (int): maximun number of pages to return
+            max_pages (int): maximum number of pages to return
 
         Returns:
             a list of `ImmichAsset`
@@ -62,7 +62,7 @@ class ImmichSearch(ImmichSubApi):
 
         Args:
             page_size (int): assets per page
-            max_pages (int): maximun number of pages to return
+            max_pages (int): maximum number of pages to return
 
         Returns:
             a list of `ImmichAsset`
@@ -76,7 +76,7 @@ class ImmichSearch(ImmichSubApi):
 
         Args:
             page_size (int): assets per page
-            max_pages (int): maximun number of pages to return
+            max_pages (int): maximum number of pages to return
 
         Returns:
             a list of `ImmichAsset`
@@ -93,7 +93,7 @@ class ImmichSearch(ImmichSubApi):
         Args:
             tag_ids (list[str]): filter to list of tagIds
             page_size (int): assets per page
-            max_pages (int): maximun number of pages to return
+            max_pages (int): maximum number of pages to return
 
         Returns:
             a list of `ImmichAsset`
@@ -110,7 +110,7 @@ class ImmichSearch(ImmichSubApi):
         Args:
             person_ids (list[str]): filter to list of personIds
             page_size (int): assets per page
-            max_pages (int): maximun number of pages to return
+            max_pages (int): maximum number of pages to return
 
         Returns:
             a list of `ImmichAsset`
@@ -127,7 +127,7 @@ class ImmichSearch(ImmichSubApi):
         Args:
             album_ids (list[str]): filter to list of albumIds
             page_size (int): assets per page
-            max_pages (int): maximun number of pages to return
+            max_pages (int): maximum number of pages to return
 
         Returns:
             a list of `ImmichAsset`
