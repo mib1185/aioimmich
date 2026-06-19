@@ -20,6 +20,10 @@ from .const import (
 )
 
 
+class MockImmich(Immich):
+    """Immich test double that allows per-instance overrides."""
+
+
 @pytest.fixture(name="mock_aiointercept")
 async def aiointercept_fixture() -> AsyncGenerator[aiointercept, None]:
     """Mock a web request and provide a response."""
@@ -28,11 +32,11 @@ async def aiointercept_fixture() -> AsyncGenerator[aiointercept, None]:
 
 
 @pytest.fixture(name="mock_immich")
-async def immich_fixture() -> AsyncGenerator[Immich, Any]:
+async def immich_fixture() -> AsyncGenerator[MockImmich, Any]:
     """Return Immich session."""
     session = aiohttp.ClientSession()
-    api = Immich(session, MOCK_IMMICH_API_KEY, MOCK_IMMICH_HOST)
-    yield api
+    immich = MockImmich(session, MOCK_IMMICH_API_KEY, MOCK_IMMICH_HOST)
+    yield immich
     await session.close()
 
 
@@ -50,6 +54,7 @@ def mock_immich_with_data(
                 status=data["status"],
                 body=data["body"],
                 exception=data.get("exception"),
+                repeat=data.get("repeat", 1),
             )
         mock_aiointercept.post(
             f"https://{MOCK_IMMICH_HOST}:2283/api/search/metadata",
@@ -74,6 +79,7 @@ def mock_immich_with_data(
             ),
         )
 
+        await mock_immich.async_setup()
         return mock_immich
 
     return data_to_immich

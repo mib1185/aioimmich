@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from aiohttp import StreamReader
 from aiohttp.client import ClientSession
@@ -11,9 +12,13 @@ from .const import CONNECT_ERRORS, LOGGER
 from .exceptions import (
     ImmichError,
     ImmichForbiddenError,
+    ImmichMissingSetup,
     ImmichNotFoundError,
     ImmichUnauthorizedError,
 )
+
+if TYPE_CHECKING:
+    from .server.models import ImmichServerVersion
 
 
 @dataclass
@@ -42,6 +47,14 @@ class ImmichApi:
         self.base_url = f"{'https' if use_ssl else 'http'}://{host}:{port}/api"
         self.cache: dict[str, CacheEntry] = {}
         self.device_id = device_id
+        self._version: ImmichServerVersion | None = None
+
+    @property
+    def version(self) -> ImmichServerVersion:
+        """Get server version."""
+        if self._version is None:
+            raise ImmichMissingSetup
+        return self._version
 
     async def async_do_request(
         self,
@@ -54,6 +67,9 @@ class ImmichApi:
         raw_response_content: bool = False,
     ) -> list | dict | bytes | StreamReader | None:
         """Perform the request and handle errors."""
+        if self._version is None and end_point != "server/version":
+            raise ImmichMissingSetup
+
         headers = {"Accept": f"application/{application}", "x-api-key": self.api_key}
         url = f"{self.base_url}/{end_point}"
 
@@ -97,6 +113,9 @@ class ImmichApi:
                 return await resp.read()
 
             err_result = await resp.json()
+            if correlation_id := resp.headers.get("X-Correlation-ID"):
+                err_result["correlationId"] = correlation_id
+
             LOGGER.debug("RESPONSE %s", err_result)
             if resp.status == 400:
                 raise ImmichError(err_result)

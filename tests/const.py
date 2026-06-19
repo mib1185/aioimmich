@@ -227,13 +227,15 @@ MOCK_DATA: dict = {
         "status": 200,
         "body": json.dumps([MOCK_DATA_SHAED_ALBUM]),
     },
-    f"albums/{MOCK_DATA_ALBUM_1['id']}?withoutAssets=true": {
+    "albums": {
+        "status": 200,
+        "body": json.dumps(
+            [MOCK_DATA_ALBUM_1, MOCK_DATA_SHAED_ALBUM, MOCK_DATA_ALBUM_2]
+        ),
+    },
+    f"albums/{MOCK_DATA_ALBUM_1['id']}": {
         "status": 200,
         "body": json.dumps(MOCK_DATA_ALBUM_1),
-    },
-    f"albums/{MOCK_DATA_ALBUM_1['id']}?withoutAssets=false": {
-        "status": 200,
-        "body": json.dumps({**MOCK_DATA_ALBUM_1, "assets": MOCK_DATA_ALBUM_1_ASSETS}),
     },
     "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=thumbnail": {
         "status": 200,
@@ -333,6 +335,11 @@ MOCK_DATA: dict = {
             }
         ),
     },
+    "server/version": {
+        "status": 200,
+        "body": json.dumps({"major": 3, "minor": 0, "patch": 0}),
+        "repeat": 2,
+    },
     "server/version-check": {
         "status": 200,
         "body": json.dumps(
@@ -427,7 +434,7 @@ MOCK_DATA: dict = {
             }
         ),
     },
-    "albums/INVALID_ALBUM_ID?withoutAssets=false": {
+    "albums/INVALID_ALBUM_ID": {
         "status": 400,
         "body": json.dumps(
             {
@@ -438,7 +445,7 @@ MOCK_DATA: dict = {
             }
         ),
     },
-    "albums/INVALID_API_KEY?withoutAssets=false": {
+    "albums/INVALID_API_KEY": {
         "status": 401,
         "body": json.dumps(
             {
@@ -449,7 +456,7 @@ MOCK_DATA: dict = {
             }
         ),
     },
-    "albums/FORBIDDEN?withoutAssets=false": {
+    "albums/FORBIDDEN": {
         "status": 403,
         "body": json.dumps(
             {
@@ -460,7 +467,7 @@ MOCK_DATA: dict = {
             }
         ),
     },
-    "albums/NOTFOUND?withoutAssets=false": {
+    "albums/NOTFOUND": {
         "status": 404,
         "body": json.dumps(
             {
@@ -471,7 +478,7 @@ MOCK_DATA: dict = {
             }
         ),
     },
-    "albums/CLIENT_ERROR?withoutAssets=false": {
+    "albums/CLIENT_ERROR": {
         "status": None,
         "body": None,
         "exception": ClientError,

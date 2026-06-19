@@ -72,10 +72,15 @@ class ImmichAssests(ImmichSubApi):
         data = {
             "deviceAssetId": f"{self.api.device_id}-{file}-{stats.st_mtime}",
             "deviceId": self.api.device_id,
-            "fileCreatedAt": datetime.fromtimestamp(stats.st_mtime).isoformat(),
-            "fileModifiedAt": datetime.fromtimestamp(stats.st_mtime).isoformat(),
+            "fileCreatedAt": datetime.fromtimestamp(stats.st_mtime)
+            .astimezone()
+            .isoformat(),
+            "fileModifiedAt": datetime.fromtimestamp(stats.st_mtime)
+            .astimezone()
+            .isoformat(),
             "isFavorite": "false",
         }
+
         with MultipartWriter("form-data", boundary=boundary) as mp:
             for k, v in data.items():
                 part = mp.append(v)

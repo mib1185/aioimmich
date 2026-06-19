@@ -95,6 +95,16 @@ class ImmichServerStatistics(DataClassJSONMixin):
 
 
 @dataclass
+class ImmichServerVersion(DataClassJSONMixin):
+    """Representation of the immich server version result."""
+
+    major: int
+    minor: int
+    patch: int
+    prerelease: int | None = field(default=None)
+
+
+@dataclass
 class ImmichServerVersionCheck(DataClassJSONMixin):
     """Representation of the immich server version check result."""
 

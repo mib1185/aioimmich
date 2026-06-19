@@ -13,28 +13,29 @@ class ImmichAlbums(ImmichSubApi):
         Returns:
             list of all albums as `list[ImmichAlbum]`
         """
-        result = await self.api.async_do_request("albums", {"shared": "false"})
-        assert isinstance(result, list)
-        result_shared = await self.api.async_do_request("albums", {"shared": "true"})
-        assert isinstance(result_shared, list)
-        return [ImmichAlbum.from_dict(album) for album in result + result_shared]
+        if self.api.version.major < 3:
+            result = await self.api.async_do_request("albums", {"shared": "false"})
+            assert isinstance(result, list)
+            result_shared = await self.api.async_do_request(
+                "albums", {"shared": "true"}
+            )
+            assert isinstance(result_shared, list)
+            return [ImmichAlbum.from_dict(album) for album in result + result_shared]
 
-    async def async_get_album_info(
-        self, album_id: str, without_assests: bool = False
-    ) -> ImmichAlbum:
-        """Get album information and its assets.
+        result = await self.api.async_do_request("albums")
+        assert isinstance(result, list)
+        return [ImmichAlbum.from_dict(album) for album in result]
+
+    async def async_get_album_info(self, album_id: str) -> ImmichAlbum:
+        """Get album information.
 
         Args:
             album_id (str): id of the album to be fetched
-            without_assests (bool): whether to fetch the asstes for the album
 
         Returns:
-            album with assests (when `without_assests=False`) as `ImmichAlbum`
+            album as `ImmichAlbum`
         """
-        result = await self.api.async_do_request(
-            f"albums/{album_id}",
-            {"withoutAssets": "true" if without_assests else "false"},
-        )
+        result = await self.api.async_do_request(f"albums/{album_id}")
         assert isinstance(result, dict)
         return ImmichAlbum.from_dict(result)
 

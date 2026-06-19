@@ -10,6 +10,7 @@ from .assets import ImmichAssests
 from .people import ImmichPeople
 from .search import ImmichSearch
 from .server import ImmichServer
+from .server.models import ImmichServerVersion
 from .tags import ImmichTags
 from .users import ImmichUsers
 
@@ -56,3 +57,9 @@ class Immich:
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
         self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -> None:
+        """Set up the API."""
+        version = await self.api.async_do_request("server/version")
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)

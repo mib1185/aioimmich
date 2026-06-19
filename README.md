@@ -36,9 +36,10 @@ from aioimmich import Immich
 async def main():
     async with aiohttp.ClientSession() as session:
         immich = Immich(session, "<API-KEY>", "<IMMICH-IP>")
+        await immich.async_setup()
 
         for album in await immich.albums.async_get_all_albums():
-            print(f"Album: {album.name} contains {album.asset_count} assets")
+            print(f"Album: {album.album_name} contains {album.asset_count} assets")
 
 
 if __name__ == "__main__":
@@ -56,6 +57,7 @@ from aioimmich import Immich
 async def main():
     async with aiohttp.ClientSession() as session:
         immich = Immich(session, "<API-KEY>", "<IMMICH-IP>")
+        await immich.async_setup()
 
         asset_bytes = await immich.assets.async_view_asset("<ASSET-ID>", size="fullsize")
         with open(f"my_nice_picture.jpg", "wb") as fh:
@@ -77,6 +79,7 @@ from aioimmich import Immich
 async def main():
     async with aiohttp.ClientSession() as session:
         immich = Immich(session, "<API-KEY>", "<IMMICH-IP>")
+        await immich.async_setup()
 
         about_info = await api.server.async_get_about_info()
         print(f"Version:       {about_info.version}")
