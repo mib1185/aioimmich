@@ -132,6 +132,16 @@ class ImmichSearch(ImmichSubApi):
         Returns:
             a list of `ImmichAsset`
         """
+        if self.api.version.major < 3:
+            results: list[ImmichAsset] = []
+            for album_id in album_ids:
+                result = await self.api.async_do_request(f"albums/{album_id}")
+                assert isinstance(result, dict)
+                results.extend(
+                    [ImmichAsset.from_dict(asset) for asset in result["assets"]]
+                )
+            return results
+
         return await self._async_search_assets(
             album_ids=album_ids, page_size=page_size, max_pages=max_pages
         )

@@ -219,10 +219,12 @@ MOCK_DATA_SHAED_ALBUM: dict = {
 }
 
 MOCK_DATA: dict = {
+    # data for test_get_all_albums_v2
     "albums?shared=false": {
         "status": 200,
         "body": json.dumps([MOCK_DATA_ALBUM_1, MOCK_DATA_ALBUM_2]),
     },
+    # data for test_get_all_albums_v2
     "albums?shared=true": {
         "status": 200,
         "body": json.dumps([MOCK_DATA_SHAED_ALBUM]),
@@ -236,6 +238,11 @@ MOCK_DATA: dict = {
     f"albums/{MOCK_DATA_ALBUM_1['id']}": {
         "status": 200,
         "body": json.dumps(MOCK_DATA_ALBUM_1),
+    },
+    # data for test_get_all_by_album_ids_v2
+    "albums/14ce3af3-67be-41c6-b77c-b25abddaf546": {
+        "status": 200,
+        "body": json.dumps({**MOCK_DATA_ALBUM_1, "assets": MOCK_DATA_ALBUM_1_ASSETS}),
     },
     "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=thumbnail": {
         "status": 200,
