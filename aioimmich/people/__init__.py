@@ -36,7 +36,7 @@ class ImmichPeople(ImmichSubApi):
 
         return results
 
-    async def async_filter_peoples_by_name(self, name: str) -> list[ImmichPerson]:
+    async def async_filter_people_by_name(self, name: str) -> list[ImmichPerson]:
         """Filter people by name.
 
         Args:
@@ -45,7 +45,7 @@ class ImmichPeople(ImmichSubApi):
         Returns:
             a list of `ImmichPerson`
         """
-        result = await self.async_get_all_people()
+        result = await self.async_get_all_people(max_pages=50)
         assert isinstance(result, list)
 
         return [person for person in result if name.lower() in person.name.lower()]
