@@ -63,6 +63,12 @@ def mock_immich_with_data(
             ),
         )
         mock_aiointercept.post(
+            f"https://{MOCK_IMMICH_HOST}:2283/api/search/smart",
+            body=json.dumps(
+                {"assets": {"items": MOCK_DATA_ALBUM_1_ASSETS, "nextPage": None}}
+            ),
+        )
+        mock_aiointercept.post(
             f"https://{MOCK_IMMICH_HOST}:2283/api/assets",
             status=201,
             body=json.dumps({"id": "abcdef-0123456789", "status": "created"}),

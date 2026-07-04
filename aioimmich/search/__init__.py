@@ -2,6 +2,7 @@
 
 from ..api import ImmichSubApi
 from ..assets.models import AssetType, ImmichAsset
+from ..people.models import ImmichPerson
 
 
 class ImmichSearch(ImmichSubApi):
@@ -145,3 +146,59 @@ class ImmichSearch(ImmichSubApi):
         return await self._async_search_assets(
             album_ids=album_ids, page_size=page_size, max_pages=max_pages
         )
+
+    async def async_search_persons(self, name: str) -> list[ImmichPerson]:
+        """Search for persons by name.
+
+        Args:
+            name (str): Person name to search for
+
+        Returns:
+            a list of `ImmichPerson`
+        """
+        result = await self.api.async_do_request("search/person", params={"name": name})
+        assert isinstance(result, list)
+
+        return [ImmichPerson.from_dict(person) for person in result]
+
+    async def async_smart_search(
+        self,
+        query: str,
+        page_size: int = 100,
+        max_pages: int = 20,
+        is_favorite: bool | None = None,
+        is_not_in_album: bool | None = None,
+    ) -> list[ImmichAsset]:
+        """Perform a smart search for assets by using machine learning vectors to determine relevance.
+
+        Args:
+            query (str): Natural language search query
+            page_size (int): assets per page
+            max_pages (int): maximum number of pages to return
+            is_favorite (bool | None): Filter by favorite status
+            is_not_in_album (bool | None): Filter assets not in any album
+
+        Returns:
+            a list of `ImmichAsset`
+        """
+        data: dict[str, str | int | bool] = {
+            "query": query,
+            "size": page_size,
+        }
+        if is_favorite is not None:
+            data["isFavorite"] = is_favorite
+        if is_not_in_album is not None:
+            data["isNotInAlbum"] = is_not_in_album
+
+        results: list[ImmichAsset] = []
+        for page in range(max_pages):
+            result = await self.api.async_do_request(
+                "search/smart", data={**data, "page": page + 1}, method="POST"
+            )
+            assert isinstance(result, dict)
+            assets = result["assets"]
+            results.extend(ImmichAsset.from_dict(asset) for asset in assets["items"])
+            if assets.get("nextPage") is None:
+                break
+
+        return results

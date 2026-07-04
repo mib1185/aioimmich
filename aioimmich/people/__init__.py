@@ -36,6 +36,21 @@ class ImmichPeople(ImmichSubApi):
 
         return results
 
+    async def async_filter_people_by_name(self, name: str) -> list[ImmichPerson]:
+        """Filter people by name.
+
+        Args:
+            name (str): People name to filter by (case-insensitive)
+
+        Returns:
+            a list of `ImmichPerson`
+        """
+        return [
+            person
+            for person in await self.async_get_all_people(max_pages=50)
+            if name.lower() in person.name.lower()
+        ]
+
     async def async_get_people_count(self) -> int:
         """Get the total count of all people.
 

@@ -47,6 +47,16 @@ async def test_get_album_info(mock_immich_with_data, snapshot: SnapshotAssertion
     assert album == snapshot
 
 
+async def test_filter_albums_by_name(
+    mock_immich_with_data, snapshot: SnapshotAssertion
+):
+    """Test async_filter_albums_by_name."""
+    api = await mock_immich_with_data()
+    albums = await api.albums.async_filter_albums_by_name("Shared Album")
+    assert len(albums) == 1
+    assert albums == snapshot
+
+
 async def test_add_assets_to_album(mock_immich_with_data, mock_aiointercept):
     """Test async_add_assets_to_album."""
     api = await mock_immich_with_data()
