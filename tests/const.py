@@ -310,6 +310,11 @@ MOCK_DATA: dict = {
             }
         ),
     },
+    # data for test_search_persons
+    "search/person?name=some+person": {
+        "status": 200,
+        "body": json.dumps(MOCK_DATA_PEOPLE),
+    },
     "server/about": {
         "status": 200,
         "body": json.dumps(

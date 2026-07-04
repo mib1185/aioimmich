@@ -15,6 +15,7 @@ from aioimmich import Immich
 from .const import (
     MOCK_DATA,
     MOCK_DATA_ALBUM_1_ASSETS,
+    MOCK_DATA_PEOPLE,
     MOCK_IMMICH_API_KEY,
     MOCK_IMMICH_HOST,
 )
@@ -58,6 +59,12 @@ def mock_immich_with_data(
             )
         mock_aiointercept.post(
             f"https://{MOCK_IMMICH_HOST}:2283/api/search/metadata",
+            body=json.dumps(
+                {"assets": {"items": MOCK_DATA_ALBUM_1_ASSETS, "nextPage": None}}
+            ),
+        )
+        mock_aiointercept.post(
+            f"https://{MOCK_IMMICH_HOST}:2283/api/search/smart",
             body=json.dumps(
                 {"assets": {"items": MOCK_DATA_ALBUM_1_ASSETS, "nextPage": None}}
             ),
