@@ -48,9 +48,11 @@ class ImmichAlbums(ImmichSubApi):
         Returns:
             a list of `ImmichAlbum`
         """
-        albums = await self.async_get_all_albums()
-
-        return [album for album in albums if name.lower() in album.album_name.lower()]
+        return [
+            album
+            for album in await self.async_get_all_albums()
+            if name.lower() in album.album_name.lower()
+        ]
 
     async def async_add_assets_to_album(
         self, album_id: str, asset_ids: list[str]

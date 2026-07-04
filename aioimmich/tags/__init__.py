@@ -26,6 +26,8 @@ class ImmichTags(ImmichSubApi):
         Returns:
             a list of `ImmichTag`
         """
-        tags = await self.async_get_all_tags()
-
-        return [tag for tag in tags if name.lower() in tag.name.lower()]
+        return [
+            tag
+            for tag in await self.async_get_all_tags()
+            if name.lower() in tag.name.lower()
+        ]
