@@ -39,6 +39,20 @@ class ImmichAlbums(ImmichSubApi):
         assert isinstance(result, dict)
         return ImmichAlbum.from_dict(result)
 
+    async def async_filter_albums_by_name(self, name: str) -> list[ImmichAlbum]:
+        """Filter albums by name.
+
+        Args:
+            name (str): Album name to filter by
+
+        Returns:
+            a list of `ImmichAlbum`
+        """
+        result = await self.async_get_all_albums()
+        assert isinstance(result, list)
+
+        return [album for album in result if name.lower() in album.album_name.lower()]
+
     async def async_add_assets_to_album(
         self, album_id: str, asset_ids: list[str]
     ) -> list[ImmichAddAssetsToAlbumResponse]:

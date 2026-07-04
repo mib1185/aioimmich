@@ -36,6 +36,20 @@ class ImmichPeople(ImmichSubApi):
 
         return results
 
+    async def async_filter_peoples_by_name(self, name: str) -> list[ImmichPerson]:
+        """Filter people by name.
+
+        Args:
+            name (str): People name to filter by
+
+        Returns:
+            a list of `ImmichPerson`
+        """
+        result = await self.async_get_all_people()
+        assert isinstance(result, list)
+
+        return [person for person in result if name.lower() in person.name.lower()]
+
     async def async_get_people_count(self) -> int:
         """Get the total count of all people.
 
