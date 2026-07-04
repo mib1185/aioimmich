@@ -21,12 +21,11 @@ class ImmichTags(ImmichSubApi):
         """Filter tags by name.
 
         Args:
-            name (str): Tag name to filter by
+            name (str): Tag name to filter by (case-insensitive)
 
         Returns:
             a list of `ImmichTag`
         """
-        result = await self.async_get_all_tags()
-        assert isinstance(result, list)
+        tags = await self.async_get_all_tags()
 
-        return [tag for tag in result if name.lower() in tag.name.lower()]
+        return [tag for tag in tags if name.lower() in tag.name.lower()]

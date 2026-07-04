@@ -15,7 +15,6 @@ from aioimmich import Immich
 from .const import (
     MOCK_DATA,
     MOCK_DATA_ALBUM_1_ASSETS,
-    MOCK_DATA_PEOPLE,
     MOCK_IMMICH_API_KEY,
     MOCK_IMMICH_HOST,
 )

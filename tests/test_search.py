@@ -141,8 +141,8 @@ async def test_get_all_by_album_ids_v2(
 async def test_search_persons(mock_immich_with_data):
     """Test async_search_persons."""
     api = await mock_immich_with_data()
-    assets = await api.search.async_search_persons("some person")
-    assert len(assets) == 3
+    persons = await api.search.async_search_persons("some person")
+    assert len(persons) == 3
 
 
 @pytest.mark.parametrize(

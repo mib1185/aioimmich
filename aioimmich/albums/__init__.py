@@ -43,15 +43,14 @@ class ImmichAlbums(ImmichSubApi):
         """Filter albums by name.
 
         Args:
-            name (str): Album name to filter by
+            name (str): Album name to filter by (case-insensitive)
 
         Returns:
             a list of `ImmichAlbum`
         """
-        result = await self.async_get_all_albums()
-        assert isinstance(result, list)
+        albums = await self.async_get_all_albums()
 
-        return [album for album in result if name.lower() in album.album_name.lower()]
+        return [album for album in albums if name.lower() in album.album_name.lower()]
 
     async def async_add_assets_to_album(
         self, album_id: str, asset_ids: list[str]
