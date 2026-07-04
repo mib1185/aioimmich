@@ -218,7 +218,7 @@ MOCK_DATA_SHAED_ALBUM: dict = {
     "lastModifiedAssetTimestamp": "2026-01-28T22:42:19.894Z",
 }
 
-MOCK_DATA_PEOPLE: list = [
+MOCK_DATA_PEOPLE: list[dict] = [
     {
         "id": "6176838a-ac5a-4d1f-9a35-91c591d962d8",
         "name": "Me",
