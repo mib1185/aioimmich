@@ -166,6 +166,9 @@ class ImmichSearch(ImmichSubApi):
         query: str,
         page_size: int = 100,
         max_pages: int = 20,
+        album_ids: list[str] | None = None,
+        person_ids: list[str] | None = None,
+        tag_ids: list[str] | None = None,
         is_favorite: bool | None = None,
         is_not_in_album: bool | None = None,
     ) -> list[ImmichAsset]:
@@ -175,16 +178,25 @@ class ImmichSearch(ImmichSubApi):
             query (str): Natural language search query
             page_size (int): assets per page
             max_pages (int): maximum number of pages to return
-            is_favorite (bool | None): Filter by favorite status
-            is_not_in_album (bool | None): Filter assets not in any album
+            album_ids (list[str] | None): filter by album IDs
+            person_ids (list[str] | None): filter by person IDs
+            tag_ids (list[str] | None): filter by tag IDs
+            is_favorite (bool | None): filter by favorite status
+            is_not_in_album (bool | None): filter assets not in any album
 
         Returns:
             a list of `ImmichAsset`
         """
-        data: dict[str, str | int | bool] = {
+        data: dict[str, str | int | bool | list[str]] = {
             "query": query,
             "size": page_size,
         }
+        if album_ids is not None:
+            data["albumIds"] = album_ids
+        if person_ids is not None:
+            data["personIds"] = person_ids
+        if tag_ids is not None:
+            data["tagIds"] = tag_ids
         if is_favorite is not None:
             data["isFavorite"] = is_favorite
         if is_not_in_album is not None:

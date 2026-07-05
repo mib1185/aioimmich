@@ -151,6 +151,33 @@ async def test_search_persons(mock_immich_with_data):
         ({}, {"size": 100, "query": "my search string", "page": 1}),
         ({"page_size": 10}, {"size": 10, "query": "my search string", "page": 1}),
         (
+            {"album_ids": ["abcdef-1234-aabbccddeeff"]},
+            {
+                "size": 100,
+                "query": "my search string",
+                "page": 1,
+                "albumIds": ["abcdef-1234-aabbccddeeff"],
+            },
+        ),
+        (
+            {"person_ids": ["abcdef-1234-aabbccddeeff"]},
+            {
+                "size": 100,
+                "query": "my search string",
+                "page": 1,
+                "personIds": ["abcdef-1234-aabbccddeeff"],
+            },
+        ),
+        (
+            {"tag_ids": ["abcdef-1234-aabbccddeeff"]},
+            {
+                "size": 100,
+                "query": "my search string",
+                "page": 1,
+                "tagIds": ["abcdef-1234-aabbccddeeff"],
+            },
+        ),
+        (
             {"is_favorite": True, "is_not_in_album": True},
             {
                 "isFavorite": True,
