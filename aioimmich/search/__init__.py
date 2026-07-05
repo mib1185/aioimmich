@@ -166,6 +166,7 @@ class ImmichSearch(ImmichSubApi):
         query: str,
         page_size: int = 100,
         max_pages: int = 20,
+        asset_type: AssetType | None = None,
         album_ids: list[str] | None = None,
         person_ids: list[str] | None = None,
         tag_ids: list[str] | None = None,
@@ -178,6 +179,7 @@ class ImmichSearch(ImmichSubApi):
             query (str): Natural language search query
             page_size (int): assets per page
             max_pages (int): maximum number of pages to return
+            asset_type (AssetType | None): filter to `AssetType`
             album_ids (list[str] | None): filter by album IDs
             person_ids (list[str] | None): filter by person IDs
             tag_ids (list[str] | None): filter by tag IDs
@@ -191,11 +193,13 @@ class ImmichSearch(ImmichSubApi):
             "query": query,
             "size": page_size,
         }
-        if album_ids is not None:
+        if asset_type:
+            data["type"] = asset_type.value
+        if album_ids:
             data["albumIds"] = album_ids
-        if person_ids is not None:
+        if person_ids:
             data["personIds"] = person_ids
-        if tag_ids is not None:
+        if tag_ids:
             data["tagIds"] = tag_ids
         if is_favorite is not None:
             data["isFavorite"] = is_favorite

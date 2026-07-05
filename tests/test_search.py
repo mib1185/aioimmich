@@ -7,6 +7,8 @@ import json
 import pytest
 from syrupy.assertion import SnapshotAssertion
 
+from aioimmich.assets.models import AssetType
+
 from .const import MOCK_IMMICH_HOST
 
 
@@ -150,6 +152,10 @@ async def test_search_persons(mock_immich_with_data):
     [
         ({}, {"size": 100, "query": "my search string", "page": 1}),
         ({"page_size": 10}, {"size": 10, "query": "my search string", "page": 1}),
+        (
+            {"asset_type": AssetType.IMAGE},
+            {"size": 100, "query": "my search string", "page": 1, "type": "IMAGE"},
+        ),
         (
             {"album_ids": ["abcdef-1234-aabbccddeeff"]},
             {
