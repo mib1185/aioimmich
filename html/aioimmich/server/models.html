@@ -428,6 +428,68 @@ class ImmichServerStorage(DataClassJSONMixin):
 </dd>
 </dl>
 </dd>
+<dt id="aioimmich.server.models.ImmichServerVersion"><code class="flex name class">
+<span>class <span class="ident">ImmichServerVersion</span></span>
+<span>(</span><span>major: int, minor: int, patch: int, prerelease: int | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ImmichServerVersion(DataClassJSONMixin):
+    &#34;&#34;&#34;Representation of the immich server version result.&#34;&#34;&#34;
+
+    major: int
+    minor: int
+    patch: int
+    prerelease: int | None = field(default=None)</code></pre>
+</details>
+<div class="desc"><p>Representation of the immich server version result.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>mashumaro.mixins.json.DataClassJSONMixin</li>
+<li>mashumaro.mixins.dict.DataClassDictMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerVersion.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>d, *, dialect=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerVersion.major"><code class="name">var <span class="ident">major</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerVersion.minor"><code class="name">var <span class="ident">minor</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerVersion.patch"><code class="name">var <span class="ident">patch</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="aioimmich.server.models.ImmichServerVersion.prerelease"><code class="name">var <span class="ident">prerelease</span> : int | None</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.server.models.ImmichServerVersion.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
 <dt id="aioimmich.server.models.ImmichServerVersionCheck"><code class="flex name class">
 <span>class <span class="ident">ImmichServerVersionCheck</span></span>
 <span>(</span><span>checked_at: datetime | None, release_version: str | None)</span>
@@ -559,6 +621,17 @@ class ImmichServerVersionCheck(DataClassJSONMixin):
 <li><code><a title="aioimmich.server.models.ImmichServerStorage.disk_use_raw" href="#aioimmich.server.models.ImmichServerStorage.disk_use_raw">disk_use_raw</a></code></li>
 <li><code><a title="aioimmich.server.models.ImmichServerStorage.from_dict" href="#aioimmich.server.models.ImmichServerStorage.from_dict">from_dict</a></code></li>
 <li><code><a title="aioimmich.server.models.ImmichServerStorage.to_dict" href="#aioimmich.server.models.ImmichServerStorage.to_dict">to_dict</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="aioimmich.server.models.ImmichServerVersion" href="#aioimmich.server.models.ImmichServerVersion">ImmichServerVersion</a></code></h4>
+<ul class="two-column">
+<li><code><a title="aioimmich.server.models.ImmichServerVersion.from_dict" href="#aioimmich.server.models.ImmichServerVersion.from_dict">from_dict</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerVersion.major" href="#aioimmich.server.models.ImmichServerVersion.major">major</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerVersion.minor" href="#aioimmich.server.models.ImmichServerVersion.minor">minor</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerVersion.patch" href="#aioimmich.server.models.ImmichServerVersion.patch">patch</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerVersion.prerelease" href="#aioimmich.server.models.ImmichServerVersion.prerelease">prerelease</a></code></li>
+<li><code><a title="aioimmich.server.models.ImmichServerVersion.to_dict" href="#aioimmich.server.models.ImmichServerVersion.to_dict">to_dict</a></code></li>
 </ul>
 </li>
 <li>

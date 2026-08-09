@@ -72,28 +72,46 @@ el.replaceWith(d);
         Returns:
             list of all albums as `list[ImmichAlbum]`
         &#34;&#34;&#34;
+        if self.api.version.major &lt; 3:
+            result = await self.api.async_do_request(&#34;albums&#34;, {&#34;shared&#34;: &#34;false&#34;})
+            assert isinstance(result, list)
+            result_shared = await self.api.async_do_request(
+                &#34;albums&#34;, {&#34;shared&#34;: &#34;true&#34;}
+            )
+            assert isinstance(result_shared, list)
+            return [ImmichAlbum.from_dict(album) for album in result + result_shared]
+
         result = await self.api.async_do_request(&#34;albums&#34;)
         assert isinstance(result, list)
         return [ImmichAlbum.from_dict(album) for album in result]
 
-    async def async_get_album_info(
-        self, album_id: str, without_assests: bool = False
-    ) -&gt; ImmichAlbum:
-        &#34;&#34;&#34;Get album information and its assets.
+    async def async_get_album_info(self, album_id: str) -&gt; ImmichAlbum:
+        &#34;&#34;&#34;Get album information.
 
         Args:
             album_id (str): id of the album to be fetched
-            without_assests (bool): whether to fetch the asstes for the album
 
         Returns:
-            album with assests (when `without_assests=False`) as `ImmichAlbum`
+            album as `ImmichAlbum`
         &#34;&#34;&#34;
-        result = await self.api.async_do_request(
-            f&#34;albums/{album_id}&#34;,
-            {&#34;withoutAssets&#34;: &#34;true&#34; if without_assests else &#34;false&#34;},
-        )
+        result = await self.api.async_do_request(f&#34;albums/{album_id}&#34;)
         assert isinstance(result, dict)
         return ImmichAlbum.from_dict(result)
+
+    async def async_filter_albums_by_name(self, name: str) -&gt; list[ImmichAlbum]:
+        &#34;&#34;&#34;Filter albums by name.
+
+        Args:
+            name (str): Album name to filter by (case-insensitive)
+
+        Returns:
+            a list of `ImmichAlbum`
+        &#34;&#34;&#34;
+        return [
+            album
+            for album in await self.async_get_all_albums()
+            if name.lower() in album.album_name.lower()
+        ]
 
     async def async_add_assets_to_album(
         self, album_id: str, asset_ids: list[str]
@@ -148,53 +166,83 @@ el.replaceWith(d);
     return [ImmichAddAssetsToAlbumResponse.from_dict(item) for item in result]</code></pre>
 </details>
 <div class="desc"><p>Add given assets to the given album.</p>
-<h2 id="args">Args</h2>
 <dl>
+<dt>Args</dt>
+<dt>-----=</dt>
 <dt><strong><code>album_id</code></strong> :&ensp;<code>str</code></dt>
 <dd>id of the album to add the assets</dd>
 <dt><strong><code>asset_ids</code></strong> :&ensp;<code>list</code></dt>
 <dd>list of asset ids to add to the album</dd>
 </dl>
-<h2 id="returns">Returns</h2>
-<p>result of adding as list of <code>ImmichAddAssetsToAlbumResponse</code></p></div>
+<p>Returns
+-----=
+result of adding as list of <code>ImmichAddAssetsToAlbumResponse</code></p></div>
 </dd>
-<dt id="aioimmich.albums.ImmichAlbums.async_get_album_info"><code class="name flex">
-<span>async def <span class="ident">async_get_album_info</span></span>(<span>self, album_id: str, without_assests: bool = False) ‑> <a title="aioimmich.albums.models.ImmichAlbum" href="models.html#aioimmich.albums.models.ImmichAlbum">ImmichAlbum</a></span>
+<dt id="aioimmich.albums.ImmichAlbums.async_filter_albums_by_name"><code class="name flex">
+<span>async def <span class="ident">async_filter_albums_by_name</span></span>(<span>self, name: str) ‑> list[<a title="aioimmich.albums.models.ImmichAlbum" href="models.html#aioimmich.albums.models.ImmichAlbum">ImmichAlbum</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">async def async_get_album_info(
-    self, album_id: str, without_assests: bool = False
-) -&gt; ImmichAlbum:
-    &#34;&#34;&#34;Get album information and its assets.
+<pre><code class="python">async def async_filter_albums_by_name(self, name: str) -&gt; list[ImmichAlbum]:
+    &#34;&#34;&#34;Filter albums by name.
+
+    Args:
+        name (str): Album name to filter by (case-insensitive)
+
+    Returns:
+        a list of `ImmichAlbum`
+    &#34;&#34;&#34;
+    return [
+        album
+        for album in await self.async_get_all_albums()
+        if name.lower() in album.album_name.lower()
+    ]</code></pre>
+</details>
+<div class="desc"><p>Filter albums by name.</p>
+<dl>
+<dt>Args</dt>
+<dt>-----=</dt>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>Album name to filter by (case-insensitive)</dd>
+</dl>
+<p>Returns
+-----=
+a list of <code>ImmichAlbum</code></p></div>
+</dd>
+<dt id="aioimmich.albums.ImmichAlbums.async_get_album_info"><code class="name flex">
+<span>async def <span class="ident">async_get_album_info</span></span>(<span>self, album_id: str) ‑> <a title="aioimmich.albums.models.ImmichAlbum" href="models.html#aioimmich.albums.models.ImmichAlbum">ImmichAlbum</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def async_get_album_info(self, album_id: str) -&gt; ImmichAlbum:
+    &#34;&#34;&#34;Get album information.
 
     Args:
         album_id (str): id of the album to be fetched
-        without_assests (bool): whether to fetch the asstes for the album
 
     Returns:
-        album with assests (when `without_assests=False`) as `ImmichAlbum`
+        album as `ImmichAlbum`
     &#34;&#34;&#34;
-    result = await self.api.async_do_request(
-        f&#34;albums/{album_id}&#34;,
-        {&#34;withoutAssets&#34;: &#34;true&#34; if without_assests else &#34;false&#34;},
-    )
+    result = await self.api.async_do_request(f&#34;albums/{album_id}&#34;)
     assert isinstance(result, dict)
     return ImmichAlbum.from_dict(result)</code></pre>
 </details>
-<div class="desc"><p>Get album information and its assets.</p>
-<h2 id="args">Args</h2>
+<div class="desc"><p>Get album information.</p>
 <dl>
+<dt>Args</dt>
+<dt>-----=</dt>
 <dt><strong><code>album_id</code></strong> :&ensp;<code>str</code></dt>
 <dd>id of the album to be fetched</dd>
-<dt><strong><code>without_assests</code></strong> :&ensp;<code>bool</code></dt>
-<dd>whether to fetch the asstes for the album</dd>
 </dl>
-<h2 id="returns">Returns</h2>
-<p>album with assests (when <code>without_assests=False</code>) as <code>ImmichAlbum</code></p></div>
+<p>Returns
+-----=
+album as <code>ImmichAlbum</code></p></div>
 </dd>
 <dt id="aioimmich.albums.ImmichAlbums.async_get_all_albums"><code class="name flex">
 <span>async def <span class="ident">async_get_all_albums</span></span>(<span>self) ‑> list[<a title="aioimmich.albums.models.ImmichAlbum" href="models.html#aioimmich.albums.models.ImmichAlbum">ImmichAlbum</a>]</span>
@@ -210,13 +258,23 @@ el.replaceWith(d);
     Returns:
         list of all albums as `list[ImmichAlbum]`
     &#34;&#34;&#34;
+    if self.api.version.major &lt; 3:
+        result = await self.api.async_do_request(&#34;albums&#34;, {&#34;shared&#34;: &#34;false&#34;})
+        assert isinstance(result, list)
+        result_shared = await self.api.async_do_request(
+            &#34;albums&#34;, {&#34;shared&#34;: &#34;true&#34;}
+        )
+        assert isinstance(result_shared, list)
+        return [ImmichAlbum.from_dict(album) for album in result + result_shared]
+
     result = await self.api.async_do_request(&#34;albums&#34;)
     assert isinstance(result, list)
     return [ImmichAlbum.from_dict(album) for album in result]</code></pre>
 </details>
 <div class="desc"><p>Get all albums.</p>
-<h2 id="returns">Returns</h2>
-<p>list of all albums as <code>list[ImmichAlbum]</code></p></div>
+<p>Returns
+-----=
+list of all albums as <code>list[ImmichAlbum]</code></p></div>
 </dd>
 </dl>
 </dd>
@@ -244,6 +302,7 @@ el.replaceWith(d);
 <h4><code><a title="aioimmich.albums.ImmichAlbums" href="#aioimmich.albums.ImmichAlbums">ImmichAlbums</a></code></h4>
 <ul class="">
 <li><code><a title="aioimmich.albums.ImmichAlbums.async_add_assets_to_album" href="#aioimmich.albums.ImmichAlbums.async_add_assets_to_album">async_add_assets_to_album</a></code></li>
+<li><code><a title="aioimmich.albums.ImmichAlbums.async_filter_albums_by_name" href="#aioimmich.albums.ImmichAlbums.async_filter_albums_by_name">async_filter_albums_by_name</a></code></li>
 <li><code><a title="aioimmich.albums.ImmichAlbums.async_get_album_info" href="#aioimmich.albums.ImmichAlbums.async_get_album_info">async_get_album_info</a></code></li>
 <li><code><a title="aioimmich.albums.ImmichAlbums.async_get_all_albums" href="#aioimmich.albums.ImmichAlbums.async_get_all_albums">async_get_all_albums</a></code></li>
 </ul>
