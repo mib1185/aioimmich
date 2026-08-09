@@ -268,7 +268,7 @@ class ExifInfo(DataClassJSONMixin):
 </dd>
 <dt id="aioimmich.assets.models.ImmichAsset"><code class="flex name class">
 <span>class <span class="ident">ImmichAsset</span></span>
-<span>(</span><span>asset_id: str,<br>asset_type: <a title="aioimmich.assets.models.AssetType" href="#aioimmich.assets.models.AssetType">AssetType</a>,<br>checksum: str,<br>device_asset_id: str,<br>device_id: str,<br>duration: str,<br>file_created_at: datetime,<br>file_modified_at: datetime,<br>has_metadata: bool,<br>is_archived: bool,<br>is_favorite: bool,<br>is_offline: bool,<br>is_trashed: bool,<br>local_datetime: datetime,<br>original_file_name: str,<br>original_path: str,<br>owner_id: str,<br>people: list,<br>resized: bool,<br>thumbhash: str,<br>updated_at: datetime,<br>duplicate_id: str | None = None,<br>exif_info: <a title="aioimmich.assets.models.ExifInfo" href="#aioimmich.assets.models.ExifInfo">ExifInfo</a> | None = None,<br>library_id: str | None = None,<br>live_photo_video_id: str | None = None,<br>original_mime_type: str | None = None,<br>visibility: str | None = None)</span>
+<span>(</span><span>asset_id: str,<br>asset_type: <a title="aioimmich.assets.models.AssetType" href="#aioimmich.assets.models.AssetType">AssetType</a>,<br>checksum: str,<br>duration: str,<br>file_created_at: datetime,<br>file_modified_at: datetime,<br>has_metadata: bool,<br>is_archived: bool,<br>is_favorite: bool,<br>is_offline: bool,<br>is_trashed: bool,<br>local_datetime: datetime,<br>original_file_name: str,<br>original_path: str,<br>owner_id: str,<br>people: list,<br>resized: bool,<br>thumbhash: str,<br>updated_at: datetime,<br>device_asset_id: str | None = None,<br>device_id: str | None = None,<br>duplicate_id: str | None = None,<br>exif_info: <a title="aioimmich.assets.models.ExifInfo" href="#aioimmich.assets.models.ExifInfo">ExifInfo</a> | None = None,<br>library_id: str | None = None,<br>live_photo_video_id: str | None = None,<br>original_mime_type: str | None = None,<br>visibility: str | None = None)</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -283,8 +283,6 @@ class ImmichAsset(DataClassJSONMixin):
     asset_id: str = field(metadata=field_options(alias=&#34;id&#34;))
     asset_type: AssetType = field(metadata=field_options(alias=&#34;type&#34;))
     checksum: str
-    device_asset_id: str = field(metadata=field_options(alias=&#34;deviceAssetId&#34;))
-    device_id: str = field(metadata=field_options(alias=&#34;deviceId&#34;))
     duration: str
     file_created_at: datetime = field(metadata=field_options(alias=&#34;fileCreatedAt&#34;))
     file_modified_at: datetime = field(metadata=field_options(alias=&#34;fileModifiedAt&#34;))
@@ -303,6 +301,12 @@ class ImmichAsset(DataClassJSONMixin):
     updated_at: datetime = field(metadata=field_options(alias=&#34;updatedAt&#34;))
 
     # default parameters
+    device_asset_id: str | None = field(
+        metadata=field_options(alias=&#34;deviceAssetId&#34;), default=None
+    )
+    device_id: str | None = field(
+        metadata=field_options(alias=&#34;deviceId&#34;), default=None
+    )
     duplicate_id: str | None = field(
         metadata=field_options(alias=&#34;duplicateId&#34;), default=None
     )
@@ -349,11 +353,11 @@ class ImmichAsset(DataClassJSONMixin):
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="aioimmich.assets.models.ImmichAsset.device_asset_id"><code class="name">var <span class="ident">device_asset_id</span> : str</code></dt>
+<dt id="aioimmich.assets.models.ImmichAsset.device_asset_id"><code class="name">var <span class="ident">device_asset_id</span> : str | None</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="aioimmich.assets.models.ImmichAsset.device_id"><code class="name">var <span class="ident">device_id</span> : str</code></dt>
+<dt id="aioimmich.assets.models.ImmichAsset.device_id"><code class="name">var <span class="ident">device_id</span> : str | None</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>

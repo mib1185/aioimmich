@@ -74,7 +74,35 @@ el.replaceWith(d);
         &#34;&#34;&#34;
         result = await self.api.async_do_request(&#34;tags&#34;)
         assert isinstance(result, list)
-        return [ImmichTag.from_dict(tag) for tag in result]</code></pre>
+        return [ImmichTag.from_dict(tag) for tag in result]
+
+    async def async_get_tag_by_id(self, tag_id: str) -&gt; ImmichTag:
+        &#34;&#34;&#34;Get a specific tag by its uuid.
+
+        Args:
+            tag_id (str):  Tag ID
+
+        Returns:
+            `ImmichTag`
+        &#34;&#34;&#34;
+        result = await self.api.async_do_request(f&#34;tags/{tag_id}&#34;)
+        assert isinstance(result, dict)
+        return ImmichTag.from_dict(result)
+
+    async def async_filter_tags_by_name(self, name: str) -&gt; list[ImmichTag]:
+        &#34;&#34;&#34;Filter tags by name.
+
+        Args:
+            name (str): Tag name to filter by (case-insensitive)
+
+        Returns:
+            a list of `ImmichTag`
+        &#34;&#34;&#34;
+        return [
+            tag
+            for tag in await self.async_get_all_tags()
+            if name.lower() in tag.name.lower()
+        ]</code></pre>
 </details>
 <div class="desc"><p>Immich tags api.</p>
 <p>Immich sub api init.</p></div>
@@ -84,6 +112,40 @@ el.replaceWith(d);
 </ul>
 <h3>Methods</h3>
 <dl>
+<dt id="aioimmich.tags.ImmichTags.async_filter_tags_by_name"><code class="name flex">
+<span>async def <span class="ident">async_filter_tags_by_name</span></span>(<span>self, name: str) ‑> list[<a title="aioimmich.tags.models.ImmichTag" href="models.html#aioimmich.tags.models.ImmichTag">ImmichTag</a>]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def async_filter_tags_by_name(self, name: str) -&gt; list[ImmichTag]:
+    &#34;&#34;&#34;Filter tags by name.
+
+    Args:
+        name (str): Tag name to filter by (case-insensitive)
+
+    Returns:
+        a list of `ImmichTag`
+    &#34;&#34;&#34;
+    return [
+        tag
+        for tag in await self.async_get_all_tags()
+        if name.lower() in tag.name.lower()
+    ]</code></pre>
+</details>
+<div class="desc"><p>Filter tags by name.</p>
+<dl>
+<dt>Args</dt>
+<dt>-----=</dt>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>Tag name to filter by (case-insensitive)</dd>
+</dl>
+<p>Returns
+-----=
+a list of <code>ImmichTag</code></p></div>
+</dd>
 <dt id="aioimmich.tags.ImmichTags.async_get_all_tags"><code class="name flex">
 <span>async def <span class="ident">async_get_all_tags</span></span>(<span>self) ‑> list[<a title="aioimmich.tags.models.ImmichTag" href="models.html#aioimmich.tags.models.ImmichTag">ImmichTag</a>]</span>
 </code></dt>
@@ -103,8 +165,41 @@ el.replaceWith(d);
     return [ImmichTag.from_dict(tag) for tag in result]</code></pre>
 </details>
 <div class="desc"><p>Get all tags.</p>
-<h2 id="returns">Returns</h2>
-<p>all tags as list of <code>ImmichTag</code></p></div>
+<p>Returns
+-----=
+all tags as list of <code>ImmichTag</code></p></div>
+</dd>
+<dt id="aioimmich.tags.ImmichTags.async_get_tag_by_id"><code class="name flex">
+<span>async def <span class="ident">async_get_tag_by_id</span></span>(<span>self, tag_id: str) ‑> <a title="aioimmich.tags.models.ImmichTag" href="models.html#aioimmich.tags.models.ImmichTag">ImmichTag</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def async_get_tag_by_id(self, tag_id: str) -&gt; ImmichTag:
+    &#34;&#34;&#34;Get a specific tag by its uuid.
+
+    Args:
+        tag_id (str):  Tag ID
+
+    Returns:
+        `ImmichTag`
+    &#34;&#34;&#34;
+    result = await self.api.async_do_request(f&#34;tags/{tag_id}&#34;)
+    assert isinstance(result, dict)
+    return ImmichTag.from_dict(result)</code></pre>
+</details>
+<div class="desc"><p>Get a specific tag by its uuid.</p>
+<dl>
+<dt>Args</dt>
+<dt>-----=</dt>
+<dt><strong><code>tag_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>Tag ID</dd>
+</dl>
+<p>Returns
+-----=
+<code>ImmichTag</code></p></div>
 </dd>
 </dl>
 </dd>
@@ -131,7 +226,9 @@ el.replaceWith(d);
 <li>
 <h4><code><a title="aioimmich.tags.ImmichTags" href="#aioimmich.tags.ImmichTags">ImmichTags</a></code></h4>
 <ul class="">
+<li><code><a title="aioimmich.tags.ImmichTags.async_filter_tags_by_name" href="#aioimmich.tags.ImmichTags.async_filter_tags_by_name">async_filter_tags_by_name</a></code></li>
 <li><code><a title="aioimmich.tags.ImmichTags.async_get_all_tags" href="#aioimmich.tags.ImmichTags.async_get_all_tags">async_get_all_tags</a></code></li>
+<li><code><a title="aioimmich.tags.ImmichTags.async_get_tag_by_id" href="#aioimmich.tags.ImmichTags.async_get_tag_by_id">async_get_tag_by_id</a></code></li>
 </ul>
 </li>
 </ul>

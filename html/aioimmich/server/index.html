@@ -96,6 +96,16 @@ el.replaceWith(d);
         assert isinstance(result, dict)
         return ImmichServerStatistics.from_dict(result)
 
+    async def async_get_version(self) -&gt; ImmichServerVersion:
+        &#34;&#34;&#34;Get server version result.
+
+        Returns:
+            server version result as `ImmichServerVersion`
+        &#34;&#34;&#34;
+        result = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(result, dict)
+        return ImmichServerVersion.from_dict(result)
+
     async def async_get_version_check(self) -&gt; ImmichServerVersionCheck:
         &#34;&#34;&#34;Get server version check result.
 
@@ -135,8 +145,9 @@ el.replaceWith(d);
     return ImmichServerAbout.from_dict(result)</code></pre>
 </details>
 <div class="desc"><p>Get server about info.</p>
-<h2 id="returns">Returns</h2>
-<p>server about info as <code>ImmichServerAbout</code></p></div>
+<p>Returns
+-----=
+server about info as <code>ImmichServerAbout</code></p></div>
 </dd>
 <dt id="aioimmich.server.ImmichServer.async_get_server_statistics"><code class="name flex">
 <span>async def <span class="ident">async_get_server_statistics</span></span>(<span>self) ‑> <a title="aioimmich.server.models.ImmichServerStatistics" href="models.html#aioimmich.server.models.ImmichServerStatistics">ImmichServerStatistics</a></span>
@@ -157,8 +168,9 @@ el.replaceWith(d);
     return ImmichServerStatistics.from_dict(result)</code></pre>
 </details>
 <div class="desc"><p>Get server usage statistics.</p>
-<h2 id="returns">Returns</h2>
-<p>server usage statistics as <code>ImmichServerStatistics</code></p></div>
+<p>Returns
+-----=
+server usage statistics as <code>ImmichServerStatistics</code></p></div>
 </dd>
 <dt id="aioimmich.server.ImmichServer.async_get_storage_info"><code class="name flex">
 <span>async def <span class="ident">async_get_storage_info</span></span>(<span>self) ‑> <a title="aioimmich.server.models.ImmichServerStorage" href="models.html#aioimmich.server.models.ImmichServerStorage">ImmichServerStorage</a></span>
@@ -179,8 +191,32 @@ el.replaceWith(d);
     return ImmichServerStorage.from_dict(result)</code></pre>
 </details>
 <div class="desc"><p>Get server storage info.</p>
-<h2 id="returns">Returns</h2>
-<p>server storage info as <code>ImmichServerStorage</code></p></div>
+<p>Returns
+-----=
+server storage info as <code>ImmichServerStorage</code></p></div>
+</dd>
+<dt id="aioimmich.server.ImmichServer.async_get_version"><code class="name flex">
+<span>async def <span class="ident">async_get_version</span></span>(<span>self) ‑> <a title="aioimmich.server.models.ImmichServerVersion" href="models.html#aioimmich.server.models.ImmichServerVersion">ImmichServerVersion</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def async_get_version(self) -&gt; ImmichServerVersion:
+    &#34;&#34;&#34;Get server version result.
+
+    Returns:
+        server version result as `ImmichServerVersion`
+    &#34;&#34;&#34;
+    result = await self.api.async_do_request(&#34;server/version&#34;)
+    assert isinstance(result, dict)
+    return ImmichServerVersion.from_dict(result)</code></pre>
+</details>
+<div class="desc"><p>Get server version result.</p>
+<p>Returns
+-----=
+server version result as <code>ImmichServerVersion</code></p></div>
 </dd>
 <dt id="aioimmich.server.ImmichServer.async_get_version_check"><code class="name flex">
 <span>async def <span class="ident">async_get_version_check</span></span>(<span>self) ‑> <a title="aioimmich.server.models.ImmichServerVersionCheck" href="models.html#aioimmich.server.models.ImmichServerVersionCheck">ImmichServerVersionCheck</a></span>
@@ -204,8 +240,9 @@ el.replaceWith(d);
 </details>
 <div class="desc"><p>Get server version check result.</p>
 <p>Requires immich server v1.134.0</p>
-<h2 id="returns">Returns</h2>
-<p>server version check result as <code>ImmichServerVersionCheck</code></p></div>
+<p>Returns
+-----=
+server version check result as <code>ImmichServerVersionCheck</code></p></div>
 </dd>
 </dl>
 </dd>
@@ -235,6 +272,7 @@ el.replaceWith(d);
 <li><code><a title="aioimmich.server.ImmichServer.async_get_about_info" href="#aioimmich.server.ImmichServer.async_get_about_info">async_get_about_info</a></code></li>
 <li><code><a title="aioimmich.server.ImmichServer.async_get_server_statistics" href="#aioimmich.server.ImmichServer.async_get_server_statistics">async_get_server_statistics</a></code></li>
 <li><code><a title="aioimmich.server.ImmichServer.async_get_storage_info" href="#aioimmich.server.ImmichServer.async_get_storage_info">async_get_storage_info</a></code></li>
+<li><code><a title="aioimmich.server.ImmichServer.async_get_version" href="#aioimmich.server.ImmichServer.async_get_version">async_get_version</a></code></li>
 <li><code><a title="aioimmich.server.ImmichServer.async_get_version_check" href="#aioimmich.server.ImmichServer.async_get_version_check">async_get_version_check</a></code></li>
 </ul>
 </li>

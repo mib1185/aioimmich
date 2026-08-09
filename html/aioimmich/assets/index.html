@@ -115,10 +115,15 @@ el.replaceWith(d);
         data = {
             &#34;deviceAssetId&#34;: f&#34;{self.api.device_id}-{file}-{stats.st_mtime}&#34;,
             &#34;deviceId&#34;: self.api.device_id,
-            &#34;fileCreatedAt&#34;: datetime.fromtimestamp(stats.st_mtime).isoformat(),
-            &#34;fileModifiedAt&#34;: datetime.fromtimestamp(stats.st_mtime).isoformat(),
+            &#34;fileCreatedAt&#34;: datetime.fromtimestamp(stats.st_mtime)
+            .astimezone()
+            .isoformat(),
+            &#34;fileModifiedAt&#34;: datetime.fromtimestamp(stats.st_mtime)
+            .astimezone()
+            .isoformat(),
             &#34;isFavorite&#34;: &#34;false&#34;,
         }
+
         with MultipartWriter(&#34;form-data&#34;, boundary=boundary) as mp:
             for k, v in data.items():
                 part = mp.append(v)
@@ -172,13 +177,15 @@ el.replaceWith(d);
     return result</code></pre>
 </details>
 <div class="desc"><p>Get a video stream.</p>
-<h2 id="args">Args</h2>
 <dl>
+<dt>Args</dt>
+<dt>-----=</dt>
 <dt><strong><code>asset_id</code></strong> :&ensp;<code>str</code></dt>
 <dd>id of the video to be streamed</dd>
 </dl>
-<h2 id="returns">Returns</h2>
-<p>the video stream as <code>StreamReader</code></p></div>
+<p>Returns
+-----=
+the video stream as <code>StreamReader</code></p></div>
 </dd>
 <dt id="aioimmich.assets.ImmichAssests.async_upload_asset"><code class="name flex">
 <span>async def <span class="ident">async_upload_asset</span></span>(<span>self, file: str) ‑> <a title="aioimmich.assets.models.ImmichAssetUploadResponse" href="models.html#aioimmich.assets.models.ImmichAssetUploadResponse">ImmichAssetUploadResponse</a></span>
@@ -204,10 +211,15 @@ el.replaceWith(d);
     data = {
         &#34;deviceAssetId&#34;: f&#34;{self.api.device_id}-{file}-{stats.st_mtime}&#34;,
         &#34;deviceId&#34;: self.api.device_id,
-        &#34;fileCreatedAt&#34;: datetime.fromtimestamp(stats.st_mtime).isoformat(),
-        &#34;fileModifiedAt&#34;: datetime.fromtimestamp(stats.st_mtime).isoformat(),
+        &#34;fileCreatedAt&#34;: datetime.fromtimestamp(stats.st_mtime)
+        .astimezone()
+        .isoformat(),
+        &#34;fileModifiedAt&#34;: datetime.fromtimestamp(stats.st_mtime)
+        .astimezone()
+        .isoformat(),
         &#34;isFavorite&#34;: &#34;false&#34;,
     }
+
     with MultipartWriter(&#34;form-data&#34;, boundary=boundary) as mp:
         for k, v in data.items():
             part = mp.append(v)
@@ -228,13 +240,15 @@ el.replaceWith(d);
     return ImmichAssetUploadResponse.from_dict(result)</code></pre>
 </details>
 <div class="desc"><p>Upload a file.</p>
-<h2 id="args">Args</h2>
 <dl>
+<dt>Args</dt>
+<dt>-----=</dt>
 <dt><strong><code>file</code></strong> :&ensp;<code>str</code></dt>
 <dd>path to the file to be uploaded</dd>
 </dl>
-<h2 id="returns">Returns</h2>
-<p>result of upload as <code>ImmichAssetUploadResponse</code></p></div>
+<p>Returns
+-----=
+result of upload as <code>ImmichAssetUploadResponse</code></p></div>
 </dd>
 <dt id="aioimmich.assets.ImmichAssests.async_view_asset"><code class="name flex">
 <span>async def <span class="ident">async_view_asset</span></span>(<span>self, asset_id: str, size: str = 'thumbnail') ‑> bytes</span>
@@ -261,15 +275,17 @@ el.replaceWith(d);
     return result</code></pre>
 </details>
 <div class="desc"><p>Get an assets thumbnail.</p>
-<h2 id="args">Args</h2>
 <dl>
+<dt>Args</dt>
+<dt>-----=</dt>
 <dt><strong><code>asset_id</code></strong> :&ensp;<code>str</code></dt>
 <dd>id of the asset to be fetched</dd>
 <dt><strong><code>size</code></strong> :&ensp;<code>str</code></dt>
 <dd>one of [<code>fullsize</code>, <code>preview</code>, <code>thumbnail</code>] size (default: <code>thumbnail</code>)</dd>
 </dl>
-<h2 id="returns">Returns</h2>
-<p>asset content as <code>bytes</code></p></div>
+<p>Returns
+-----=
+asset content as <code>bytes</code></p></div>
 </dd>
 </dl>
 </dd>

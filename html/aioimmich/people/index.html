@@ -73,7 +73,7 @@ el.replaceWith(d);
 
         Args:
             page_size (int):  assets per page
-            max_pages (int):  maximun number of pages to return
+            max_pages (int):  maximum number of pages to return
 
         Returns:
             all people as list of `ImmichPerson`
@@ -94,6 +94,49 @@ el.replaceWith(d);
                 break
 
         return results
+
+    async def async_get_person_by_id(self, person_id: str) -&gt; ImmichPerson:
+        &#34;&#34;&#34;Get a specific person by its uuid.
+
+        Args:
+            person_id (str):  Person ID
+
+        Returns:
+            `ImmichPerson`
+        &#34;&#34;&#34;
+        result = await self.api.async_do_request(f&#34;people/{person_id}&#34;)
+        assert isinstance(result, dict)
+        return ImmichPerson.from_dict(result)
+
+    async def async_filter_people_by_name(self, name: str) -&gt; list[ImmichPerson]:
+        &#34;&#34;&#34;Filter people by name.
+
+        Args:
+            name (str): People name to filter by (case-insensitive)
+
+        Returns:
+            a list of `ImmichPerson`
+        &#34;&#34;&#34;
+        return [
+            person
+            for person in await self.async_get_all_people(max_pages=50)
+            if name.lower() in person.name.lower()
+        ]
+
+    async def async_get_people_count(self) -&gt; int:
+        &#34;&#34;&#34;Get the total count of all people.
+
+        Returns:
+            total count of all people as `int`
+        &#34;&#34;&#34;
+        result = await self.api.async_do_request(
+            &#34;people&#34;,
+            params={
+                &#34;size&#34;: 1,
+            },
+        )
+        assert isinstance(result, dict)
+        return int(result[&#34;total&#34;])
 
     async def async_get_person_thumbnail(self, person_id: str) -&gt; bytes:
         &#34;&#34;&#34;Download thumbnail for a person.
@@ -118,6 +161,40 @@ el.replaceWith(d);
 </ul>
 <h3>Methods</h3>
 <dl>
+<dt id="aioimmich.people.ImmichPeople.async_filter_people_by_name"><code class="name flex">
+<span>async def <span class="ident">async_filter_people_by_name</span></span>(<span>self, name: str) ‑> list[<a title="aioimmich.people.models.ImmichPerson" href="models.html#aioimmich.people.models.ImmichPerson">ImmichPerson</a>]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def async_filter_people_by_name(self, name: str) -&gt; list[ImmichPerson]:
+    &#34;&#34;&#34;Filter people by name.
+
+    Args:
+        name (str): People name to filter by (case-insensitive)
+
+    Returns:
+        a list of `ImmichPerson`
+    &#34;&#34;&#34;
+    return [
+        person
+        for person in await self.async_get_all_people(max_pages=50)
+        if name.lower() in person.name.lower()
+    ]</code></pre>
+</details>
+<div class="desc"><p>Filter people by name.</p>
+<dl>
+<dt>Args</dt>
+<dt>-----=</dt>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>People name to filter by (case-insensitive)</dd>
+</dl>
+<p>Returns
+-----=
+a list of <code>ImmichPerson</code></p></div>
+</dd>
 <dt id="aioimmich.people.ImmichPeople.async_get_all_people"><code class="name flex">
 <span>async def <span class="ident">async_get_all_people</span></span>(<span>self, with_unnamed: bool = False, page_size: int = 200, max_pages: int = 10) ‑> list[<a title="aioimmich.people.models.ImmichPerson" href="models.html#aioimmich.people.models.ImmichPerson">ImmichPerson</a>]</span>
 </code></dt>
@@ -133,7 +210,7 @@ el.replaceWith(d);
 
     Args:
         page_size (int):  assets per page
-        max_pages (int):  maximun number of pages to return
+        max_pages (int):  maximum number of pages to return
 
     Returns:
         all people as list of `ImmichPerson`
@@ -156,15 +233,77 @@ el.replaceWith(d);
     return results</code></pre>
 </details>
 <div class="desc"><p>Get all people.</p>
-<h2 id="args">Args</h2>
 <dl>
+<dt>Args</dt>
+<dt>-----=</dt>
 <dt><strong><code>page_size</code></strong> :&ensp;<code>int</code></dt>
 <dd>assets per page</dd>
 <dt><strong><code>max_pages</code></strong> :&ensp;<code>int</code></dt>
-<dd>maximun number of pages to return</dd>
+<dd>maximum number of pages to return</dd>
 </dl>
-<h2 id="returns">Returns</h2>
-<p>all people as list of <code>ImmichPerson</code></p></div>
+<p>Returns
+-----=
+all people as list of <code>ImmichPerson</code></p></div>
+</dd>
+<dt id="aioimmich.people.ImmichPeople.async_get_people_count"><code class="name flex">
+<span>async def <span class="ident">async_get_people_count</span></span>(<span>self) ‑> int</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def async_get_people_count(self) -&gt; int:
+    &#34;&#34;&#34;Get the total count of all people.
+
+    Returns:
+        total count of all people as `int`
+    &#34;&#34;&#34;
+    result = await self.api.async_do_request(
+        &#34;people&#34;,
+        params={
+            &#34;size&#34;: 1,
+        },
+    )
+    assert isinstance(result, dict)
+    return int(result[&#34;total&#34;])</code></pre>
+</details>
+<div class="desc"><p>Get the total count of all people.</p>
+<p>Returns
+-----=
+total count of all people as <code>int</code></p></div>
+</dd>
+<dt id="aioimmich.people.ImmichPeople.async_get_person_by_id"><code class="name flex">
+<span>async def <span class="ident">async_get_person_by_id</span></span>(<span>self, person_id: str) ‑> <a title="aioimmich.people.models.ImmichPerson" href="models.html#aioimmich.people.models.ImmichPerson">ImmichPerson</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def async_get_person_by_id(self, person_id: str) -&gt; ImmichPerson:
+    &#34;&#34;&#34;Get a specific person by its uuid.
+
+    Args:
+        person_id (str):  Person ID
+
+    Returns:
+        `ImmichPerson`
+    &#34;&#34;&#34;
+    result = await self.api.async_do_request(f&#34;people/{person_id}&#34;)
+    assert isinstance(result, dict)
+    return ImmichPerson.from_dict(result)</code></pre>
+</details>
+<div class="desc"><p>Get a specific person by its uuid.</p>
+<dl>
+<dt>Args</dt>
+<dt>-----=</dt>
+<dt><strong><code>person_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>Person ID</dd>
+</dl>
+<p>Returns
+-----=
+<code>ImmichPerson</code></p></div>
 </dd>
 <dt id="aioimmich.people.ImmichPeople.async_get_person_thumbnail"><code class="name flex">
 <span>async def <span class="ident">async_get_person_thumbnail</span></span>(<span>self, person_id: str) ‑> bytes</span>
@@ -190,13 +329,15 @@ el.replaceWith(d);
     return result</code></pre>
 </details>
 <div class="desc"><p>Download thumbnail for a person.</p>
-<h2 id="args">Args</h2>
 <dl>
+<dt>Args</dt>
+<dt>-----=</dt>
 <dt><strong><code>person_id</code></strong> :&ensp;<code>str</code></dt>
 <dd>id of the person to fetch the thumbnail for</dd>
 </dl>
-<h2 id="returns">Returns</h2>
-<p>persons thumbnail as <code>bytes</code></p></div>
+<p>Returns
+-----=
+persons thumbnail as <code>bytes</code></p></div>
 </dd>
 </dl>
 </dd>
@@ -223,7 +364,10 @@ el.replaceWith(d);
 <li>
 <h4><code><a title="aioimmich.people.ImmichPeople" href="#aioimmich.people.ImmichPeople">ImmichPeople</a></code></h4>
 <ul class="">
+<li><code><a title="aioimmich.people.ImmichPeople.async_filter_people_by_name" href="#aioimmich.people.ImmichPeople.async_filter_people_by_name">async_filter_people_by_name</a></code></li>
 <li><code><a title="aioimmich.people.ImmichPeople.async_get_all_people" href="#aioimmich.people.ImmichPeople.async_get_all_people">async_get_all_people</a></code></li>
+<li><code><a title="aioimmich.people.ImmichPeople.async_get_people_count" href="#aioimmich.people.ImmichPeople.async_get_people_count">async_get_people_count</a></code></li>
+<li><code><a title="aioimmich.people.ImmichPeople.async_get_person_by_id" href="#aioimmich.people.ImmichPeople.async_get_person_by_id">async_get_person_by_id</a></code></li>
 <li><code><a title="aioimmich.people.ImmichPeople.async_get_person_thumbnail" href="#aioimmich.people.ImmichPeople.async_get_person_thumbnail">async_get_person_thumbnail</a></code></li>
 </ul>
 </li>

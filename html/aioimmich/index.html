@@ -140,7 +140,13 @@ el.replaceWith(d);
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
-        self.users = ImmichUsers(self.api)</code></pre>
+        self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -&gt; None:
+        &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+        version = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
 </details>
 <div class="desc"><p>Immich instance.</p>
 <p>Immich instace init.</p></div>
@@ -193,7 +199,13 @@ el.replaceWith(d);
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
-        self.users = ImmichUsers(self.api)</code></pre>
+        self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -&gt; None:
+        &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+        version = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -244,7 +256,13 @@ el.replaceWith(d);
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
-        self.users = ImmichUsers(self.api)</code></pre>
+        self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -&gt; None:
+        &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+        version = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -295,7 +313,13 @@ el.replaceWith(d);
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
-        self.users = ImmichUsers(self.api)</code></pre>
+        self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -&gt; None:
+        &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+        version = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -346,7 +370,13 @@ el.replaceWith(d);
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
-        self.users = ImmichUsers(self.api)</code></pre>
+        self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -&gt; None:
+        &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+        version = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -397,7 +427,13 @@ el.replaceWith(d);
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
-        self.users = ImmichUsers(self.api)</code></pre>
+        self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -&gt; None:
+        &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+        version = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -448,7 +484,13 @@ el.replaceWith(d);
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
-        self.users = ImmichUsers(self.api)</code></pre>
+        self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -&gt; None:
+        &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+        version = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -499,7 +541,13 @@ el.replaceWith(d);
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
-        self.users = ImmichUsers(self.api)</code></pre>
+        self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -&gt; None:
+        &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+        version = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -550,9 +598,34 @@ el.replaceWith(d);
         self.search = ImmichSearch(self.api)
         self.server = ImmichServer(self.api)
         self.tags = ImmichTags(self.api)
-        self.users = ImmichUsers(self.api)</code></pre>
+        self.users = ImmichUsers(self.api)
+
+    async def async_setup(self) -&gt; None:
+        &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+        version = await self.api.async_do_request(&#34;server/version&#34;)
+        assert isinstance(version, dict)
+        self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
 </details>
 <div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="aioimmich.Immich.async_setup"><code class="name flex">
+<span>async def <span class="ident">async_setup</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def async_setup(self) -&gt; None:
+    &#34;&#34;&#34;Set up the API.&#34;&#34;&#34;
+    version = await self.api.async_do_request(&#34;server/version&#34;)
+    assert isinstance(version, dict)
+    self.api._version = ImmichServerVersion.from_dict(version)</code></pre>
+</details>
+<div class="desc"><p>Set up the API.</p></div>
 </dd>
 </dl>
 </dd>
@@ -586,6 +659,7 @@ el.replaceWith(d);
 <li><code><a title="aioimmich.Immich.albums" href="#aioimmich.Immich.albums">albums</a></code></li>
 <li><code><a title="aioimmich.Immich.api" href="#aioimmich.Immich.api">api</a></code></li>
 <li><code><a title="aioimmich.Immich.assets" href="#aioimmich.Immich.assets">assets</a></code></li>
+<li><code><a title="aioimmich.Immich.async_setup" href="#aioimmich.Immich.async_setup">async_setup</a></code></li>
 <li><code><a title="aioimmich.Immich.people" href="#aioimmich.Immich.people">people</a></code></li>
 <li><code><a title="aioimmich.Immich.search" href="#aioimmich.Immich.search">search</a></code></li>
 <li><code><a title="aioimmich.Immich.server" href="#aioimmich.Immich.server">server</a></code></li>

@@ -60,17 +60,28 @@ el.replaceWith(d);
     &#34;&#34;&#34;Base class for immich errors.&#34;&#34;&#34;
 
     def __init__(self, result: dict):
-        &#34;&#34;&#34;Initialize JSON RPC errors.&#34;&#34;&#34;
+        &#34;&#34;&#34;Initialize an immich error.&#34;&#34;&#34;
         message = result[&#34;message&#34;]
-        error = result[&#34;error&#34;]
-        code = result[&#34;statusCode&#34;]
         correlation_id = result[&#34;correlationId&#34;]
-        super().__init__(
-            f&#34;{message} (error: &#39;{error}&#39; code: &#39;{code}&#39; correlation_id: &#39;{correlation_id}&#39;)&#34;
-        )</code></pre>
+        if &#34;error&#34; in result:
+            # immich v2 path
+            error = result[&#34;error&#34;]
+            code = result[&#34;statusCode&#34;]
+            super().__init__(
+                f&#34;{message} (error: &#39;{error}&#39; code: &#39;{code}&#39; correlation_id: &#39;{correlation_id}&#39;)&#34;
+            )
+        elif &#34;errors&#34; in result:
+            # immich v3 validation error path
+            msg = f&#34;{message} (correlation_id: &#39;{correlation_id}&#39;) -&#34;
+            for err in result[&#34;errors&#34;]:
+                msg += f&#34; {err[&#39;message&#39;]} in path {err[&#39;path&#39;]}&#34;
+            super().__init__(msg)
+        else:
+            # immich v3 common error path
+            super().__init__(f&#34;{message} (correlation_id: &#39;{correlation_id}&#39;)&#34;)</code></pre>
 </details>
 <div class="desc"><p>Base class for immich errors.</p>
-<p>Initialize JSON RPC errors.</p></div>
+<p>Initialize an immich error.</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li>builtins.Exception</li>
@@ -96,10 +107,35 @@ el.replaceWith(d);
     &#34;&#34;&#34;Forbidden error.&#34;&#34;&#34;</code></pre>
 </details>
 <div class="desc"><p>Forbidden error.</p>
-<p>Initialize JSON RPC errors.</p></div>
+<p>Initialize an immich error.</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li><a title="aioimmich.exceptions.ImmichError" href="#aioimmich.exceptions.ImmichError">ImmichError</a></li>
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="aioimmich.exceptions.ImmichMissingSetup"><code class="flex name class">
+<span>class <span class="ident">ImmichMissingSetup</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ImmichMissingSetup(Exception):
+    &#34;&#34;&#34;The Immich class had not yet been set up.&#34;&#34;&#34;
+
+    def __init__(self):
+        &#34;&#34;&#34;Initialize missing setup error.&#34;&#34;&#34;
+        super().__init__(
+            &#34;The Immich class had not yet been set up; please run async_setup first&#34;
+        )</code></pre>
+</details>
+<div class="desc"><p>The Immich class had not yet been set up.</p>
+<p>Initialize missing setup error.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
@@ -117,7 +153,7 @@ el.replaceWith(d);
     &#34;&#34;&#34;Not found error.&#34;&#34;&#34;</code></pre>
 </details>
 <div class="desc"><p>Not found error.</p>
-<p>Initialize JSON RPC errors.</p></div>
+<p>Initialize an immich error.</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li><a title="aioimmich.exceptions.ImmichError" href="#aioimmich.exceptions.ImmichError">ImmichError</a></li>
@@ -138,7 +174,7 @@ el.replaceWith(d);
     &#34;&#34;&#34;Unauthorized error.&#34;&#34;&#34;</code></pre>
 </details>
 <div class="desc"><p>Unauthorized error.</p>
-<p>Initialize JSON RPC errors.</p></div>
+<p>Initialize an immich error.</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li><a title="aioimmich.exceptions.ImmichError" href="#aioimmich.exceptions.ImmichError">ImmichError</a></li>
@@ -166,6 +202,9 @@ el.replaceWith(d);
 </li>
 <li>
 <h4><code><a title="aioimmich.exceptions.ImmichForbiddenError" href="#aioimmich.exceptions.ImmichForbiddenError">ImmichForbiddenError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="aioimmich.exceptions.ImmichMissingSetup" href="#aioimmich.exceptions.ImmichMissingSetup">ImmichMissingSetup</a></code></h4>
 </li>
 <li>
 <h4><code><a title="aioimmich.exceptions.ImmichNotFoundError" href="#aioimmich.exceptions.ImmichNotFoundError">ImmichNotFoundError</a></code></h4>
