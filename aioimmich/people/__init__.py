@@ -37,7 +37,7 @@ class ImmichPeople(ImmichSubApi):
         return results
 
     async def async_get_person_by_id(self, person_id: str) -> ImmichPerson:
-        """Get all people.
+        """Get a specific person by its uuid.
 
         Args:
             person_id (str):  Person ID
