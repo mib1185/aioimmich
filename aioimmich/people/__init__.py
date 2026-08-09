@@ -36,6 +36,19 @@ class ImmichPeople(ImmichSubApi):
 
         return results
 
+    async def async_get_person_by_id(self, person_id: str) -> ImmichPerson:
+        """Get a specific person by its uuid.
+
+        Args:
+            person_id (str):  Person ID
+
+        Returns:
+            `ImmichPerson`
+        """
+        result = await self.api.async_do_request(f"people/{person_id}")
+        assert isinstance(result, dict)
+        return ImmichPerson.from_dict(result)
+
     async def async_filter_people_by_name(self, name: str) -> list[ImmichPerson]:
         """Filter people by name.
 

@@ -14,6 +14,16 @@ async def test_get_all_people(mock_immich_with_data, snapshot: SnapshotAssertion
     assert people == snapshot
 
 
+async def test_get_person_by_id(mock_immich_with_data, snapshot: SnapshotAssertion):
+    """Test async_get_person_by_id."""
+    api = await mock_immich_with_data()
+    person = await api.people.async_get_person_by_id(
+        person_id="6176838a-ac5a-4d1f-9a35-91c591d962d8"
+    )
+
+    assert person == snapshot
+
+
 async def test_filter_people_by_name(
     mock_immich_with_data, snapshot: SnapshotAssertion
 ):

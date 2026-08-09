@@ -428,6 +428,11 @@ MOCK_DATA: dict = {
             }
         ),
     },
+    # data for test_get_person_by_id
+    "people/6176838a-ac5a-4d1f-9a35-91c591d962d8": {
+        "status": 200,
+        "body": json.dumps(MOCK_DATA_PEOPLE[0]),
+    },
     # data for test_filter_people_by_name
     "people?page=1&size=200": {
         "status": 200,
