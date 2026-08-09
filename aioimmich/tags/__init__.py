@@ -17,6 +17,19 @@ class ImmichTags(ImmichSubApi):
         assert isinstance(result, list)
         return [ImmichTag.from_dict(tag) for tag in result]
 
+    async def async_get_tag_by_id(self, tag_id: str) -> ImmichTag:
+        """Get a specific tag by its uuid.
+
+        Args:
+            tag_id (str):  Tag ID
+
+        Returns:
+            `ImmichTag`
+        """
+        result = await self.api.async_do_request(f"tags/{tag_id}")
+        assert isinstance(result, dict)
+        return ImmichTag.from_dict(result)
+
     async def async_filter_tags_by_name(self, name: str) -> list[ImmichTag]:
         """Filter tags by name.
 

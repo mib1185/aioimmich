@@ -14,6 +14,16 @@ async def test_get_all_tags(mock_immich_with_data, snapshot: SnapshotAssertion):
     assert tags == snapshot
 
 
+async def test_get_tag_by_id(mock_immich_with_data, snapshot: SnapshotAssertion):
+    """Test async_get_tag_by_id."""
+    api = await mock_immich_with_data()
+    tag = await api.tags.async_get_tag_by_id(
+        tag_id="14ce3af3-67be-41c6-b77c-b25abddaf546"
+    )
+
+    assert tag == snapshot
+
+
 async def test_filter_tags_by_name(mock_immich_with_data, snapshot: SnapshotAssertion):
     """Test async_filter_tags_by_name."""
     api = await mock_immich_with_data()
