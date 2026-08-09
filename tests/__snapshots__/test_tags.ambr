@@ -11,3 +11,6 @@
     ImmichTag(created_at=datetime.datetime(2025, 5, 12, 20, 0, 49, 967000, tzinfo=datetime.timezone.utc), name='Holidays', tag_id='69bd487f-dc1e-4420-94c6-656f0515773d', updated_at=datetime.datetime(2025, 5, 12, 20, 0, 55, 575000, tzinfo=datetime.timezone.utc), value='Holidays', color=None, parent_id=None),
   ])
 # ---
+# name: test_get_tag_by_id
+  ImmichTag(created_at=datetime.datetime(2025, 5, 12, 20, 1, 24, 330000, tzinfo=datetime.timezone.utc), name='My 30th birthday', tag_id='14ce3af3-67be-41c6-b77c-b25abddaf546', updated_at=datetime.datetime(2025, 5, 12, 20, 1, 24, 412000, tzinfo=datetime.timezone.utc), value='My 30th birthday', color=None, parent_id=None)
+# ---
