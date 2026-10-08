@@ -23,18 +23,23 @@ async def _file_sender(file: str) -> AsyncIterator[bytes]:
 class ImmichAssests(ImmichSubApi):
     """Immich assets api."""
 
-    async def async_view_asset(self, asset_id: str, size: str = "thumbnail") -> bytes:
+    async def async_view_asset(
+        self, asset_id: str, size: str = "thumbnail", edited: bool = False
+    ) -> bytes:
         """Get an assets thumbnail.
 
         Args:
             asset_id (str): id of the asset to be fetched
             size (str): one of [`fullsize`, `preview`, `thumbnail`] size (default: `thumbnail`)
+            edited (bool): return edited asset if available
 
         Returns:
             asset content as `bytes`
         """
         result = await self.api.async_do_request(
-            f"assets/{asset_id}/thumbnail", {"size": size}, application="octet-stream"
+            f"assets/{asset_id}/thumbnail",
+            {"size": size, "edited": "true" if edited else "false"},
+            application="octet-stream",
         )
         assert isinstance(result, bytes)
         return result
