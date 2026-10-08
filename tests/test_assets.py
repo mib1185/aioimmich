@@ -30,6 +30,13 @@ async def test_view_asset(mock_immich_with_data):
     assert isinstance(asset_bytes, bytes)
     assert asset_bytes == b"abcdefabcdefabcdefabcdef"
 
+    # get the edited asset
+    asset_bytes = await api.assets.async_view_asset(
+        "2e94c203-50aa-4ad2-8e29-56dd74e0eff4", edited=True
+    )
+    assert isinstance(asset_bytes, bytes)
+    assert asset_bytes == b"abcdefabcdefabcdefabcdefabcdef"
+
 
 async def test_upload_asset(mock_immich_with_data, mock_aiointercept, tmp_path):
     """Test async_upload_asset."""

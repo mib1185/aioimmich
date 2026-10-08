@@ -298,17 +298,21 @@ MOCK_DATA: dict = {
         "status": 200,
         "body": json.dumps({**MOCK_DATA_ALBUM_1, "assets": MOCK_DATA_ALBUM_1_ASSETS}),
     },
-    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=thumbnail": {
+    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=thumbnail&edited=false": {
         "status": 200,
         "body": b"abcdef",
     },
-    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=preview": {
+    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=preview&edited=false": {
         "status": 200,
         "body": b"abcdefabcdef",
     },
-    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=fullsize": {
+    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=fullsize&edited=false": {
         "status": 200,
         "body": b"abcdefabcdefabcdefabcdef",
+    },
+    "assets/2e94c203-50aa-4ad2-8e29-56dd74e0eff4/thumbnail?size=thumbnail&edited=true": {
+        "status": 200,
+        "body": b"abcdefabcdefabcdefabcdefabcdef",
     },
     "users/me": {
         "status": 200,
