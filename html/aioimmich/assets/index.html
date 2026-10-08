@@ -66,18 +66,23 @@ el.replaceWith(d);
 <pre><code class="python">class ImmichAssests(ImmichSubApi):
     &#34;&#34;&#34;Immich assets api.&#34;&#34;&#34;
 
-    async def async_view_asset(self, asset_id: str, size: str = &#34;thumbnail&#34;) -&gt; bytes:
+    async def async_view_asset(
+        self, asset_id: str, size: str = &#34;thumbnail&#34;, edited: bool = False
+    ) -&gt; bytes:
         &#34;&#34;&#34;Get an assets thumbnail.
 
         Args:
             asset_id (str): id of the asset to be fetched
             size (str): one of [`fullsize`, `preview`, `thumbnail`] size (default: `thumbnail`)
+            edited (bool): return edited asset if available
 
         Returns:
             asset content as `bytes`
         &#34;&#34;&#34;
         result = await self.api.async_do_request(
-            f&#34;assets/{asset_id}/thumbnail&#34;, {&#34;size&#34;: size}, application=&#34;octet-stream&#34;
+            f&#34;assets/{asset_id}/thumbnail&#34;,
+            {&#34;size&#34;: size, &#34;edited&#34;: &#34;true&#34; if edited else &#34;false&#34;},
+            application=&#34;octet-stream&#34;,
         )
         assert isinstance(result, bytes)
         return result
@@ -251,25 +256,30 @@ the video stream as <code>StreamReader</code></p></div>
 result of upload as <code>ImmichAssetUploadResponse</code></p></div>
 </dd>
 <dt id="aioimmich.assets.ImmichAssests.async_view_asset"><code class="name flex">
-<span>async def <span class="ident">async_view_asset</span></span>(<span>self, asset_id: str, size: str = 'thumbnail') ‑> bytes</span>
+<span>async def <span class="ident">async_view_asset</span></span>(<span>self, asset_id: str, size: str = 'thumbnail', edited: bool = False) ‑> bytes</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">async def async_view_asset(self, asset_id: str, size: str = &#34;thumbnail&#34;) -&gt; bytes:
+<pre><code class="python">async def async_view_asset(
+    self, asset_id: str, size: str = &#34;thumbnail&#34;, edited: bool = False
+) -&gt; bytes:
     &#34;&#34;&#34;Get an assets thumbnail.
 
     Args:
         asset_id (str): id of the asset to be fetched
         size (str): one of [`fullsize`, `preview`, `thumbnail`] size (default: `thumbnail`)
+        edited (bool): return edited asset if available
 
     Returns:
         asset content as `bytes`
     &#34;&#34;&#34;
     result = await self.api.async_do_request(
-        f&#34;assets/{asset_id}/thumbnail&#34;, {&#34;size&#34;: size}, application=&#34;octet-stream&#34;
+        f&#34;assets/{asset_id}/thumbnail&#34;,
+        {&#34;size&#34;: size, &#34;edited&#34;: &#34;true&#34; if edited else &#34;false&#34;},
+        application=&#34;octet-stream&#34;,
     )
     assert isinstance(result, bytes)
     return result</code></pre>
@@ -282,6 +292,8 @@ result of upload as <code>ImmichAssetUploadResponse</code></p></div>
 <dd>id of the asset to be fetched</dd>
 <dt><strong><code>size</code></strong> :&ensp;<code>str</code></dt>
 <dd>one of [<code>fullsize</code>, <code>preview</code>, <code>thumbnail</code>] size (default: <code>thumbnail</code>)</dd>
+<dt><strong><code>edited</code></strong> :&ensp;<code>bool</code></dt>
+<dd>return edited asset if available</dd>
 </dl>
 <p>Returns
 -----=
