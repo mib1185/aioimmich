@@ -53,7 +53,7 @@ jobs:
 
       - name: Build package
         run: |
-          python -m build . --wheel
+          python -m build . --sdist --wheel
 
       - name: Publish package on PyPI
         if: steps.check-version.outputs.tag

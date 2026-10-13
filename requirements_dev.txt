@@ -9,4 +9,4 @@ pytest-asyncio==1.4.0
 pytest-cov==7.1.0
 pytest==9.1.1
 reorder-python-imports==3.17.0
-syrupy
+syrupy==5.0.0

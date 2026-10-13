@@ -66,7 +66,7 @@ el.replaceWith(d);
         person_ids: list[str] | None = None,
         tag_ids: list[str] | None = None,
         page_size: int = 100,
-        max_pages: int = 20,
+        max_pages: int | None = 20,
         is_favorite: bool | None = None,
     ) -&gt; list[ImmichAsset]:
         &#34;&#34;&#34;Search for assets.
@@ -77,7 +77,8 @@ el.replaceWith(d);
             person_ids (list[str] | None): filter to list of personIds
             tag_ids (list[str] | None): filter to list of tagIds
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -95,9 +96,11 @@ el.replaceWith(d);
             data[&#34;isFavorite&#34;] = is_favorite
 
         results: list[ImmichAsset] = []
-        for page in range(max_pages):
+        page = 0
+        while max_pages is None or page &lt; max_pages:
+            page += 1
             result = await self.api.async_do_request(
-                &#34;search/metadata&#34;, data={**data, &#34;page&#34;: page + 1}, method=&#34;POST&#34;
+                &#34;search/metadata&#34;, data={**data, &#34;page&#34;: page}, method=&#34;POST&#34;
             )
             assert isinstance(result, dict)
             assets = result[&#34;assets&#34;]
@@ -108,13 +111,14 @@ el.replaceWith(d);
         return results
 
     async def async_get_all(
-        self, page_size: int = 100, max_pages: int = 20
+        self, page_size: int = 100, max_pages: int | None = 20
     ) -&gt; list[ImmichAsset]:
         &#34;&#34;&#34;Get all assets.
 
         Args:
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -122,13 +126,14 @@ el.replaceWith(d);
         return await self._async_search_assets(page_size=page_size, max_pages=max_pages)
 
     async def async_get_all_favorites(
-        self, page_size: int = 100, max_pages: int = 20
+        self, page_size: int = 100, max_pages: int | None = 20
     ) -&gt; list[ImmichAsset]:
         &#34;&#34;&#34;Get all favorite assets.
 
         Args:
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -138,14 +143,15 @@ el.replaceWith(d);
         )
 
     async def async_get_all_by_tag_ids(
-        self, tag_ids: list[str], page_size: int = 100, max_pages: int = 20
+        self, tag_ids: list[str], page_size: int = 100, max_pages: int | None = 20
     ) -&gt; list[ImmichAsset]:
         &#34;&#34;&#34;Get all assets for given tag ids.
 
         Args:
             tag_ids (list[str]): filter to list of tagIds
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -155,14 +161,15 @@ el.replaceWith(d);
         )
 
     async def async_get_all_by_person_ids(
-        self, person_ids: list[str], page_size: int = 100, max_pages: int = 20
+        self, person_ids: list[str], page_size: int = 100, max_pages: int | None = 20
     ) -&gt; list[ImmichAsset]:
         &#34;&#34;&#34;Get all assets for given person ids.
 
         Args:
             person_ids (list[str]): filter to list of personIds
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -172,14 +179,15 @@ el.replaceWith(d);
         )
 
     async def async_get_all_by_album_ids(
-        self, album_ids: list[str], page_size: int = 100, max_pages: int = 20
+        self, album_ids: list[str], page_size: int = 100, max_pages: int | None = 20
     ) -&gt; list[ImmichAsset]:
         &#34;&#34;&#34;Get all assets for given album ids.
 
         Args:
             album_ids (list[str]): filter to list of albumIds
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -216,7 +224,7 @@ el.replaceWith(d);
         self,
         query: str,
         page_size: int = 100,
-        max_pages: int = 20,
+        max_pages: int | None = 20,
         asset_type: AssetType | None = None,
         album_ids: list[str] | None = None,
         person_ids: list[str] | None = None,
@@ -229,7 +237,8 @@ el.replaceWith(d);
         Args:
             query (str): Natural language search query
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
             asset_type (AssetType | None): filter to `AssetType`
             album_ids (list[str] | None): filter by album IDs
             person_ids (list[str] | None): filter by person IDs
@@ -258,9 +267,11 @@ el.replaceWith(d);
             data[&#34;isNotInAlbum&#34;] = is_not_in_album
 
         results: list[ImmichAsset] = []
-        for page in range(max_pages):
+        page = 0
+        while max_pages is None or page &lt; max_pages:
+            page += 1
             result = await self.api.async_do_request(
-                &#34;search/smart&#34;, data={**data, &#34;page&#34;: page + 1}, method=&#34;POST&#34;
+                &#34;search/smart&#34;, data={**data, &#34;page&#34;: page}, method=&#34;POST&#34;
             )
             assert isinstance(result, dict)
             assets = result[&#34;assets&#34;]
@@ -279,7 +290,7 @@ el.replaceWith(d);
 <h3>Methods</h3>
 <dl>
 <dt id="aioimmich.search.ImmichSearch.async_get_all"><code class="name flex">
-<span>async def <span class="ident">async_get_all</span></span>(<span>self, page_size: int = 100, max_pages: int = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
+<span>async def <span class="ident">async_get_all</span></span>(<span>self, page_size: int = 100, max_pages: int | None = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -287,13 +298,14 @@ el.replaceWith(d);
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">async def async_get_all(
-    self, page_size: int = 100, max_pages: int = 20
+    self, page_size: int = 100, max_pages: int | None = 20
 ) -&gt; list[ImmichAsset]:
     &#34;&#34;&#34;Get all assets.
 
     Args:
         page_size (int): assets per page
-        max_pages (int): maximum number of pages to return
+        max_pages (int | None): maximum number of pages to return, or ``None``
+            for all available pages
 
     Returns:
         a list of `ImmichAsset`
@@ -306,15 +318,16 @@ el.replaceWith(d);
 <dt>-----=</dt>
 <dt><strong><code>page_size</code></strong> :&ensp;<code>int</code></dt>
 <dd>assets per page</dd>
-<dt><strong><code>max_pages</code></strong> :&ensp;<code>int</code></dt>
-<dd>maximum number of pages to return</dd>
+<dt><strong><code>max_pages</code></strong> :&ensp;<code>int | None</code></dt>
+<dd>maximum number of pages to return, or <code>None</code>
+for all available pages</dd>
 </dl>
 <p>Returns
 -----=
 a list of <code>ImmichAsset</code></p></div>
 </dd>
 <dt id="aioimmich.search.ImmichSearch.async_get_all_by_album_ids"><code class="name flex">
-<span>async def <span class="ident">async_get_all_by_album_ids</span></span>(<span>self, album_ids: list[str], page_size: int = 100, max_pages: int = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
+<span>async def <span class="ident">async_get_all_by_album_ids</span></span>(<span>self, album_ids: list[str], page_size: int = 100, max_pages: int | None = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -322,14 +335,15 @@ a list of <code>ImmichAsset</code></p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">async def async_get_all_by_album_ids(
-    self, album_ids: list[str], page_size: int = 100, max_pages: int = 20
+    self, album_ids: list[str], page_size: int = 100, max_pages: int | None = 20
 ) -&gt; list[ImmichAsset]:
     &#34;&#34;&#34;Get all assets for given album ids.
 
     Args:
         album_ids (list[str]): filter to list of albumIds
         page_size (int): assets per page
-        max_pages (int): maximum number of pages to return
+        max_pages (int | None): maximum number of pages to return, or ``None``
+            for all available pages
 
     Returns:
         a list of `ImmichAsset`
@@ -356,15 +370,16 @@ a list of <code>ImmichAsset</code></p></div>
 <dd>filter to list of albumIds</dd>
 <dt><strong><code>page_size</code></strong> :&ensp;<code>int</code></dt>
 <dd>assets per page</dd>
-<dt><strong><code>max_pages</code></strong> :&ensp;<code>int</code></dt>
-<dd>maximum number of pages to return</dd>
+<dt><strong><code>max_pages</code></strong> :&ensp;<code>int | None</code></dt>
+<dd>maximum number of pages to return, or <code>None</code>
+for all available pages</dd>
 </dl>
 <p>Returns
 -----=
 a list of <code>ImmichAsset</code></p></div>
 </dd>
 <dt id="aioimmich.search.ImmichSearch.async_get_all_by_person_ids"><code class="name flex">
-<span>async def <span class="ident">async_get_all_by_person_ids</span></span>(<span>self, person_ids: list[str], page_size: int = 100, max_pages: int = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
+<span>async def <span class="ident">async_get_all_by_person_ids</span></span>(<span>self, person_ids: list[str], page_size: int = 100, max_pages: int | None = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -372,14 +387,15 @@ a list of <code>ImmichAsset</code></p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">async def async_get_all_by_person_ids(
-    self, person_ids: list[str], page_size: int = 100, max_pages: int = 20
+    self, person_ids: list[str], page_size: int = 100, max_pages: int | None = 20
 ) -&gt; list[ImmichAsset]:
     &#34;&#34;&#34;Get all assets for given person ids.
 
     Args:
         person_ids (list[str]): filter to list of personIds
         page_size (int): assets per page
-        max_pages (int): maximum number of pages to return
+        max_pages (int | None): maximum number of pages to return, or ``None``
+            for all available pages
 
     Returns:
         a list of `ImmichAsset`
@@ -396,15 +412,16 @@ a list of <code>ImmichAsset</code></p></div>
 <dd>filter to list of personIds</dd>
 <dt><strong><code>page_size</code></strong> :&ensp;<code>int</code></dt>
 <dd>assets per page</dd>
-<dt><strong><code>max_pages</code></strong> :&ensp;<code>int</code></dt>
-<dd>maximum number of pages to return</dd>
+<dt><strong><code>max_pages</code></strong> :&ensp;<code>int | None</code></dt>
+<dd>maximum number of pages to return, or <code>None</code>
+for all available pages</dd>
 </dl>
 <p>Returns
 -----=
 a list of <code>ImmichAsset</code></p></div>
 </dd>
 <dt id="aioimmich.search.ImmichSearch.async_get_all_by_tag_ids"><code class="name flex">
-<span>async def <span class="ident">async_get_all_by_tag_ids</span></span>(<span>self, tag_ids: list[str], page_size: int = 100, max_pages: int = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
+<span>async def <span class="ident">async_get_all_by_tag_ids</span></span>(<span>self, tag_ids: list[str], page_size: int = 100, max_pages: int | None = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -412,14 +429,15 @@ a list of <code>ImmichAsset</code></p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">async def async_get_all_by_tag_ids(
-    self, tag_ids: list[str], page_size: int = 100, max_pages: int = 20
+    self, tag_ids: list[str], page_size: int = 100, max_pages: int | None = 20
 ) -&gt; list[ImmichAsset]:
     &#34;&#34;&#34;Get all assets for given tag ids.
 
     Args:
         tag_ids (list[str]): filter to list of tagIds
         page_size (int): assets per page
-        max_pages (int): maximum number of pages to return
+        max_pages (int | None): maximum number of pages to return, or ``None``
+            for all available pages
 
     Returns:
         a list of `ImmichAsset`
@@ -436,15 +454,16 @@ a list of <code>ImmichAsset</code></p></div>
 <dd>filter to list of tagIds</dd>
 <dt><strong><code>page_size</code></strong> :&ensp;<code>int</code></dt>
 <dd>assets per page</dd>
-<dt><strong><code>max_pages</code></strong> :&ensp;<code>int</code></dt>
-<dd>maximum number of pages to return</dd>
+<dt><strong><code>max_pages</code></strong> :&ensp;<code>int | None</code></dt>
+<dd>maximum number of pages to return, or <code>None</code>
+for all available pages</dd>
 </dl>
 <p>Returns
 -----=
 a list of <code>ImmichAsset</code></p></div>
 </dd>
 <dt id="aioimmich.search.ImmichSearch.async_get_all_favorites"><code class="name flex">
-<span>async def <span class="ident">async_get_all_favorites</span></span>(<span>self, page_size: int = 100, max_pages: int = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
+<span>async def <span class="ident">async_get_all_favorites</span></span>(<span>self, page_size: int = 100, max_pages: int | None = 20) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -452,13 +471,14 @@ a list of <code>ImmichAsset</code></p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">async def async_get_all_favorites(
-    self, page_size: int = 100, max_pages: int = 20
+    self, page_size: int = 100, max_pages: int | None = 20
 ) -&gt; list[ImmichAsset]:
     &#34;&#34;&#34;Get all favorite assets.
 
     Args:
         page_size (int): assets per page
-        max_pages (int): maximum number of pages to return
+        max_pages (int | None): maximum number of pages to return, or ``None``
+            for all available pages
 
     Returns:
         a list of `ImmichAsset`
@@ -473,8 +493,9 @@ a list of <code>ImmichAsset</code></p></div>
 <dt>-----=</dt>
 <dt><strong><code>page_size</code></strong> :&ensp;<code>int</code></dt>
 <dd>assets per page</dd>
-<dt><strong><code>max_pages</code></strong> :&ensp;<code>int</code></dt>
-<dd>maximum number of pages to return</dd>
+<dt><strong><code>max_pages</code></strong> :&ensp;<code>int | None</code></dt>
+<dd>maximum number of pages to return, or <code>None</code>
+for all available pages</dd>
 </dl>
 <p>Returns
 -----=
@@ -514,7 +535,7 @@ a list of <code>ImmichAsset</code></p></div>
 a list of <code>ImmichPerson</code></p></div>
 </dd>
 <dt id="aioimmich.search.ImmichSearch.async_smart_search"><code class="name flex">
-<span>async def <span class="ident">async_smart_search</span></span>(<span>self,<br>query: str,<br>page_size: int = 100,<br>max_pages: int = 20,<br>asset_type: <a title="aioimmich.assets.models.AssetType" href="../assets/models.html#aioimmich.assets.models.AssetType">AssetType</a> | None = None,<br>album_ids: list[str] | None = None,<br>person_ids: list[str] | None = None,<br>tag_ids: list[str] | None = None,<br>is_favorite: bool | None = None,<br>is_not_in_album: bool | None = None) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
+<span>async def <span class="ident">async_smart_search</span></span>(<span>self,<br>query: str,<br>page_size: int = 100,<br>max_pages: int | None = 20,<br>asset_type: <a title="aioimmich.assets.models.AssetType" href="../assets/models.html#aioimmich.assets.models.AssetType">AssetType</a> | None = None,<br>album_ids: list[str] | None = None,<br>person_ids: list[str] | None = None,<br>tag_ids: list[str] | None = None,<br>is_favorite: bool | None = None,<br>is_not_in_album: bool | None = None) ‑> list[<a title="aioimmich.assets.models.ImmichAsset" href="../assets/models.html#aioimmich.assets.models.ImmichAsset">ImmichAsset</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -525,7 +546,7 @@ a list of <code>ImmichPerson</code></p></div>
     self,
     query: str,
     page_size: int = 100,
-    max_pages: int = 20,
+    max_pages: int | None = 20,
     asset_type: AssetType | None = None,
     album_ids: list[str] | None = None,
     person_ids: list[str] | None = None,
@@ -538,7 +559,8 @@ a list of <code>ImmichPerson</code></p></div>
     Args:
         query (str): Natural language search query
         page_size (int): assets per page
-        max_pages (int): maximum number of pages to return
+        max_pages (int | None): maximum number of pages to return, or ``None``
+            for all available pages
         asset_type (AssetType | None): filter to `AssetType`
         album_ids (list[str] | None): filter by album IDs
         person_ids (list[str] | None): filter by person IDs
@@ -567,9 +589,11 @@ a list of <code>ImmichPerson</code></p></div>
         data[&#34;isNotInAlbum&#34;] = is_not_in_album
 
     results: list[ImmichAsset] = []
-    for page in range(max_pages):
+    page = 0
+    while max_pages is None or page &lt; max_pages:
+        page += 1
         result = await self.api.async_do_request(
-            &#34;search/smart&#34;, data={**data, &#34;page&#34;: page + 1}, method=&#34;POST&#34;
+            &#34;search/smart&#34;, data={**data, &#34;page&#34;: page}, method=&#34;POST&#34;
         )
         assert isinstance(result, dict)
         assets = result[&#34;assets&#34;]
@@ -587,8 +611,9 @@ a list of <code>ImmichPerson</code></p></div>
 <dd>Natural language search query</dd>
 <dt><strong><code>page_size</code></strong> :&ensp;<code>int</code></dt>
 <dd>assets per page</dd>
-<dt><strong><code>max_pages</code></strong> :&ensp;<code>int</code></dt>
-<dd>maximum number of pages to return</dd>
+<dt><strong><code>max_pages</code></strong> :&ensp;<code>int | None</code></dt>
+<dd>maximum number of pages to return, or <code>None</code>
+for all available pages</dd>
 <dt><strong><code>asset_type</code></strong> :&ensp;<code>AssetType | None</code></dt>
 <dd>filter to <code>AssetType</code></dd>
 <dt><strong><code>album_ids</code></strong> :&ensp;<code>list[str] | None</code></dt>

@@ -15,7 +15,7 @@ class ImmichSearch(ImmichSubApi):
         person_ids: list[str] | None = None,
         tag_ids: list[str] | None = None,
         page_size: int = 100,
-        max_pages: int = 20,
+        max_pages: int | None = 20,
         is_favorite: bool | None = None,
     ) -> list[ImmichAsset]:
         """Search for assets.
@@ -26,7 +26,8 @@ class ImmichSearch(ImmichSubApi):
             person_ids (list[str] | None): filter to list of personIds
             tag_ids (list[str] | None): filter to list of tagIds
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -44,9 +45,11 @@ class ImmichSearch(ImmichSubApi):
             data["isFavorite"] = is_favorite
 
         results: list[ImmichAsset] = []
-        for page in range(max_pages):
+        page = 0
+        while max_pages is None or page < max_pages:
+            page += 1
             result = await self.api.async_do_request(
-                "search/metadata", data={**data, "page": page + 1}, method="POST"
+                "search/metadata", data={**data, "page": page}, method="POST"
             )
             assert isinstance(result, dict)
             assets = result["assets"]
@@ -57,13 +60,14 @@ class ImmichSearch(ImmichSubApi):
         return results
 
     async def async_get_all(
-        self, page_size: int = 100, max_pages: int = 20
+        self, page_size: int = 100, max_pages: int | None = 20
     ) -> list[ImmichAsset]:
         """Get all assets.
 
         Args:
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -71,13 +75,14 @@ class ImmichSearch(ImmichSubApi):
         return await self._async_search_assets(page_size=page_size, max_pages=max_pages)
 
     async def async_get_all_favorites(
-        self, page_size: int = 100, max_pages: int = 20
+        self, page_size: int = 100, max_pages: int | None = 20
     ) -> list[ImmichAsset]:
         """Get all favorite assets.
 
         Args:
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -87,14 +92,15 @@ class ImmichSearch(ImmichSubApi):
         )
 
     async def async_get_all_by_tag_ids(
-        self, tag_ids: list[str], page_size: int = 100, max_pages: int = 20
+        self, tag_ids: list[str], page_size: int = 100, max_pages: int | None = 20
     ) -> list[ImmichAsset]:
         """Get all assets for given tag ids.
 
         Args:
             tag_ids (list[str]): filter to list of tagIds
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -104,14 +110,15 @@ class ImmichSearch(ImmichSubApi):
         )
 
     async def async_get_all_by_person_ids(
-        self, person_ids: list[str], page_size: int = 100, max_pages: int = 20
+        self, person_ids: list[str], page_size: int = 100, max_pages: int | None = 20
     ) -> list[ImmichAsset]:
         """Get all assets for given person ids.
 
         Args:
             person_ids (list[str]): filter to list of personIds
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -121,14 +128,15 @@ class ImmichSearch(ImmichSubApi):
         )
 
     async def async_get_all_by_album_ids(
-        self, album_ids: list[str], page_size: int = 100, max_pages: int = 20
+        self, album_ids: list[str], page_size: int = 100, max_pages: int | None = 20
     ) -> list[ImmichAsset]:
         """Get all assets for given album ids.
 
         Args:
             album_ids (list[str]): filter to list of albumIds
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
 
         Returns:
             a list of `ImmichAsset`
@@ -165,7 +173,7 @@ class ImmichSearch(ImmichSubApi):
         self,
         query: str,
         page_size: int = 100,
-        max_pages: int = 20,
+        max_pages: int | None = 20,
         asset_type: AssetType | None = None,
         album_ids: list[str] | None = None,
         person_ids: list[str] | None = None,
@@ -178,7 +186,8 @@ class ImmichSearch(ImmichSubApi):
         Args:
             query (str): Natural language search query
             page_size (int): assets per page
-            max_pages (int): maximum number of pages to return
+            max_pages (int | None): maximum number of pages to return, or ``None``
+                for all available pages
             asset_type (AssetType | None): filter to `AssetType`
             album_ids (list[str] | None): filter by album IDs
             person_ids (list[str] | None): filter by person IDs
@@ -207,9 +216,11 @@ class ImmichSearch(ImmichSubApi):
             data["isNotInAlbum"] = is_not_in_album
 
         results: list[ImmichAsset] = []
-        for page in range(max_pages):
+        page = 0
+        while max_pages is None or page < max_pages:
+            page += 1
             result = await self.api.async_do_request(
-                "search/smart", data={**data, "page": page + 1}, method="POST"
+                "search/smart", data={**data, "page": page}, method="POST"
             )
             assert isinstance(result, dict)
             assets = result["assets"]
