@@ -15,8 +15,8 @@
         "ms-python.pylint"
       ],
       "settings": {
-        "python.pythonPath": "/usr/local/python/current/bin/python",
-        "python.formatting.blackPath": "/usr/local/bin/black",
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+        "python.formatting.blackPath": "${workspaceFolder}/.venv/bin/black",
         "python.formatting.provider": "black",
         "python.testing.pytestArgs": [
           "--no-cov",
@@ -44,5 +44,5 @@
     }
   },
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
-  "updateContentCommand": "pip3 --disable-pip-version-check --no-cache-dir install -r requirements_dev.txt && pre-commit install"
+  "updateContentCommand": "pip3 --disable-pip-version-check --no-cache-dir install uv && uv sync && uv run prek install"
 }
