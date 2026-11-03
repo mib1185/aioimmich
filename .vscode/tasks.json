@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "re-create docs",
+            "type": "shell",
+            "command": "pdoc3 --html --output-dir html aioimmich --force",
+            "problemMatcher": []
+        }
+    ]
+}

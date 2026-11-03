@@ -36,3 +36,11 @@ repos:
           - types-aiofiles
           - types-python-dateutil
         files: ^(aioimmich|tests)/.+\.py$
+  - repo: local
+    hooks:
+      - id: pdoc3
+        name: re-create docs with pdoc3
+        language: system
+        entry: uv run --frozen pdoc3 --html --output-dir html aioimmich --force
+        files: ^(aioimmich/.+\.py|html/.+)$
+        pass_filenames: false
