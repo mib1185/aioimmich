@@ -29,6 +29,7 @@ dev = [
     "aiointercept==1.0.0",
     "black==26.10.1",
     "mypy==2.4.1",
+    "pdoc3==0.11.6",
     "pre-commit-hooks==6.0.0",
     "prek==0.5.9",
     "pylint==4.1.3",

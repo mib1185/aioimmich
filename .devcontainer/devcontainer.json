@@ -3,6 +3,9 @@
   "containerEnv": {
     "DEVCONTAINER": "1"
   },
+  "remoteEnv": {
+    "PATH": "${containerWorkspaceFolder}/.venv/bin:${containerEnv:PATH}"
+  },
   "runArgs": [
     "-e",
     "GIT_EDITOR=code --wait"
@@ -12,7 +15,8 @@
       "extensions": [
         "ms-python.black-formatter",
         "ms-python.vscode-pylance",
-        "ms-python.pylint"
+        "ms-python.pylint",
+        "GitHub.copilot-chat"
       ],
       "settings": {
         "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
@@ -43,6 +47,8 @@
       "version": "3.11"
     }
   },
-  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
-  "updateContentCommand": "pip3 --disable-pip-version-check --no-cache-dir install uv && uv sync && uv run prek install"
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "updateContentCommand": "uv sync && uv run prek install"
 }
