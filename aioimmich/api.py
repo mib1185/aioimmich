@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from aiohttp import StreamReader
+from aiohttp import ClientResponse, StreamReader
 from aiohttp.client import ClientSession
 
 from .const import CONNECT_ERRORS, LOGGER
@@ -65,12 +65,22 @@ class ImmichApi:
         method: str = "GET",
         application: str = "json",
         raw_response_content: bool = False,
-    ) -> list | dict | bytes | StreamReader | None:
-        """Perform the request and handle errors."""
+        raw_response: bool = False,
+        extra_headers: dict[str, str] | None = None,
+    ) -> list | dict | bytes | StreamReader | ClientResponse | None:
+        """Perform the request and handle errors.
+
+        With `raw_response` the `aiohttp.ClientResponse` of a successful request is
+        returned as is. The caller owns it and must release it, e.g. with
+        `async with response:`, otherwise the connection is not returned to the
+        connection pool of the session.
+        """
         if self._version is None and end_point != "server/version":
             raise ImmichMissingSetup
 
         headers = {"Accept": f"application/{application}", "x-api-key": self.api_key}
+        if extra_headers:
+            headers.update(extra_headers)
         url = f"{self.base_url}/{end_point}"
 
         cache_key = f"{method}_{end_point}_{params}"
@@ -99,6 +109,9 @@ class ImmichApi:
                 return cache_entry.result
 
             if 200 <= resp.status < 300:
+                if raw_response:
+                    LOGGER.debug("RESPONSE as raw response")
+                    return resp
                 if raw_response_content:
                     LOGGER.debug("RESPONSE as stream")
                     return resp.content
